@@ -49,8 +49,20 @@ export default {
       activePath: this.$route.path,
       menus: [
         {
+          icon: "el-icon-info",
+          router: "1",
+          text: "工作台",
+          menulist: [
+            {
+              router: "workSpace",
+              text: "首页",
+              // hideInMenu: true,
+            },
+          ],
+        },
+        {
           icon: "el-icon-message",
-          router: "2",
+          router: "3",
           text: "绩效",
           menulist: [
             {
@@ -60,11 +72,6 @@ export default {
             {
               router: "markDocument",
               text: "绩效档案",
-            },
-            {
-              router: "workSpace",
-              text: "工作台",
-              hideInMenu: true,
             },
           ],
         },
