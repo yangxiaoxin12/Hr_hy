@@ -17,7 +17,7 @@
             type="text"
             size="small"
             @click="handleEdit(scope.row, scope.$index)"
-            >跳转地址</el-button
+            >详情</el-button
           >
         </template>
       </el-table-column>

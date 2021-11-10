@@ -1,6 +1,7 @@
 <template>
   <div class="sidebar" style="min-height: 597px">
     <el-menu
+    :unique-opened="true"
       :default-active="activePath"
       class="el-menu-vertical-demo"
       @open="handleOpen"
@@ -62,21 +63,6 @@ export default {
           ],
         },
         {
-          icon: "el-icon-message",
-          router: "3",
-          text: "绩效",
-          menulist: [
-            {
-              router: "testplan",
-              text: "考核计划",
-            },
-            {
-              router: "markDocument",
-              text: "绩效档案",
-            },
-          ],
-        },
-        {
           icon: "el-icon-menu",
           router: "2",
           text: "组织",
@@ -107,6 +93,30 @@ export default {
           ],
         },
         {
+          icon: "el-icon-s-data",
+          router: "4",
+          text: "招聘",
+          menulist: [
+            {
+              router: "recruitPlan",
+              text: "招聘计划",
+            },
+            {
+              router: "postRelease",
+              text: "职位发布",
+            },
+            {
+              router: "filterRelease",
+              text: "面试与评价",
+            },
+            {
+              router: "toExamine",
+              text: "审批",
+              jump: "http://hyxcl.shhuayi.com/SitePages/SHHYPortal/PolicyLibrary.aspx",
+            },
+          ],
+        },
+        {
           icon: "el-icon-user-solid",
           router: "3",
           text: "培训",
@@ -131,34 +141,24 @@ export default {
           ],
         },
         {
-          icon: "el-icon-s-data",
-          router: "4",
-          text: "招聘",
+          icon: "el-icon-message",
+          router: "3",
+          text: "绩效",
           menulist: [
             {
-              router: "recruitPlan",
-              text: "招聘计划",
+              router: "testplan",
+              text: "考核计划",
             },
             {
-              router: "postRelease",
-              text: "职位发布",
-            },
-            {
-              router: "filterRelease",
-              text: "面试与评价",
-            },
-            {
-              router: "toExamine",
-              text: "审批",
-              jump: "http://hyxcl.shhuayi.com/SitePages/SHHYPortal/PolicyLibrary.aspx",
+              router: "markDocument",
+              text: "绩效档案",
             },
           ],
         },
-
         {
           icon: "el-icon-setting",
           router: "3",
-          text: "创新管理平台",
+          text: "创新管理",
           menulist: [
             {
               router: "roleManagement",

@@ -44,9 +44,8 @@
       </el-table-column>
       <el-table-column prop="type" label="公司收益" width="150">
       </el-table-column>
-      <el-table-column prop="grade" label="公司评估" width="120">
+      <el-table-column prop="grade" label="公司评估" >
       </el-table-column>
-      <el-table-column prop="back" label="反馈" width="120"> </el-table-column>
     </el-table>
   </div>
 </template>
