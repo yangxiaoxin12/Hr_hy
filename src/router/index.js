@@ -65,8 +65,8 @@ const cardvolumemanagement = () =>
     import('@/components/cardvolumemanagement/cardvolumemanagement') // 导入
 const randomcodemanagement = () =>
     import('@/components/cardvolumemanagement/randomcodemanagement') // 导入
-const membermanagement = () =>
-    import('@/components/membercenter/membermanagement') // 导入
+const trainingPlan = () =>
+    import('@/components/membercenter/trainingPlan') // 导入
 const configurationrule = () =>
     import('@/components/membercenter/configurationrule') // 导入
 const levelmanagement = () =>
@@ -299,9 +299,9 @@ export default new Router({
 
         },
         {
-            path: '/membermanagement',
-            name: 'membermanagement',
-            component: membermanagement
+            path: '/trainingPlan',
+            name: 'trainingPlan',
+            component: trainingPlan
 
         },
         {

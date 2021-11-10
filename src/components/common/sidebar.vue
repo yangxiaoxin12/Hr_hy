@@ -98,7 +98,7 @@ export default {
           text: "培训",
           menulist: [
             {
-              router: "membermanagement",
+              router: "trainingPlan",
               text: "培训计划",
             },
             {
