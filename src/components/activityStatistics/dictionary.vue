@@ -1,74 +1,52 @@
 <template>
   <div>
-    <el-button id="tou" type="primary" @click="addPrize">字典分类录入</el-button>
+    <div class="form-outer">
+      <div class="label">专利人</div>
+      <el-input
+        class="item"
+        v-model="searchForm.planName"
+        placeholder="请输入计划名称"
+      ></el-input>
+      <div class="label">申请内容</div>
+      <el-input
+        class="item"
+        v-model="searchForm.content"
+        placeholder="请输入创新内容"
+      ></el-input>
 
-    <el-table :data="tableData" style="width: 100%;margin-bottom: 20px;" row-key="id" border>
-      <el-table-column type="index" :index="indexMethod"></el-table-column>
-      <el-table-column prop="name" label="字典名称" width="180">
-        <template slot-scope="scope">
-          <i :class="scope.row.icon"></i>
-          <span>{{ scope.row.name }}</span>
-        </template>
+      <br />
+      <div class="label">申请时间：</div>
+      <el-date-picker
+        v-model="searchForm.startDate1"
+        class="item"
+        type="daterange"
+        align="right"
+        unlink-panels
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+      >
+      </el-date-picker>
+      <el-button class="button" @click="handleSearch">查询</el-button>
+      <el-button class="button" @click="handleReset">重置</el-button>
+      <el-button class="button" type="primary">新增</el-button>
+    </div>
+
+    <el-table border :data="tableData" style="width: 100%">
+      <el-table-column type="index" width="50"> </el-table-column>
+      <el-table-column prop="startDate1" label="申请时间" width="150">
       </el-table-column>
-      <el-table-column prop="code" label="字典编码" width="180"></el-table-column>
-      <el-table-column label="操作">
-        <template slot-scope="scope">
-          <el-button type="text" @click="handleDelete(scope.row)" size="small">删除</el-button>
-          <el-button
-            v-if="scope.row.id < 10"
-            type="text"
-            @click="handleLuru(scope.$index,scope.row)"
-            size="small"
-          >字典值录入</el-button>
-          <el-button type="text" @click="gai(scope.$index,scope.row)" size="small">编辑</el-button>
-        </template>
+      <el-table-column prop="content" label="专利内容" width="150">
+      </el-table-column>
+      <el-table-column prop="dutyName" label="专利申请人" width="200">
+      </el-table-column>
+      <el-table-column prop="process" label="申请号" width="150">
+      </el-table-column>
+      <el-table-column prop="type" label="专利号" width="150">
+      </el-table-column>
+      <el-table-column prop="endDate1" label="有效期" width="120">
       </el-table-column>
     </el-table>
-    <el-dialog title="新增卡卷" :visible.sync="dialogFormVisible">
-      <el-form ref="card" refs="card" label-width="100px" style="width:500px;" :model="card">
-        <el-form-item label="字典名称:">
-          <el-input v-model="card.name"></el-input>
-        </el-form-item>
-        <el-form-item label="字典编码:">
-          <el-input v-model="card.code"></el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="onSave()">确 定</el-button>
-      </div>
-    </el-dialog>
-
-    <el-dialog title="字典值录入" :visible.sync="chenyi">
-      <el-form ref="ziji" refs="ziji" label-width="100px" style="width:500px;" :model="ziji">
-        <el-form-item label="参数名称:">
-          <el-input v-model="ziji.name"></el-input>
-        </el-form-item>
-        <el-form-item label="参数值:">
-          <el-input v-model="ziji.code"></el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="chenyi = false">取 消</el-button>
-        <el-button type="primary" @click="onSave1()">确 定</el-button>
-      </div>
-    </el-dialog>
-
-    <el-dialog title="字典值录入" :visible.sync="yxx">
-      <el-form ref="bianji" refs="bianji" label-width="100px" style="width:500px;" :model="bianji">
-        <el-form-item label="参数名称:">
-          <el-input v-model="bianji.name"></el-input>
-        </el-form-item>
-        <el-form-item label="参数值:">
-          <el-input v-model="bianji.code"></el-input>
-        </el-form-item>
-      </el-form>
-
-      <div slot="footer" class="dialog-footer">
-          <el-button @click="yxx = false">取 消</el-button>
-          <el-button type="primary" @click="onSave2(scope.row)">确 定</el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
@@ -76,229 +54,205 @@
 export default {
   data() {
     return {
-      dialogFormVisibleDis: false,
-      dialogFormVisible: false,
-      chenyi: false,
-      yxx:false,
-      indexs: "",
-      card: {
-        code: "",
-        name: "",
-        id:"",
-        icon: "el-icon-folder-opened"
+      searchForm: {
+        planName: "",
+        content: "",
+        startDate1: [],
       },
-      bianji: {
-        name: "",
-        code: "",
-      },
-      ziji: {
-        name: "",
-        code: "",
-        id: "",
-        icon: "el-icon-document"
-      },
-      // data:{
-      //   a:[{"name":"1",b:[{lv:"1"}]}]
-      // },
       tableData: [
         {
-          id: 1,
-          icon: "el-icon-folder-opened",
-          name: "奖品类型",
-          code: "prizeType",
-          children: [
-            {
-              icon: "el-icon-document",
-              id: 11,
-              name: "实物",
-              code: "1"
-            },
-            {
-              icon: "el-icon-document",
-              id: 12,
-              name: "电子卡券",
-              code: "2"
-            }
-          ]
+          planName: "2020年度安全员考核计划",
+          content: "工业蒸汽裂解炉偶和模拟方法",
+          date: "2020-1-8～2021-1-7",
+          back: 22,
+          grade: "优秀",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2028-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "是",
+          type: "170000.00" / 4,
         },
         {
-          id: 2,
-          icon: "el-icon-folder-opened",
-          name: "渠道",
-          code: "channel",
-          children: [
-            {
-              id: 21,
-              icon: "el-icon-document",
-              name: "移动",
-              code: "1"
-            },
-            {
-              id: 22,
-              name: "联通",
-              icon: "el-icon-document",
-              code: "2"
-            },
-            {
-              id: 23,
-              name: "电信",
-              icon: "el-icon-document",
-              code: "3"
-            }
-          ]
+          planName: "2020年1月度安全员考核计划",
+          content: "工业蒸汽裂解炉炉烟的组成分布预测方法",
+          date: "2020-1-8～2020-2-7",
+          grade: "优秀",
+          back: 48,
+          dutyName: "王云",
+          startDate1: "2020-1-8",
+          endDate1: "2028-2-7",
+          startDate2: "2020-1-15",
+          endDate2: "2020-2-14",
+          process: "是",
+          type: "370000.00" / 4,
         },
         {
-          id: 3,
-          icon: "el-icon-folder-opened",
-          name: "会员卡状态",
-          code: "cardState",
-          children: [
-            {
-              id: 31,
-              name: "正常",
-              icon: "el-icon-document",
-              code: "1"
-            },
-            {
-              id: 32,
-              name: "冻结",
-              icon: "el-icon-document",
-              code: "0"
-            }
-          ]
+          planName: "2020年2月度安全员考核计划",
+          content: "管式柴油调和法",
+          date: "2020-2-8～2020-3-7",
+          grade: "优秀",
+          back: 36,
+
+          dutyName: "李青",
+          startDate1: "2020-2-8",
+          endDate1: "2028-3-7",
+          startDate2: "2020-2-15",
+          endDate2: "2020-3-14",
+          process: "是",
+          type: "450000.00" / 4,
         },
         {
-          id: 4,
-          icon: "el-icon-folder-opened",
-          name: "积分变更类型",
-          code: "inteExType",
-          children: [
-            {
-              id: 41,
-              name: "做任务得积分",
-              icon: "el-icon-document",
-              code: "1"
-            },
-            {
-              id: 42,
-              name: "商城兑换减积分",
-              icon: "el-icon-document",
-              code: "0"
-            },
-            {
-              id: 43,
-              name: "管理员后台操作",
-              icon: "el-icon-document",
-              code: "3"
-            },
-            {
-              id: 44,
-              name: "签到得积分",
-              icon: "el-icon-document",
-              code: "4"
-            }
-          ]
-        }
-      ]
+          planName: "2020年3月度安全员考核计划",
+          content: "去西汀分子量分布建模快速方法",
+          date: "2020-3-8～2020-4-7",
+          grade: "优秀",
+          back: 55,
+
+          dutyName: "刘淑媛",
+          startDate1: "2020-3-8",
+          endDate1: "2028-4-7",
+          startDate2: "2020-3-15",
+          endDate2: "2020-4-14",
+          process: "是",
+          type: "56742.00" / 4,
+        },
+        {
+          planName: "2020年4月度安全员考核计划",
+          content: "微电网能量优化管理办法",
+          date: "2020-4-8～2020-5-7",
+          grade: "优秀",
+          back: 68,
+
+          dutyName: "陈思远",
+          startDate1: "2020-4-8",
+          endDate1: "2028-5-7",
+          startDate2: "2020-4-15",
+          endDate2: "2020-5-14",
+          process: "是",
+          type: "176562.00" / 4,
+        },
+        {
+          planName: "2020年5月度安全员考核计划",
+          content: "聚烯烃微观结构预测方法",
+          date: "2020-5-8～2020-6-7",
+          grade: "优秀",
+          back: 19,
+
+          dutyName: "任柯泽",
+          startDate1: "2020-5-8",
+          endDate1: "2028-6-7",
+          startDate2: "2020-5-15",
+          endDate2: "2020-6-14",
+          process: "否",
+          type: "76542.00" / 4,
+        },
+        {
+          planName: "2020年6月度安全员考核计划",
+          content: "常减压蒸馏装置的预测方法",
+          date: "2020-6-8～2020-7-7",
+          grade: "优秀",
+          back: 226,
+
+          dutyName: "王建路",
+          startDate1: "2020-6-8",
+          endDate1: "2028-7-7",
+          startDate2: "2020-6-15",
+          endDate2: "2020-7-14",
+          process: "是",
+          type: "781333.00" / 4,
+        },
+        {
+          planName: "2020年7月度安全员考核计划",
+          content: "催化裂解收率的预测方法",
+          date: "2020-7-8～2020-8-7",
+          grade: "优秀",
+          back: 127,
+
+          dutyName: "赵汤峪",
+          startDate1: "2020-7-8",
+          endDate1: "2028-8-7",
+          startDate2: "2020-7-15",
+          endDate2: "2020-8-14",
+          process: "否",
+          type: "98721.00" / 4,
+        },
+      ],
+      saveData: [],
     };
   },
+  mounted() {
+    this.tableData.forEach((item) => {
+      item.back += 22;
+      
+      item.type = item.type * 544;
+    });
+    // 保存原始数据
+    this.saveData = JSON.parse(JSON.stringify(this.tableData));
+  },
   methods: {
-    indexMethod(index) {
-      return index + 1;
+    handleEdit(row) {
+      console.log(row);
     },
-    convert(arr, name) {
-      const newArr = arr.filter(item => item.name !== name);
-      return newArr.map(item => {
-        if (item.children) {
-          item.children = this.convert(item.children, name);
-        }
-        return item;
+    handleSearch() {
+      this.tableData = this.saveData.filter((item) => {
+        let nameKey = "planName";
+        let contentKey = "content";
+        let dateKey = "startDate1";
+
+        let nameIn = this.searchForm[nameKey]
+          ? item[nameKey].indexOf(this.searchForm[nameKey]) >= 0
+          : true;
+        let contentIn = this.searchForm[contentKey]
+          ? item[contentKey].indexOf(this.searchForm[contentKey]) >= 0
+          : true;
+
+        let sDate = this.searchForm[dateKey][0];
+        let eDate = this.searchForm[dateKey][1];
+
+        console.log(sDate);
+
+        let getTimeFromStr = (str) => {
+          return new Date(str).getTime();
+        };
+
+        let dateIn =
+          sDate && eDate
+            ? getTimeFromStr(item[dateKey]) <= eDate.getTime() &&
+              getTimeFromStr(item[dateKey]) >= sDate.getTime()
+            : true;
+
+        return nameIn && contentIn && dateIn;
       });
     },
-    addPrize() {
-      this.card = {
-        code: "",
-        name: "",
-        id: "",
-        icon: "el-icon-folder-opened"
+    handleReset() {
+      this.tableData = JSON.parse(JSON.stringify(this.saveData));
+      this.searchForm = {
+        startDate1: [],
+        planName: "",
+        content: "",
       };
-      this.dialogFormVisible = true;
     },
-
-    onSave() {
-      let that = this;
-      that.card.id = that.tableData.length + 1;
-      that.card.children = [];
-      console.log(that.card.id);
-      console.log(that.card.children.id);
-      that.tableData.push(JSON.parse(JSON.stringify(this.card)));
-      that.dialogFormVisible = false;
-    },
-    onSave1() {
-      let a = (this.indexs - 1).toString(); //当前父级的索引；
-      let b = this.tableData[a].children.length.toString();
-      let c = Number(a + b) + 11;
-      this.ziji.id = c;
-      console.log(this.ziji);
-      this.tableData[a].children.push(this.ziji);
-      this.chenyi = false;
-    },
-    onSave2() {
-        
-    },
-    handleDelete(row, index) {
-      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .then(() => {
-          const arr = this.convert(this.tableData, row.name);
-          this.$message({
-            type: "success",
-            message: "删除成功!"
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除!"
-          });
-        });
-    },
-    handleLuru(i, row) {
-      this.indexs = row.id;
-      this.ziji = {
-        name: "",
-        code: "",
-        icon: "el-icon-document",
-        id: ""
-      };
-      this.chenyi = true;
-    },
-    gai(i, row){
-       console.log(row)
-     this.bianji={
-       name:row.name,
-        code:row.code
-     }
-     this.yxx= true
-    }
-  }
+  },
 };
 </script>
-<style>
-.el-icon-document:before {
-  content: "\E785";
-  color: #d68d16;
+
+<style scoped lang="less">
+.testplan {
+  padding: 20px;
+  text-align: left;
 }
-.el-icon-folder-opened:before {
-  content: "\E784";
-  color: #d68d16;
-}
-#tou {
-  border: 1px solid red;
-  margin-left: -1048px;
-  margin-bottom: 20px;
+.form-outer {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  .item {
+    width: 200px;
+    margin-right: 10px;
+  }
+  .label {
+    line-height: 40px;
+  }
 }
 </style>

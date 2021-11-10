@@ -1,390 +1,244 @@
 <template>
   <div>
-    <el-table :data="tableData" stripe style="width: 100%">
-      <el-table-column
-        prop="roleName"
-        label="角色名称"
-        align="center"
-      ></el-table-column>
-      <el-table-column
-        prop="roleDesc"
-        label="角色描述"
-        align="center"
-      ></el-table-column>
-      <el-table-column fixed="right" label="操作" align="center">
-        <template slot-scope="scope">
-          <el-button
-            @click="handleClick(scope.$index, scope.row)"
-            type="text"
-            size="small"
-            >修改</el-button
-          >
-          <el-button type="text" @click="handleDelete(scope.row)" size="small"
-            >删除</el-button
-          >
-        </template>
-      </el-table-column>
-    </el-table>
-    <div class="newrole">
-      <i class="el-icon-plus"></i>
-      <el-button
-        class="newrole_button"
-        @click="addEquipment"
-        type="text"
-        size="small"
-        >新增角色</el-button
+    <div class="form-outer">
+      <div class="label">提案名称：</div>
+      <el-input
+        class="item"
+        v-model="searchForm.planName"
+        placeholder="请输入计划名称"
+      ></el-input>
+      <div class="label">提案人</div>
+      <el-input
+        class="item"
+        v-model="searchForm.content"
+        placeholder="请输入考核内容"
+      ></el-input>
+
+      <br />
+      <div class="label">提案日期：</div>
+      <el-date-picker
+        v-model="searchForm.startDate1"
+        class="item"
+        type="daterange"
+        align="right"
+        unlink-panels
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
       >
+      </el-date-picker>
+      <el-button class="button" @click="handleSearch">查询</el-button>
+      <el-button class="button" @click="handleReset">重置</el-button>
+      <el-button class="button" type="primary">新增</el-button>
     </div>
-    <el-dialog
-      id="dialog"
-      label-width="100px"
-      style="text-align:left"
-      :title="titleMap[dialogStatus]"
-      :visible.sync="dialogFormVisible"
-    >
-      <el-form style="width:400px;" label-width="100px" :model="form">
-        <el-form-item label="角色名称:">
-          <el-input
-            placeholder="请输入"
-            v-model="form.roleName"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="角色描述:">
-          <el-input
-            placeholder="请输入"
-            v-model="form.roleDesc"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-      </el-form>
-      <span class="quan">权限设置:</span>
-      <el-tree
-        class="tree"
-        :data="data"
-        show-checkbox
-        node-key="id"
-        :default-expanded-keys="[]"
-        :default-checked-keys="[]"
-        :props="defaultProps"
-      ></el-tree>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="back">取 消</el-button>
-        <el-button type="primary" @click="onSave('form')">确 定</el-button>
-      </div>
-    </el-dialog>
+
+    <el-table border :data="tableData" style="width: 100%">
+      <el-table-column type="index"  width="50">
+      </el-table-column>
+      <el-table-column prop="endDate1" label="提出时间" width="150">
+      </el-table-column>
+      <el-table-column prop="content" label="提案内容" width="150">
+      </el-table-column>
+      <el-table-column prop="dutyName" label="提案人" width="200">
+      </el-table-column>
+      <el-table-column prop="process" label="提案是否落地" width="150">
+      </el-table-column>
+      <el-table-column prop="type" label="公司收益" width="150">
+      </el-table-column>
+      <el-table-column prop="grade" label="公司评估" width="120">
+      </el-table-column>
+      <el-table-column prop="back" label="反馈" width="120">
+      </el-table-column>
+      
+    </el-table>
   </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
+      searchForm: {
+        planName: "",
+        content: "",
+        startDate1: [],
+      },
       tableData: [
         {
-          roleName: "超级管理员",
-          roleDesc: "市场运营所有角色"
+          planName: "2020年度安全员考核计划",
+          content: "年度系统总结报告",
+          date: "2020-1-8～2021-1-7",
+          back:22,
+          grade:"优秀",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "是",
+          type: "170000.00",
         },
         {
-          roleName: "超级管理员",
-          roleDesc: "所有权限"
+          planName: "2020年1月度安全员考核计划",
+          content: "行政体系革新申请",
+          date: "2020-1-8～2020-2-7",grade:"优秀",back:48,
+          dutyName: "王云",
+          startDate1: "2020-1-8",
+          endDate1: "2020-2-7",
+          startDate2: "2020-1-15",
+          endDate2: "2020-2-14",
+          process: "是",
+          type: "370000.00",
         },
         {
-          roleName: "超级管理员",
-          roleDesc: "市场运营所有角色"
+          planName: "2020年2月度安全员考核计划",
+          content: "后勤供应链改良",
+          date: "2020-2-8～2020-3-7",grade:"优秀",back:36,
+
+          dutyName: "李青",
+          startDate1: "2020-2-8",
+          endDate1: "2020-3-7",
+          startDate2: "2020-2-15",
+          endDate2: "2020-3-14",
+          process: "是",
+          type: "450000.00",
         },
         {
-          roleName: "超级管理员",
-          roleDesc: "内容商权限"
-        }
+          planName: "2020年3月度安全员考核计划",
+          content: "新增报销流程",
+          date: "2020-3-8～2020-4-7",grade:"优秀",back:55,
+
+          dutyName: "刘淑媛",
+          startDate1: "2020-3-8",
+          endDate1: "2020-4-7",
+          startDate2: "2020-3-15",
+          endDate2: "2020-4-14",
+          process: "是",
+          type: "56742.00",
+        },
+        {
+          planName: "2020年4月度安全员考核计划",
+          content: "财务水平测试考试提案",
+          date: "2020-4-8～2020-5-7",grade:"优秀",back:68,
+
+          dutyName: "陈思远",
+          startDate1: "2020-4-8",
+          endDate1: "2020-5-7",
+          startDate2: "2020-4-15",
+          endDate2: "2020-5-14",
+          process: "是",
+          type: "176562.00",
+        },
+        {
+          planName: "2020年5月度安全员考核计划",
+          content: "化工水平测试提案",
+          date: "2020-5-8～2020-6-7",grade:"优秀",back:19,
+
+          dutyName: "任柯泽",
+          startDate1: "2020-5-8",
+          endDate1: "2020-6-7",
+          startDate2: "2020-5-15",
+          endDate2: "2020-6-14",
+          process: "否",
+          type: "76542.00",
+        },
+        {
+          planName: "2020年6月度安全员考核计划",
+          content: "IT技术水平培训",
+          date: "2020-6-8～2020-7-7",grade:"优秀",back:226,
+
+          dutyName: "王建路",
+          startDate1: "2020-6-8",
+          endDate1: "2020-7-7",
+          startDate2: "2020-6-15",
+          endDate2: "2020-7-14",
+          process: "是",
+          type: "781333.00",
+        },
+        {
+          planName: "2020年7月度安全员考核计划",
+          content: "重大事故预警系统革新",
+          date: "2020-7-8～2020-8-7",grade:"优秀",back:127,
+
+          dutyName: "赵汤峪",
+          startDate1: "2020-7-8",
+          endDate1: "2020-8-7",
+          startDate2: "2020-7-15",
+          endDate2: "2020-8-14",
+          process: "否",
+          type: "98721.00",
+        },
+        
       ],
-      titleMap: ["新建账户", "修改账户"],
-      dialogStatus: 0,
-      data: [
-        {
-          id: 1,
-          label: "活动管理",
-          children: [
-            {
-              id: 2,
-              label: "活动列表"
-            },
-            {
-              id: 3,
-              label: "新建活动"
-            }
-          ]
-        },
-        {
-          id: 4,
-          label: "积分管理",
-          children: [
-            {
-              id: 5,
-              label: "用户积分列表"
-            },
-            {
-              id: 6,
-              label: "用户兑换记录"
-            },
-            {
-              id: 7,
-              label: "积分奖品规则"
-            }
-          ]
-        },
-        {
-          id: 3,
-          label: "卡卷管理",
-          children: [
-            {
-              id: 8,
-              label: "电子卡劵"
-            },
-            {
-              id: 9,
-              label: "卡卷明细"
-            },
-            {
-              id: 10,
-              label: "随机码管理"
-            }
-          ]
-        },
-        {
-          id: 4,
-          label: "会员中心",
-          children: [
-            {
-              id: 11,
-              label: "会员管理"
-            },
-            {
-              id: 12,
-              label: "配置规则"
-            },
-            {
-              id: 13,
-              label: "等级管理"
-            }
-          ]
-        },
-        {
-          id: 5,
-          label: "数据中心",
-          children: [
-            {
-              id: 14,
-              label: "活动详情"
-            },
-            {
-              id: 15,
-              label: "中奖信息"
-            },
-            {
-              id: 16,
-              label: "库存统计"
-            }
-          ]
-        },
-        {
-          id: 6,
-          label: "系统管理",
-          children: [
-            {
-              id: 17,
-              label: "角色设置"
-            },
-            {
-              id: 18,
-              label: "账户管理"
-            },
-            {
-              id: 19,
-              label: "数据字典"
-            },
-            {
-              id: 20,
-              label: "系统日志"
-            }
-          ]
-        }
-      ],
-      defaultProps: {
-        children: "children",
-        label: "label"
-      },
-      dialogTableVisible: false,
-      dialogFormVisible: false,
-      form: {
-        roleName: "", //角色名称
-        roleDesc: "" //角色描述
-      },
-      total: 1,
-      listQuery: {
-        page: 1,
-        limit: 10,
-        importance: undefined,
-        title: undefined,
-        type: undefined,
-        sort: "+No"
-      },
-      formLabelWidth: "120px"
+      saveData: [],
     };
   },
+  mounted() {
+    // 保存原始数据
+    this.saveData = JSON.parse(JSON.stringify(this.tableData));
+  },
   methods: {
-    newrole() {
-      alert(123);
-    },
-    getList(){
-      let sendParam={};
-       sendParam.currentPage=this.listQuery.page;
-       sendParam.pageSize=this.listQuery.limit;
-      this.$Service.post("/api/roleListView.action",JSON.stringify(sendParam),{
-              headers: {
-                "Access-Control-Allow-Origin": "*", //解决cors头问题
-                "Access-Control-Allow-Credentials": "true", //解决session问题
-                "Content-Type": "application/json;charset=UTF-8" //将表单数据传递转化为form-data类型
-              },
-              withCredentials: true
-            }).then(res=>{
-              console.log(res);
-              if(res.data.status==0){
-                this.$message.success("获取数据成功!");
-                this.tableData=res.data.data;
-                this.total=res.data.count;
-              }else{
-                this.$message.error("未获得数据");
-              }
-            }).catch(error=>{
-              this.$message.error("未获得数据,接口原因");
-            })
-    },
-
-    //删除按钮事件
-    handleDelete(row) {
-      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .then(() => {
-          console.log(row);
-          let send = {};
-          send.roleId = row.roleId;
-          this.$Service.post("/api/delRole.action", JSON.stringify(send), {
-            headers: {
-              "Access-Control-Allow-Origin": "*", //解决cors头问题
-              "Access-Control-Allow-Credentials": "true", //解决session问题
-              "Content-Type": "application/json;charset=UTF-8" //将表单数据传递转化为form-data类型
-            },
-            withCredentials: true
-          }).then(res=>{
-            console.log(res);
-            if(res.data.status==0){
-                this.$message.success("删除成功!");
-            }else{
-              this.$message.error("删除失败!");
-            }
-
-          }).catch(error=>{
-            this.$message({
-                productType: "error",
-                message: "删除失败!接口原因"
-              });
-          })
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除!"
-          });
-        });
-    },
-    //模态框确认部分
-    onSave(form) {
-      console.log(this.form);
-      if (this.dialogStatus == 0) {
-        // this.tableData.push(this.form);
-        this.$Service.post("/api/addRole.action", JSON.stringify(this.form), {
-          headers: {
-            "Access-Control-Allow-Origin": "*", //解决cors头问题
-            "Access-Control-Allow-Credentials": "true", //解决session问题
-            "Content-Type": "application/json;charset=UTF-8" //将表单数据传递转化为form-data类型
-          },
-          withCredentials: true
-        })
-          .then(res => {
-            console.log(res);
-          })
-          .catch(error => {
-            this.$message.error("新增失败,接口原因");
-          });
-      }
-
-      this.dialogFormVisible = false;
-    },
-    addEquipment() {
-      //新增弹框标题
-      //显示弹框
-      this.dialogFormVisible = true;
-      this.dialogStatus = 0;
-    },
-    //模态框修改部分
-    handleClick(i, row) {
+    handleEdit(row) {
       console.log(row);
-      this.form = row;
-      // this.dialogStatus = 1;
-      this.dialogFormVisible = true;
     },
+    handleSearch() {
+      this.tableData = this.saveData.filter((item) => {
+        let nameKey = "planName";
+        let contentKey = "content";
+        let dateKey = "startDate1";
 
-    //模态框取消部分
-    back() {
-      this.dialogFormVisible = false;
-      this.form = {
-        roleName: "", //角色名称
-        roleDesc: "" //角色描述
+        let nameIn = this.searchForm[nameKey]
+          ? item[nameKey].indexOf(this.searchForm[nameKey]) >= 0
+          : true;
+        let contentIn = this.searchForm[contentKey]
+          ? item[contentKey].indexOf(this.searchForm[contentKey]) >= 0
+          : true;
+
+        let sDate = this.searchForm[dateKey][0];
+        let eDate = this.searchForm[dateKey][1];
+
+        console.log(sDate);
+
+        let getTimeFromStr = (str) => {
+          return new Date(str).getTime();
+        };
+
+        let dateIn =
+          sDate && eDate
+            ? getTimeFromStr(item[dateKey]) <= eDate.getTime() &&
+              getTimeFromStr(item[dateKey]) >= sDate.getTime()
+            : true;
+
+        return nameIn && contentIn && dateIn;
+      });
+    },
+    handleReset() {
+      this.tableData = JSON.parse(JSON.stringify(this.saveData));
+      this.searchForm = {
+        startDate1: [],
+        planName: "",
+        content: "",
       };
     },
-   
   },
-  mounted() {
-    this.getList();
-  }
 };
 </script>
-<style leng="less" scoped>
-.el-table thead {
-  color: "#909399";
-  font-weight: 500;
-  background-color: "#909399";
+
+<style scoped lang="less">
+.testplan {
+  padding: 20px;
+  text-align: left;
 }
-.tree {
-  margin-left: 70px;
-  margin-top: -20px;
-}
-.newrole,
-.newrole_button {
-  color: rgba(10, 171, 149, 1);
-  font-size: 14px;
-  font-family: PingFang SC;
-  font-weight: 500;
-  text-align: center;
-}
-.newrole {
-  margin-top: 40px;
-  border: 1px dashed #ebeef5;
-}
-#dialog {
-  border-bottom: 1px solid gray;
-  /* width: 48%; */
-  left: 200px;
-}
-.el-dialog .el-dialog__header .el-dialog__title {
-  font-size: 14px;
-}
-.searchCss {
-  background: rgba(10, 171, 149, 1);
+.form-outer {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  .item {
+    width: 200px;
+    margin-right: 10px;
+  }
+  .label {
+    line-height: 40px;
+  }
 }
 </style>
