@@ -30,6 +30,9 @@
             @click="handleEdit(scope.row, scope.$index)"
             >下载</el-button
           >
+          <el-button type="text" style="color: blue" size="small"
+            >上传</el-button
+          >
           <el-button type="text" style="color: red" size="small"
             >删除</el-button
           >

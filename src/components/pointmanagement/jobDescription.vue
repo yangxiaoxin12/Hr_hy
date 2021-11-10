@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="form-outer">
-      <div class="label">科室/单位：</div>
+      <div class="label">岗位：</div>
       <el-input
         class="item"
         v-model="searchForm.content"
-        placeholder="请输入科室/单位名称"
+        placeholder="请输入岗位名称"
       ></el-input>
       <el-button class="button" @click="handleSearch">查询</el-button>
       <el-button class="button" @click="handleReset">重置</el-button>
@@ -15,7 +15,7 @@
     <el-table border :data="tableData" style="width: 100%">
       <el-table-column fixed prop="planName" label="序号" width="100">
       </el-table-column>
-      <el-table-column prop="content" label="科室/单位" width="280">
+      <el-table-column prop="content" label="岗位" width="280">
       </el-table-column>
       <el-table-column prop="date" label="下发时间" width="200">
       </el-table-column>
@@ -50,7 +50,7 @@ export default {
       tableData: [
         {
           planName: "1",
-          content: "安环部",
+          content: "UI",
           date: "2020-12-15",
           dutyName: "岗位说明书目录（ui用）",
           startDate1: "2020-1-8",
@@ -64,7 +64,7 @@ export default {
           planName: "2",
           content: "新材料公司",
           date: "2020-12-28",
-          dutyName: "新材料公司岗位说明书",
+          dutyName: "新材料公司岗位",
           startDate1: "2020-1-8",
           endDate1: "2020-2-7",
           startDate2: "2020-1-15",
@@ -76,7 +76,7 @@ export default {
           planName: "3",
           content: "数字化工作室",
           date: "2020-12-24",
-          dutyName: "数字化工作室岗位说明书",
+          dutyName: "新材料公司岗位",
           startDate1: "2020-2-8",
           endDate1: "2020-3-7",
           startDate2: "2020-2-15",
