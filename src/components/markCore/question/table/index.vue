@@ -72,8 +72,8 @@
 <script>
 
 import Bus from "@/api/Bus"; //注意引入
-import dialogfprm from "@/components/activitymanagement/question/table/form";
-import optionform from "@/components/activitymanagement/question/table/form/option";
+import dialogfprm from "@/components/markCore/question/table/form";
+import optionform from "@/components/markCore/question/table/form/option";
 export default {
   components: {
     dialogfprm,

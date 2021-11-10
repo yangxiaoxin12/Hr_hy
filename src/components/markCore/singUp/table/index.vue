@@ -57,7 +57,7 @@
 }
 </style>
 <script>
-import dialogFprm from "@/components/activitymanagement/singUp/table/form";
+import dialogFprm from "@/components/markCore/singUp/table/form";
 export default {
   components: {
     dialogFprm

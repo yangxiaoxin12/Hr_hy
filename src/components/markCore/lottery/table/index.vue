@@ -57,7 +57,7 @@
 }
 </style>
 <script>
-import dialogFprm from "@/components/activitymanagement/lottery/table/form";
+import dialogFprm from "@/components/markCore/lottery/table/form";
 export default {
   components: {
     dialogFprm

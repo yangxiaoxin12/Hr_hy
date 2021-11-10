@@ -4,9 +4,9 @@ const login = () => import("@/components/login");
 const index = () => import("@/components/index");
 // const testLottery = () =>
 //     import ('@/components/testLottery')
-const testplan = () => import("@/components/activitymanagement/testplan");
+const testplan = () => import("@/components/markCore/testplan");
 const markDocument = () =>
-  import("@/components/activitymanagement/markDocument");
+  import("@/components/markCore/markDocument");
 const roleaction = () => import("@/components/roleaction/roleaction");
 const accountnumber = () => import("@/components/roleaction/accountnumber");
 const changepassword = () => import("@/components/roleaction/changepassword");
@@ -21,25 +21,25 @@ const voteImport = () => import("@/components/statisticsRanking/voteImport"); //
 const tableVotingDetails = () =>
   import("@/components/statisticsRanking/tableVotingDetails"); // 导入
 
-const CreateVote = () => import("@/components/activitymanagement/createVote"); // 导入
+const CreateVote = () => import("@/components/markCore/createVote"); // 导入
 
 const createLottery = () =>
-  import("@/components/activitymanagement/createLottery"); // 导入
+  import("@/components/markCore/createLottery"); // 导入
 const createQuestion = () =>
-  import("@/components/activitymanagement/createQuestion"); // 导入
+  import("@/components/markCore/createQuestion"); // 导入
 const createApplication = () =>
-  import("@/components/activitymanagement/createApplication"); // 导入
+  import("@/components/markCore/createApplication"); // 导入
 
 //----------------------------------
 const createIntegral = () =>
-  import("@/components/activitymanagement/createIntegral"); // 导入
+  import("@/components/markCore/createIntegral"); // 导入
 const createSignIn = () =>
-  import("@/components/activitymanagement/createSignIn"); // 导入
+  import("@/components/markCore/createSignIn"); // 导入
 const createRedPacket = () =>
-  import("@/components/activitymanagement/createRedPacket"); // 导入
+  import("@/components/markCore/createRedPacket"); // 导入
 const createThumbUp = () =>
-  import("@/components/activitymanagement/createThumbUp"); // 导入
-const voteDetails = () => import("@/components/activitymanagement/voteDetails"); // 导入
+  import("@/components/markCore/createThumbUp"); // 导入
+const voteDetails = () => import("@/components/markCore/voteDetails"); // 导入
 const orgBuild = () => import("@/components/pointmanagement/orgBuild"); // 导入
 const prizePointList = () =>
   import("@/components/pointmanagement/prizePointList"); // 导入

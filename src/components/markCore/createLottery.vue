@@ -229,8 +229,8 @@
 }
 </style>
 <script>
-import lottery from "@/components/activitymanagement/lottery";
-import stepTable from "@/components/activitymanagement/lottery/table";
+import lottery from "@/components/markCore/lottery";
+import stepTable from "@/components/markCore/lottery/table";
 export default {
   components: { lottery, stepTable },
   data() {

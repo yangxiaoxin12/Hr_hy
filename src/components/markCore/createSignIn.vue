@@ -79,8 +79,8 @@
 </style>
 <script>
 
-import singUp from "@/components/activitymanagement/singUp";
-import stepTable from "@/components/activitymanagement/singUp/table";
+import singUp from "@/components/markCore/singUp";
+import stepTable from "@/components/markCore/singUp/table";
 //import singUp from "@/components/singUp";
 export default {
   components: {

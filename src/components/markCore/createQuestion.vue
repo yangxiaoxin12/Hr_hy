@@ -82,8 +82,8 @@
 }
 </style>
 <script>
-import question from "@/components/activitymanagement/question";
-import stepTable from "@/components/activitymanagement/question/table";
+import question from "@/components/markCore/question";
+import stepTable from "@/components/markCore/question/table";
 export default {
   components: {
     question,

@@ -6,17 +6,23 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
 };
 </script>
 
-<style>
-*{
+<style lang="less" scoped>
+* {
   font-size: 14px;
 }
-::-webkit-scrollbar {display:none}
-::-moz-scrollbar {display:none}
-::-ms-scrollbar {display:none}
+::-webkit-scrollbar {
+  display: none;
+}
+::-moz-scrollbar {
+  display: none;
+}
+::-ms-scrollbar {
+  display: none;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -31,7 +37,6 @@ export default {
   font-family: PingFang SC;
   font-weight: 500;
   overflow: hidden;
- 
 }
 .el-tabs__item.is-active {
   color: white;
@@ -108,5 +113,13 @@ export default {
   width: 100px;
   height: 100px;
   line-height: 100px;
+}
+.form-outer {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  .item {
+    width: 300px;
+  }
 }
 </style>
