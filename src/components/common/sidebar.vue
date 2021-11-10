@@ -31,6 +31,7 @@
               v-show="!item.hideInMenu"
               :index="'/' + item.router"
               :key="index"
+              @click="jumpUrl(item.jump)"
               >{{ item.text }}</el-menu-item
             >
           </el-menu-item-group>
@@ -125,6 +126,7 @@ export default {
             {
               router: "learnPlatform",
               text: "学习平台",
+              jump: "http://www.shhuayi-elearning.cn/login.htm",
             },
           ],
         },
@@ -147,7 +149,8 @@ export default {
             },
             {
               router: "toExamine",
-              text: " 审批",
+              text: "审批",
+              jump: "http://hyxcl.shhuayi.com/SitePages/SHHYPortal/PolicyLibrary.aspx",
             },
           ],
         },
@@ -191,6 +194,12 @@ export default {
         router: key,
         text: value.$options._renderChildren[0].text,
       });
+    },
+    jumpUrl(url) {
+      if (url) {
+        console.log(url);
+        window.open(url);
+      }
     },
   },
   created() {},
