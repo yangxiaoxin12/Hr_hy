@@ -199,6 +199,7 @@ export default {
       if (url) {
         console.log(url);
         window.open(url);
+        this.$router.back();
       }
     },
   },
