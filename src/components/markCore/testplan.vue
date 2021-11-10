@@ -1,16 +1,20 @@
 <template>
   <div>
     <div class="form-outer">
+      <div class="label">计划名称：</div>
       <el-input
         class="item"
         v-model="searchForm.planName"
         placeholder="请输入计划名称"
       ></el-input>
     </div>
+
     <el-table border :data="tableData" style="width: 100%" height="700">
       <el-table-column fixed prop="planName" label="计划名称" width="150">
       </el-table-column>
-      <el-table-column prop="date" label="考核期" width="150">
+      <el-table-column prop="content" label="考核内容" width="150">
+      </el-table-column>
+      <el-table-column prop="date" label="考核期" width="200">
       </el-table-column>
       <el-table-column prop="process" label="所属阶段" width="150">
       </el-table-column>
@@ -22,9 +26,9 @@
       </el-table-column>
       <el-table-column prop="startDate2" label="评估起始日期" width="120">
       </el-table-column>
-      <el-table-column prop="endDate1" label="目标结束日期" width="300">
+      <el-table-column prop="endDate1" label="目标结束日期" width="120">
       </el-table-column>
-      <el-table-column prop="endDate2" label="目标结束日期" width="300">
+      <el-table-column prop="endDate2" label="评估结束日期" width="120">
       </el-table-column>
     </el-table>
   </div>
@@ -39,68 +43,17 @@ export default {
       },
       tableData: [
         {
-          planName: "采购员考核计划",
-          date: "2016-05-03",
+          planName: "安全员考核计划",
+          content: "无伤亡，无重大损失",
+          date: "2020-1-8～2021-1-7",
           name: "王小虎",
           dutyName: "刘宗宪",
-          startDate1: "2020-11-07",
-          endDate1: "2021-11-06",
-          startDate2: "2020-12-25",
-          endDate2: "2021-12-24",
-          process: "阶段",
-          type: "类型",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1518 弄",
-          zip: 200333,
-        },
-        {
-          planName: "采购员考核计划",
-          date: "2016-05-03",
-          name: "王小虎",
-          dutyName: "刘宗宪",
-          startDate1: "2020-11-07",
-          endDate1: "2021-11-06",
-          startDate2: "2020-12-25",
-          endDate2: "2021-12-24",
-          process: "阶段",
-          type: "类型",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1518 弄",
-          zip: 200333,
-        },
-        {
-          planName: "采购员考核计划",
-          date: "2016-05-03",
-          name: "王小虎",
-          dutyName: "刘宗宪",
-          startDate1: "2020-11-07",
-          endDate1: "2021-11-06",
-          startDate2: "2020-12-25",
-          endDate2: "2021-12-24",
-          process: "阶段",
-          type: "类型",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1518 弄",
-          zip: 200333,
-        },
-        {
-          planName: "采购员考核计划",
-          date: "2016-05-03",
-          name: "王小虎",
-          dutyName: "刘宗宪",
-          startDate1: "2020-11-07",
-          endDate1: "2021-11-06",
-          startDate2: "2020-12-25",
-          endDate2: "2021-12-24",
-          process: "阶段",
-          type: "类型",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1518 弄",
-          zip: 200333,
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "年度阶段",
+          type: "安全考核",
         },
       ],
     };
@@ -118,7 +71,10 @@ export default {
   display: flex;
   flex-wrap: wrap;
   .item {
-    width: 300px;
+    width: 200px;
+  }
+  .label {
+    line-height: 50px;
   }
 }
 </style>
