@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow: scroll">
+  <div >
     <div class="header">
       <div class="header-item ra">
         <div class="info">
