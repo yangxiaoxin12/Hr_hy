@@ -143,7 +143,7 @@ export default {
             },
             {
               router: "filterRelease",
-              text: "筛选-发布",
+              text: "面试与评价",
             },
             {
               router: "toExamine",

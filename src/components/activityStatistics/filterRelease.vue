@@ -11,19 +11,7 @@
         label-width="90px"
       >
         <el-form-item label="收件人:">
-          <el-select
-            style="width: 280px"
-            v-model="form.region"
-            placeholder="请选择收件人"
-          >
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
-            </el-option>
-          </el-select>
+          <el-input style="width: 40%" v-model="form.addressee"></el-input>
         </el-form-item>
         <el-form-item label="发送标题:">
           <el-input style="width: 40%" v-model="form.title"></el-input>
@@ -56,30 +44,7 @@ export default {
     return {
       form: {
         name: "",
-        region: [
-          {
-            value: "选项1",
-            label: "1048442878@qq.com",
-          },
-          {
-            value: "选项2",
-            label: "176155263265@163.com",
-          },
-          {
-            value: "选项3",
-            label: "65512daskjdq@163.com",
-          },
-          {
-            value: "选项4",
-            label: "51564sdaasd@163.com",
-          },
-          {
-            value: "选项5",
-            label: "12323sdade@163.com",
-          },
-        ],
-        date1: "",
-        date2: "",
+        addressee: "",
         delivery: false,
         type: [],
         title: "",
@@ -94,19 +59,11 @@ export default {
   methods: {
     //接口已完成
     send() {
-      let parms = {
-        toUser: this.value,
-        title: this.form.title,
-        content: this.form.content,
-      };
       this.$http
-        .post("192.168.120.14:8080/mail/send", parms, {
-          headers: {
-            "Access-Control-Allow-Origin": "*", //解决cors头问题
-            "Access-Control-Allow-Credentials": "true", //解决session问题
-            "Content-Type": "application/json;charset=UTF-8", //将表单数据传递转化为form-data类型
-          },
-          withCredentials: true,
+        .post(this.$api.email.url, {
+          toUser: this.form.addressee,
+          title: this.form.title,
+          content: this.form.content,
         })
         .then((res) => {
           console.log(res);
