@@ -11,6 +11,9 @@ export default {
 </script>
 
 <style>
+*{
+  font-size: 14px;
+}
 ::-webkit-scrollbar {display:none}
 ::-moz-scrollbar {display:none}
 ::-ms-scrollbar {display:none}
