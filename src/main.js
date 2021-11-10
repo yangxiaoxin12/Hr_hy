@@ -55,7 +55,7 @@ Vue.prototype.$vuescrollConfig = {
 
 
 // 将axios挂载到原型上
-Vue.prototype.axios = axios
+Vue.prototype.$http = axios
 
 
 

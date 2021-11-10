@@ -1,6 +1,5 @@
 <template>
   <div class="eCard">
-    
     <div class="main-header">
       <el-form :inline="true" :model="formInline" class="demo-form-inline">
         <el-form-item label="">
@@ -23,10 +22,9 @@
         :data="tableData"
         border
         stripe
-
         :row-style="{ height: '47px' }"
         :cell-style="{ padding: '5px 0px' }"
-        style="width: 100% "
+        style="width: 100%"
       >
         <el-table-column prop="themeName" label="活动名称"></el-table-column>
         <el-table-column prop="prizeName" label="奖品名称"></el-table-column>
@@ -38,13 +36,12 @@
     </div>
     <div class="bottom">
       <pagination
-      v-show="total > 0"
-      :total="total"
-      :page.sync="listQuery.page"
-      :limit.sync="listQuery.limit"
-      @pagination="filterInput"
-      
-    />
+        v-show="total > 0"
+        :total="total"
+        :page.sync="listQuery.page"
+        :limit.sync="listQuery.limit"
+        @pagination="filterInput"
+      />
     </div>
   </div>
 </template>
@@ -54,7 +51,7 @@ import Pagination from "@/components/Pagination"; // secondary package based on 
 export default {
   components: {
     mainSidebar,
-    Pagination
+    Pagination,
   },
   mounted() {
     this.getList();
@@ -71,17 +68,17 @@ export default {
         importance: undefined,
         title: undefined,
         type: undefined,
-        sort: "+No"
+        sort: "+No",
       },
       card: {
         themeName: "",
         prizeName: "",
         type: "",
         endTime: "",
-        total: ""
+        total: "",
       },
       formInline: {
-        themeName: ""
+        themeName: "",
       },
       tableData: [
         {
@@ -91,9 +88,9 @@ export default {
           shiyong: "0",
           type: "2020-03-29",
           prizeName: "3",
-          endTime: "2020-04-29"
-        }
-      ]
+          endTime: "2020-04-29",
+        },
+      ],
     };
   }, //data
   methods: {
@@ -110,15 +107,15 @@ export default {
             headers: {
               "Access-Control-Allow-Origin": "*", //解决cors头问题
               "Access-Control-Allow-Credentials": "true", //解决session问题
-              "Content-productType": "application/json;charset=UTF-8" //将表单数据传递转化为form-data类型
+              "Content-productType": "application/json;charset=UTF-8", //将表单数据传递转化为form-data类型
             },
-            withCredentials: true
+            withCredentials: true,
           }
         )
-        .then(res => {
+        .then((res) => {
           if (res.data.status === 0) {
             console.log(res.data);
-            res.data.data.forEach(item => {
+            res.data.data.forEach((item) => {
               if (item.type == 1) {
                 item.type = "实物";
               } else if (item.type == 2) {
@@ -137,7 +134,6 @@ export default {
         });
     },
     getList() {
-      
       const virtualData = [
         {
           themeName: "订醇享抽大奖",
@@ -145,7 +141,7 @@ export default {
           type: "虚拟兑换奖品",
           shiyong: 0,
           total: 30,
-          stock: 22
+          stock: 22,
         },
         {
           themeName: "醇享送送送",
@@ -153,7 +149,7 @@ export default {
           type: "虚拟兑换奖品",
           shiyong: 0,
           total: 11,
-          stock: 3
+          stock: 3,
         },
         {
           themeName: "酬宾大福利",
@@ -161,19 +157,19 @@ export default {
           type: "虚拟兑换奖品",
           shiyong: 0,
           total: 21,
-          stock: 7
-        }
+          stock: 7,
+        },
       ];
       this.tableData = virtualData;
-    }
-  } //method
+    },
+  }, //method
 };
 </script>
 <style scoped>
-
 .main-header {
-  width: 1150px;
+  width: 99%;
   height: 50px;
+  border: 1px solid red;
   background-color: #fff;
   padding: 0px;
   text-align: left;
@@ -195,9 +191,8 @@ export default {
   height: 520px;
   margin-top: 20px;
   overflow: hidden;
-  
 }
-.bottom{
-  margin-top:50px;
+.bottom {
+  margin-top: 50px;
 }
 </style>
