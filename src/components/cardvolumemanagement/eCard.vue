@@ -1,539 +1,549 @@
 <template>
-  <div class="eCard">
-    <div class="main-header">
-      <el-form :inline="true" :model="formInline" class="demo-form-inline">
-        <el-form-item label="卡卷名称:">
-          <el-input v-model="formInline.cardName" placeholder></el-input>
-        </el-form-item>
-        <el-form-itme>
-          <el-button class="searchCss" type="success" @click="getList"
-            >查询</el-button
-          >
-          <el-button class="addThemeCss" type="primary" @click="onSubmit"
-            >重置</el-button
-          >
-        </el-form-itme>
-      </el-form>
+  <div>
+    <div class="form-outer">
+      <div class="label">姓名：</div>
+      <el-input
+        class="item"
+        v-model="searchForm.name"
+        placeholder="请输入姓名"
+      ></el-input>
+      <!-- <div class="label">所属部门：</div>
+      <el-input
+        class="item"
+        v-model="searchForm.pub"
+        placeholder="请输入所属部门"
+      ></el-input> -->
 
-      <el-button type="primary" @click="addPrize">增加卡卷</el-button>
-    </div>
-    <div class="content">
-          <el-dialog title="新增卡卷" :visible.sync="dialogFormVisible">
-      <el-form
-        ref="card"
-        refs="card"
-        label-width="100px"
-        :rules="rules"
-        style="width:500px;"
-        :model="card"
+      <br />
+      <div class="label">入职日期：</div>
+      <el-date-picker
+        v-model="searchForm.startDate1"
+        class="item"
+        type="daterange"
+        align="right"
+        unlink-panels
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
       >
-        <el-form-item label="卡卷名称:" prop="cardName">
-          <el-input v-model="card.cardName"></el-input>
-        </el-form-item>
-        <el-form-item label-width="100px" label="投放渠道:" prop="opera">
-          <el-select
-            style="width:400px"
-            v-model="card.opera"
-            placeholder="请选择活动区域"
-          >
-            <el-option label="移动" value="0"></el-option>
-            <el-option label="联通" value="1"></el-option>
-            <el-option label="电信" value="2"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="开始时间:" prop="startTime">
-          <el-date-picker
-            type="date"
-            style="width: 100%;"
-            placeholder="开始时间"
-            format="yyyy-MM-dd"
-            value-format="yyyy-MM-dd"
-            v-model="card.startTime"
-          ></el-date-picker>
-        </el-form-item>
-        <el-form-item label="结束时间" prop="endTime">
-          <el-date-picker
-            type="date"
-            placeholder="结束时间"
-            format="yyyy-MM-dd"
-            style="width: 100%;"
-            value-format="yyyy-MM-dd"
-            v-model="card.endTime"
-          ></el-date-picker>
-        </el-form-item>
-        <el-form-item label="卡卷首编码:" prop="code">
-          <el-input v-model="card.code"></el-input>
-        </el-form-item>
-        <el-form-item label="卡卷密码:" prop="password">
-          <el-input v-model="card.password"></el-input>
-        </el-form-item>
+      </el-date-picker>
+      <el-button class="button" @click="handleSearch">查询</el-button>
+      <el-button class="button" @click="handleReset">重置</el-button>
+      <el-button class="button" type="primary">新增</el-button>
+    </div>
 
-        <el-form-item label="产品ID:" prop="productId">
-          <el-input v-model="card.productId"></el-input>
-        </el-form-item>
-        <el-form-item label="产品名称:" prop="productName">
-          <el-input v-model="card.productName"></el-input>
-        </el-form-item>
-        <el-form-item label="总数量:" prop="cardCount" type="number">
-          <el-input v-model="card.cardCount"></el-input>
-        </el-form-item>
-        <el-form-item label-width="100px" label="规则:" prop="rule">
-          <el-select
-            style="width:400px"
-            v-model="card.rule"
-            placeholder="参加活动次数"
-          >
-            <el-option label="活动期间领取一次" value="0"></el-option>
-            <el-option label="每天领取一次" value="1"></el-option>
-          </el-select>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="onSave">确 定</el-button>
-      </div>
-    </el-dialog>
-    <el-table
-      class="tableDataCss"
-      :data="tableData"
-      border
-      stripe
-      :row-style="{ height: '47px' }"
-      :cell-style="{ padding: '5px 0px' }"
-      style="width: 100%"
-    >
-      <el-table-column prop="cardName" label="卡卷名称"></el-table-column>
-      <el-table-column prop="opera" label="运营商"></el-table-column>
-      <el-table-column prop="productName" label="产品名称"></el-table-column>
-      <el-table-column prop="productId" label="产品ID"></el-table-column>
-      <el-table-column prop="noUseNum" label="可用数量"></el-table-column>
-      <el-table-column prop="cardCount" label="总数量"></el-table-column>
-      <el-table-column prop="startTime" label="开始时间"></el-table-column>
-      <el-table-column prop="endTime" label="结束时间"></el-table-column>
-
-      <el-table-column label="操作" width="200px">
+    <el-table border :data="tableData" style="width: 100%">
+      <el-table-column fixed prop="name" label="员工姓名" width="150">
+      </el-table-column>
+      <el-table-column prop="pub" label="所属部门" width="150">
+      </el-table-column>
+      <el-table-column prop="planName" label="身份证号" width="200">
+      </el-table-column>
+      <el-table-column prop="content" label="工号" width="150">
+      </el-table-column>
+      <el-table-column prop="date" label="证件类型" width="200">
+      </el-table-column>
+      <el-table-column prop="process" label="手机号码" width="150">
+      </el-table-column>
+      <el-table-column prop="type" label="薪资" width="150"> </el-table-column>
+      <el-table-column prop="startDate1" label="入职日期" width="120">
+      </el-table-column>
+      <el-table-column fixed="right" label="操作" width="150">
         <template slot-scope="scope">
-          <el-button @click="checkList(scope.row)" type="text" size="small"
-            >明细</el-button
+          <el-button type="text" size="small" @click="handleEdit(scope.row)"
+            >编辑</el-button
           >
-          <el-button type="text" @click="handleEdit(scope.row)" size="small"
-            >上传</el-button
+          <el-button type="text" size="small" @click="handleCheck(scope.row)"
+            >详情</el-button
           >
-          <el-button type="text" @click="handleDelete(scope.row,scope.$index)" size="small"
+          <el-button
+            type="text"
+            style="color: red"
+            size="small"
+            @click="handleEdit(scope.row)"
             >删除</el-button
           >
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog title="明细" :visible.sync="dialogFormVisibleDis">
-      <el-form
-        ref="card"
-        refs="card"
-        label-width="100px"
-        :rules="rules"
-        style="width:500px;"
-        :model="card"
-      >
-        <el-form-item label="卡卷名称:" prop="cardName">
-          <el-input v-model="card.cardName"></el-input>
-        </el-form-item>
-        <el-form-item label-width="100px" label="投放渠道:" prop="opera">
-          <el-select
-            style="width:400px"
-            v-model="card.opera"
-            placeholder="请选择活动区域"
-          >
-            <el-option label="移动" value="0"></el-option>
-            <el-option label="联通" value="1"></el-option>
-            <el-option label="电信" value="2"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="开始时间:" prop="startTime">
-          <el-input v-model="card.startTime"></el-input>
-        </el-form-item>
-        <el-form-item label="结束时间:" prop="endTime">
-          <el-input v-model="card.endTime"></el-input>
-        </el-form-item>
-        <el-form-item label="卡卷首编码:" prop="code">
-          <el-input v-model="card.code"></el-input>
-        </el-form-item>
-        <el-form-item label="卡卷密码:" prop="password">
-          <el-input v-model="card.password"></el-input>
-        </el-form-item>
-        <el-form-item label="产品ID:">
-          <el-input v-model="card.productId"></el-input>
-        </el-form-item>
-        <el-form-item label="产品名称:" prop="productName">
-          <el-input v-model="card.productName"></el-input>
-        </el-form-item>
-        <el-form-item label="总数量:">
-          <el-input v-model="card.cardCount"  prop="cardCount" type="number" placeholder="请输入数字"></el-input>
-        </el-form-item>
-        <el-form-item label-width="100px" label="规则:" prop="rule">
-          <el-select
-            style="width:400px"
-            v-model="card.rule"
-            placeholder="参加活动次数"
-          >
-            <el-option label="活动期间领取一次" value="0"></el-option>
-            <el-option label="每天领取一次" value="1"></el-option>
-          </el-select>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="onCancel">取 消</el-button>
-        <el-button type="primary" @click="onCheck">确 定</el-button>
+    <el-dialog title="员工详情" :visible.sync="showDialog" width="40%" center>
+      <div class="dialog-outer">
+        <div class="item">
+          <span class="label">序号</span>
+          <span class="value">19</span>
+        </div>
+        <div class="item">
+          <span class="label">部门名称</span>
+          <span class="value">{{ checkInfo.pub }}</span>
+        </div>
+        <div class="item">
+          <span class="label">岗位名称</span>
+          <span class="value">开发工程师</span>
+        </div>
+        <div class="item">
+          <span class="label">人员编号</span>
+          <span class="value">187876772</span>
+        </div>
+        <div class="item">
+          <span class="label">姓名</span>
+          <span class="value">{{ checkInfo.name }}</span>
+        </div>
+        <div class="item">
+          <span class="label">单位工号</span>
+          <span class="value">68686761</span>
+        </div>
+        <div class="item">
+          <span class="label">单位工号</span>
+          <span class="value">68686761</span>
+        </div>
+        <div class="item">
+          <span class="label">工作地点</span>
+          <span class="value">宜昌</span>
+        </div>
+        <div class="item">
+          <span class="label">分类</span>
+          <span class="value">派遣工</span>
+        </div>
+        <div class="item">
+          <span class="label">单位工号</span>
+          <span class="value">68686761</span>
+        </div>
+        <div class="item">
+          <span class="label">性别</span>
+          <span class="value">男</span>
+        </div>
+        <div class="item">
+          <span class="label">民族</span>
+          <span class="value">汉</span>
+        </div>
+        <div class="item">
+          <span class="label">婚姻状况</span>
+          <span class="value">已婚</span>
+        </div>
+        <div class="item">
+          <span class="label">政治面貌</span>
+          <span class="value">团员</span>
+        </div>
+        <div class="item">
+          <span class="label">年龄</span>
+          <span class="value">28</span>
+        </div>
+        <div class="item">
+          <span class="label">出生日期</span>
+          <span class="value">1993.2.5</span>
+        </div>
+        <div class="item">
+          <span class="label">身份证号</span>
+          <span class="value">32061119960714261X</span>
+        </div>
+        <div class="item">
+          <span class="label">合同到期日期</span>
+          <span class="value">2023.11.08</span>
+        </div>
+        <div class="item">
+          <span class="label">参加工作时间</span>
+          <span class="value">4年</span>
+        </div>
+        <div class="item">
+          <span class="label">工龄</span>
+          <span class="value">4</span>
+        </div>
+        <div class="item">
+          <span class="label">工龄起算日</span>
+          <span class="value">2016.8.8</span>
+        </div>
+        <div class="item">
+          <span class="label">进入本单位</span>
+          <span class="value">2017.8.4</span>
+        </div>
+        <div class="item">
+          <span class="label">司龄</span>
+          <span class="value">2</span>
+        </div>
+        <div class="item">
+          <span class="label">政治面貌</span>
+          <span class="value">团员</span>
+        </div>
+        <div class="item">
+          <span class="label">学历</span>
+          <span class="value">大专</span>
+        </div>
+        <div class="item">
+          <span class="label">毕业院校</span>
+          <span class="value">江苏大学</span>
+        </div>
+        <div class="item">
+          <span class="label">专业</span>
+          <span class="value">计算机科学与技术</span>
+        </div>
       </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="showDialog = false">取 消</el-button>
+        <el-button type="primary" @click="showDialog = false">编 辑</el-button>
+      </span>
     </el-dialog>
-    </div>
-  
-    <pagination
-      v-show="total > 0"
-      :total="total"
-      :page.sync="listQuery.page"
-      :limit.sync="listQuery.limit"
-      @pagination="getList"
-    />
   </div>
 </template>
+
 <script>
-
-import Pagination from "@/components/Pagination"; // secondary package based on el-pagination
-
 export default {
-  components: {
-    Pagination
-  },
-  mounted() {
-    this.getList();
-    console.log("他往上 想明白那月光...");
-  },
   data() {
     return {
-      dialogFormVisibleDis: false,
-      dialogFormVisible: false,
-      card: {
-        id: 0,
-        cardName: "",
-        code: "",
-        password: "",
-        cardCount: 0,
-        opera: null,
-        productId: null,
-        productName: "",
-        startTime: "",
-        endTime: "",
-        createTime: "",
-        rule:null
-      },
-      formInline: {
-        cardName: ""
+      showDialog: false,
+      checkInfo: {},
+      searchForm: {
+        name: "",
+        pub: "",
+        startDate1: [],
       },
       tableData: [
         {
-          id: null,
-          cardName: "",
-          code: null,
-          password: null,
-          userId: null,
-          startTime: "",
-          endTime: "",
-          createTime: null,
-          cardCount: null, //卡卷总数量
-          noUseNum: null, //可用数量
+          name: "王陈奕",
+          pub: "产品部",
+          planName: "32061119960714261X",
+          content: "7768166",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "15000",
+        },
+        {
+          name: "李跃华",
+          pub: "安全部",
+          planName: "123123131312414214",
+          content: "97686673",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "12000",
+        },
+        {
+          name: "李却成",
+          pub: "财务部",
+          planName: "32061757723714261X",
+          content: "123675812",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "180000",
+        },
+        {
+          name: "李小琳",
+          pub: "地理部",
+          planName: "3206887812714261X",
+          content: "878687213",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "8900",
+        },
 
-          opera: 1,
+        {
+          name: "成雪峰",
+          pub: "金融部",
+          planName: "320619971260714261X",
+          content: "97686222",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "25000",
+        },
+        {
+          name: "薛赵盘",
+          pub: "成品部",
+          planName: "32061109761220714261X",
+          content: "876571223",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "14750",
+        },
+        {
+          name: "王陈奕",
+          pub: "产品部",
+          planName: "32061119960714261X",
+          content: "7768166",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "15000",
+        },
+        {
+          name: "李跃华",
+          pub: "安全部",
+          planName: "123123131312414214",
+          content: "97686673",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "12000",
+        },
+        {
+          name: "李却成",
+          pub: "财务部",
+          planName: "32061757723714261X",
+          content: "123675812",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "180000",
+        },
+        {
+          name: "李小琳",
+          pub: "地理部",
+          planName: "3206887812714261X",
+          content: "878687213",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "8900",
+        },
 
-          productId: null,
-          productName: "",
+        {
+          name: "成雪峰",
+          pub: "金融部",
+          planName: "320619971260714261X",
+          content: "97686222",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "25000",
+        },
+        {
+          name: "薛赵盘",
+          pub: "成品部",
+          planName: "32061109761220714261X",
+          content: "876571223",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "14750",
+        },
+        {
+          name: "王陈奕",
+          pub: "产品部",
+          planName: "32061119960714261X",
+          content: "7768166",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "15000",
+        },
+        {
+          name: "李跃华",
+          pub: "安全部",
+          planName: "123123131312414214",
+          content: "97686673",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "12000",
+        },
+        {
+          name: "李却成",
+          pub: "财务部",
+          planName: "32061757723714261X",
+          content: "123675812",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "180000",
+        },
+        {
+          name: "李小琳",
+          pub: "地理部",
+          planName: "3206887812714261X",
+          content: "878687213",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "8900",
+        },
 
-          batch: null //批次
-        }
+        {
+          name: "成雪峰",
+          pub: "金融部",
+          planName: "320619971260714261X",
+          content: "97686222",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "25000",
+        },
+        {
+          name: "薛赵盘",
+          pub: "成品部",
+          planName: "32061109761220714261X",
+          content: "876571223",
+          date: "身份证",
+          dutyName: "刘宗宪",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "15605293671",
+          type: "14750",
+        },
       ],
-      total: 1,
-      listQuery: {
-        page: 1,
-        limit: 10,
-        importance: undefined,
-        title: undefined,
-        type: undefined,
-        sort: "+No"
-      },
-      rules:{
-        cardName:[
-           { required: true, message: "请输入卡卷名称", trigger: "blur" },
-          { min: 2, max: 66, message: "长度在 2 到 66个字符", trigger: "blur" }
-        
-        ],
-        opera: [
-          { required: true, message: "请选择活动区域", trigger: "change" }
-        ],
-        startTime: [
-          {
-            type: "string",
-            required: true,
-            message: "请选择日期",
-            trigger: "change"
-          }
-        ],
-        endTime: [
-          {
-            type: "string",
-            required: true,
-            message: "请选择日期",
-            trigger: "change"
-          }
-        ],
-        code:[
-          { required: true, message: "请输入卡卷首编码名称", trigger: "blur" },
-          { min: 2, max: 66, message: "长度在 2 到 66个字符", trigger: "blur" }
-        ],
-        password:[
-          { required: true, message: "请输入卡卷首编码名称", trigger: "blur" },
-          { min: 2, max: 66, message: "长度在 2 到 66个字符", trigger: "blur" }
-        ],
-        cardCount:[
-           {
-            required: true,
-            message: "请输入1 到 999999 正整数",
-            trigger: "blur"
-          },
-          {
-            min: 1,
-            max: 10,
-            message: "1到 999999 正整数",
-            trigger: "blur"
-          }
-        ],
-        rule: [
-          { required: true, message: "请选择活动区域", trigger: "change" }
-        ],
-      }
+      saveData: [],
     };
-  }, // data
+  },
+  mounted() {
+    // 保存原始数据
+    this.saveData = JSON.parse(JSON.stringify(this.tableData));
+  },
   methods: {
-    getList() {
-      
-      console.log("而我要实现她的愿望....");
-      
-      this.$Service.get(
-        "/card/queryCardList.action?page=" +
-          this.listQuery.page +
-          "&pageSize=" +
-          this.listQuery.limit +
-          "&cardName=" +
-          this.formInline.cardName
-      )
-        .then(res => {
-          console.log(res);
-          this.total = res.data.count;
-          this.tableData = res.data.data;
-        })
-        .catch(error => {
-          this.$message.error("获取卡卷失败,接口无法调用");
-        });
-    },
-    onSubmit() {},
-    checkList(row) {
-      this.dialogFormVisibleDis = true;
-      this.card = row;
-    },
-    onCheck() {
-      this.dialogFormVisibleDis = false;
-      
-      let sendParams = this.card;
-      sendParams.createTime=this.card.startTime
-      console.log(JSON.stringify(sendParams))
-       this.$Service.post(
-          "/card/addcard.action",
-          JSON.stringify(sendParams),
-          //sendParams,
-          {
-            headers: {
-              "Access-Control-Allow-Origin": "*", //解决cors头问题
-              "Access-Control-Allow-Credentials": "true", //解决session问题
-              "Content-Type": "application/json;charset=UTF-8" //将表单数据传递转化为form-data类型
-            },
-            withCredentials: true
-          }
-        )
-        .then(res => {
-          console.log(res);
-          
-          if (res.data.status == "0" || res.data.status == 0) {
-            this.$message({
-              type: "success",
-              message: "新增卡卷成功!"
-            });
-          } else {
-            this.$message({
-              type: "error",
-              message: "新增卡卷失败!"
-            });
-          }
-        })
-        .catch(error => {
-          this.$message.error("新增卡卷,接口无法调用");
-        });
-      this.card = {
-        id: 0,
-        cardName: "",
-        code: "",
-        password: "",
-        cardCount: 0,
-        opera: null,
-        productId: null,
-        productName: "",
-        startTime: "",
-        endTime: "",
-        createTime: "",
-        rule:null
-      };
-    },
-    onCancel() {
-      this.dialogFormVisibleDis = false;
-      this.card = {
-        id: 0,
-        cardName: "",
-        code: "",
-        password: "",
-        cardCount: 0,
-        opera: null,
-        productId: null,
-        productName: "",
-        startTime: "",
-        endTime: "",
-        createTime: "",
-        rule:null
-      };
-    },
-    addPrize() {
-      this.dialogFormVisible = true;
-      
-      this.card = {
-        id: 0,
-        cardName: "",
-        code: "",
-        password: "",
-        cardCount: 0,
-        opera: null,
-        productId: null,
-        productName: "",
-        startTime: "",
-        endTime: "",
-        createTime: "",
-        rule:null
-      };
+    handleCheck(row) {
+      console.log(row);
+      this.checkInfo = row;
+      this.showDialog = true;
     },
     handleEdit(row) {
-      // this.$message({
-      //   type: "success",
-      //   message: "上传成功!"
-      // });
-      this.$message.warning("上传接口未提供!该功能未完善,敬请期待....")
+      console.log(row);
     },
-    handleDelete(row,i) {
-      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .then(() => {
-          console.log(row)
-          this.$Service.get('/card/deletecard.action?cardId='+row.id
-          ).then(res=>{
-            console.log(res);
-            if(res.data.status==0){
-              this.$message.success("卡卷删除成功!")
-            }else{
-              this.$message.error("卡卷删除失败!")
-            }
-          }).catch(err=>{
-            this.$message.error("卡卷删除失败!接口原因")
-          })
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除!"
-          });
-        });
-    },
-    onSave() {
-      this.dialogFormVisible = false;
-      console.log(this.card);
-      let sendParams = this.card;
-      sendParams.createTime=this.card.startTime
-      console.log(JSON.stringify(sendParams))
+    handleSearch() {
+      this.tableData = this.saveData.filter((item) => {
+        let nameKey = "name";
+        let contentKey = "pub";
+        let dateKey = "startDate1";
 
-      
-       this.$Service.post(
-          "/card/addcard.action",
-          JSON.stringify(sendParams),
-          //sendParams,
-          {
-            headers: {
-              "Access-Control-Allow-Origin": "*", //解决cors头问题
-              "Access-Control-Allow-Credentials": "true", //解决session问题
-              "Content-Type": "application/json;charset=UTF-8" //将表单数据传递转化为form-data类型
-            },
-            withCredentials: true
-          }
-        )
-        .then(res => {
-          console.log(res);
-          /*
-              {
-                  "msg": "新增数据成功",
-                  "status": 0,
-                  "data": null,
-                  "count": null
-              }
-          */
-          if (res.data.status == "0" || res.data.status == 0) {
-            this.$message({
-              type: "success",
-              message: "新增卡卷成功!"
-            });
-          } else {
-            this.$message({
-              type: "error",
-              message: "新增卡卷失败!"
-            });
-          }
-        })
-        .catch(error => {
-          this.$message.error("新增卡卷,接口无法调用");
-        });
-    }
-  } // method
+        let nameIn = this.searchForm[nameKey]
+          ? item[nameKey].indexOf(this.searchForm[nameKey]) >= 0
+          : true;
+        let contentIn = this.searchForm[contentKey]
+          ? item[contentKey].indexOf(this.searchForm[contentKey]) >= 0
+          : true;
+
+        let sDate = this.searchForm[dateKey][0];
+        let eDate = this.searchForm[dateKey][1];
+
+        let getTimeFromStr = (str) => {
+          return new Date(str).getTime();
+        };
+
+        let dateIn =
+          sDate && eDate
+            ? getTimeFromStr(item[dateKey]) <= eDate.getTime() &&
+              getTimeFromStr(item[dateKey]) >= sDate.getTime()
+            : true;
+
+        return nameIn && contentIn && dateIn;
+      });
+    },
+    handleReset() {
+      this.tableData = JSON.parse(JSON.stringify(this.saveData));
+      this.searchForm = {
+        startDate1: [],
+        name: "",
+        pub: "",
+      };
+    },
+  },
 };
 </script>
-<style scoped>
-.eCard {
-  width: 100%;
-  height: 900px;
-  background-color: rgba(255, 255, 255, 0.2);
-}
-.main-header {
-  width: 1150px;
-  height: 108px;
-  background-color: #fff;
-  padding: 0px;
+
+<style scoped lang="less">
+.testplan {
+  padding: 20px;
   text-align: left;
-  font-size: 14px;
-  color: rgba(60, 67, 83, 1);
-  margin-top: 15px;
-  box-sizing: border-box;
-  overflow: hidden;
 }
-.content{
-  width: 1150px;
-  height:610px;
-  margin-bottom: 50px;
+.form-outer {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  .item {
+    width: 200px;
+    margin-right: 10px;
+  }
+  .label {
+    line-height: 40px;
+  }
 }
-.el-button--success {
-  background: rgba(10, 171, 149, 1);
-  border-radius: 4px;
+.dialog-outer {
+  padding: 30px;
+  height: 300px;
+  overflow: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  .item {
+    width: 50%;
+    margin-bottom: 30px;
+    font-size: 16px;
+    .label {
+      font-weight: bolder;
+      line-height: 30px;
+    }
+    .value {
+      line-height: 30px;
+    }
+  }
 }
 </style>
