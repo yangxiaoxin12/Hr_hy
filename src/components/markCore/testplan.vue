@@ -97,7 +97,6 @@ export default {
           planName: "2020年1月度安全员考核计划",
           content: "本月无伤亡，无重大损失",
           date: "2020-1-8～2020-2-7",
-
           dutyName: "王云",
           startDate1: "2020-1-8",
           endDate1: "2020-2-7",
@@ -110,7 +109,6 @@ export default {
           planName: "2020年2月度安全员考核计划",
           content: "本月无伤亡，无重大损失",
           date: "2020-2-8～2020-3-7",
-
           dutyName: "李青",
           startDate1: "2020-2-8",
           endDate1: "2020-3-7",
@@ -123,7 +121,6 @@ export default {
           planName: "2020年3月度安全员考核计划",
           content: "本月无伤亡，无重大损失",
           date: "2020-3-8～2020-4-7",
-
           dutyName: "刘淑媛",
           startDate1: "2020-3-8",
           endDate1: "2020-4-7",
@@ -136,7 +133,6 @@ export default {
           planName: "2020年4月度安全员考核计划",
           content: "本月无伤亡，无重大损失",
           date: "2020-4-8～2020-5-7",
-
           dutyName: "陈思远",
           startDate1: "2020-4-8",
           endDate1: "2020-5-7",
@@ -149,7 +145,6 @@ export default {
           planName: "2020年5月度安全员考核计划",
           content: "本月无伤亡，无重大损失",
           date: "2020-5-8～2020-6-7",
-
           dutyName: "任柯泽",
           startDate1: "2020-5-8",
           endDate1: "2020-6-7",
@@ -162,7 +157,6 @@ export default {
           planName: "2020年6月度安全员考核计划",
           content: "本月无伤亡，无重大损失",
           date: "2020-6-8～2020-7-7",
-
           dutyName: "王建路",
           startDate1: "2020-6-8",
           endDate1: "2020-7-7",
@@ -175,7 +169,6 @@ export default {
           planName: "2020年7月度安全员考核计划",
           content: "本月无伤亡，无重大损失",
           date: "2020-7-8～2020-8-7",
-
           dutyName: "赵汤峪",
           startDate1: "2020-7-8",
           endDate1: "2020-8-7",
@@ -188,7 +181,6 @@ export default {
           planName: "2020年8月度安全员考核计划",
           content: "本月无伤亡，无重大损失",
           date: "2020-8-8～2020-9-7",
-
           dutyName: "李小华",
           startDate1: "2020-9-8",
           endDate1: "2020-10-7",
@@ -201,7 +193,6 @@ export default {
           planName: "2020年9月度安全员考核计划",
           content: "本月无伤亡，无重大损失",
           date: "2020-10-8～2020-11-7",
-
           dutyName: "张慧城",
           startDate1: "2020-10-8",
           endDate1: "2020-11-7",
@@ -214,7 +205,6 @@ export default {
           planName: "2020年10月度安全员考核计划",
           content: "本月无伤亡，无重大损失",
           date: "2020-11-8～2020-12-7",
-
           dutyName: "李城垣",
           startDate1: "2020-11-8",
           endDate1: "2020-12-7",
@@ -227,7 +217,6 @@ export default {
           planName: "2020年11月度安全员考核计划",
           content: "本月无伤亡，无重大损失",
           date: "2020-12-8～2021-1-7",
-
           dutyName: "钱仁武",
           startDate1: "2020-12-8",
           endDate1: "2021-1-7",

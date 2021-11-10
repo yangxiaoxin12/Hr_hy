@@ -49,7 +49,7 @@ export default {
       editableTabs: [
         {
           router: "/workSpace",
-          text: "首页"
+          text: "工作台"
         }
       ],
       editableTabsClos: []
