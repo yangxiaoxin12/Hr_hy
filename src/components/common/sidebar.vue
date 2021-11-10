@@ -50,14 +50,14 @@ export default {
       menus: [
         {
           icon: "el-icon-info",
-          router: "1",
+          router: "workSpace",
           text: "工作台",
           menulist: [
-            {
-              router: "workSpace",
-              text: "首页",
-              // hideInMenu: true,
-            },
+            // {
+            //   router: "workSpace",
+            //   text: "首页",
+            //   // hideInMenu: true,
+            // },
           ],
         },
         {
@@ -107,17 +107,17 @@ export default {
         },
         {
           icon: "el-icon-user-solid",
-          router: "4",
+          router: "3",
           text: "培训",
           menulist: [
             {
               router: "trainingPlan",
               text: "培训计划",
             },
-            {
-              router: "trainingImplementation",
-              text: "培训实施",
-            },
+            // {
+            //   router: "trainingImplementation",
+            //   text: "培训实施",
+            // },
             {
               router: "trainingRecords",
               text: "培训记录",

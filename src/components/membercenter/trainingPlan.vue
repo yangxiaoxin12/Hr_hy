@@ -1,369 +1,271 @@
 <template>
-  <div class="cashPointList">
-    <div class="main-header">
-      <el-form
-        :inline="true"
-        :model="cashForm"
-        label-width="100px"
-        class="demo-form-inline"
-      >
-        <el-form-item label="会员账号:">
-          <el-input v-model="cashForm.userName" placeholder></el-input>
-        </el-form-item>
-        <el-form-item prop="phoneNumber" label="运营商:">
-          <el-select
-            style="width:180px"
-            v-model="cashForm.isp"
-            placeholder="全部"
-          >
-            <el-option label="联通" value="0"></el-option>
-            <el-option label="移动" value="1"></el-option>
-            <el-option label="电信" value="2"></el-option>
-          </el-select>
-        </el-form-item>
-
-        <el-form-item style="width:400px!important">
-          <el-button class="searchCss" type="success" @click="getList"
-            >查询</el-button
-          >
-          <!-- <el-button class="addThemeCss" type="primary" @click="res">重置</el-button> -->
-        </el-form-item>
-      </el-form>
-      <el-table
-        class="tableDataCss"
-        :data="tableData"
-        border
-        stripe
-        :row-style="{ height: '47px' }"
-        :cell-style="{ padding: '5px 0px' }"
-        style="width: 100%"
-      >
-        <el-table-column prop="id" label="序号"></el-table-column>
-        <el-table-column prop="userName" label="账号"></el-table-column>
-        <el-table-column prop="rank" label="成长值"></el-table-column>
-        <el-table-column prop="integral" label="积分"></el-table-column>
-        <el-table-column prop="lv" label="等级"></el-table-column>
-        <el-table-column prop="wxName" label="微信号"></el-table-column>
-        <el-table-column prop="isp" label="运营商"></el-table-column>
-
-        <el-table-column prop="opt" width="190px" label="操作">
-          <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small"
-              >明细</el-button
-            >
-            <el-button type="text" @click="handleEdit(scope.row)" size="small"
-              >会员信息</el-button
-            >
-            <el-button type="text" @click="handleDelete(scope.row)" size="small"
-              >人工干预</el-button
-            >
-          </template>
-        </el-table-column>
-      </el-table>
-      <!-- 明细 -->
-      <memberDetail :show.sync="show" :curRow="curRow" @showValue="showValue" />
-      <el-dialog title="会员信息" :visible.sync="dialogFormVisible">
-        <el-form
-          style="width:500px;"
-          label-width="100px"
-          :model="formInline"
-          ref="formInline"
-        >
-          <el-form-item label="姓名:">
-            <el-input
-              v-model="formInline.userName"
-              placeholder="请输入姓名"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="性别:">
-            <el-select
-              style="width:400px"
-              v-model="formInline.sex"
-              placeholder="请输入性别"
-            >
-              <el-option label="女" value="1"></el-option>
-              <el-option label="男" value="0"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="出生日期:">
-            <el-date-picker
-              type="date"
-              placeholder="请选择"
-              format="yyyy-MM-dd"
-              style="width: 100%;"
-              value-format="yyyy-MM-dd"
-              v-model="formInline.birthday"
-            ></el-date-picker>
-          </el-form-item>
-          <el-form-item label="学历:">
-            <el-select
-              style="width:400px"
-              v-model="formInline.education"
-              placeholder="请选择"
-            >
-              <el-option label="小学" value="1"></el-option>
-              <el-option label="初中" value="0"></el-option>
-              <el-option label="高中/中专" value="2"></el-option>
-              <el-option label="专科" value="3"></el-option>
-              <el-option label="本科" value="4"></el-option>
-              <el-option label="硕士研究生" value="5"></el-option>
-              <el-option label="博士研究生" value="6"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="手机号:">
-            <el-input
-              v-model="formInline.mobile"
-              placeholder="请输入联系方式"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="地址:">
-            <el-input
-              v-model="formInline.address"
-              placeholder="请输入地址信息"
-            ></el-input>
-          </el-form-item>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false"
-            >确 定</el-button
-          >
-        </div>
-      </el-dialog>
-      <el-dialog title="人工干预" :visible.sync="dialogFormVisible1">
-        <el-form
-          style="width:500px;"
-          label-width="100px"
-          :model="formInlinedata"
-          ref="formInlinedata"
-        >
-          <el-form-item label="会员表id:">
-            <el-input
-              v-model="formInlinedata.id"
-              placeholder="会员表id"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="成长倍数:">
-            <el-input
-              v-model="formInlinedata.multiple"
-              placeholder="请输入1-99之间的数"
-            ></el-input>
-          </el-form-item>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="dialogFormVisible1 = false">取 消</el-button>
-          <el-button type="success" @click="onSure"
-            >保存</el-button
-          >
-        </div>
-      </el-dialog>
+  <div>
+    <div class="form-outer">
+      <div class="label">部门：</div>
+      <el-input
+        class="item"
+        v-model="searchForm.content"
+        placeholder="请输入部门名称"
+      ></el-input>
+      
+      <el-button class="button" @click="handleSearch">查询</el-button>
+      <el-button class="button" @click="handleReset">重置</el-button>
+      <el-button class="button" type="primary">新增</el-button>
     </div>
-    <pagination
-      v-show="total > 0"
-      :total="total"
-      :page.sync="listQuery.page"
-      :limit.sync="listQuery.limit"
-      @pagination="getList"
-    />
+
+    <el-table border :data="tableData" style="width: 100%">
+      <el-table-column fixed prop="planName" label="序号" width="100">
+      </el-table-column>
+      <el-table-column prop="content" label="部门" width="200">
+      </el-table-column>
+      <el-table-column prop="date" label="下发时间" width="200">
+      </el-table-column>
+      <el-table-column prop="dutyName" label="培训计划安排文档">
+      </el-table-column>
+      <el-table-column fixed="right" label="操作" width="200">
+        <template slot-scope="scope">
+          <el-button
+            type="text"
+            size="small"
+            @click="handleEdit(scope.row, scope.$index)"
+            >下载</el-button
+          >
+          <el-button type="text" style="color: red" size="small"
+            >删除</el-button
+          >
+        </template>
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
 <script>
-
-import memberDetail from "@/components/membercenter/memberDetail";
-import Pagination from "@/components/Pagination"; // secondary package based on el-pagination
-import mainSidebar from "@/components/common/mainSidebar";
 export default {
-  components: {
-    Pagination,
-    mainSidebar,
-    memberDetail
-  },
-  mounted() {
-    this.getList();
-  },
   data() {
     return {
-      curRow: null,
-      show: false,
-      dataForm: null,
-      dialogFormVisible1: false,
-      formInline: {
-        name: "",
-        sex: "",
-        birthday: "",
-        deucation: "",
-        phone: "",
-        area: ""
-      },
-      dialogFormVisible: false,
-      total: 1,
-      listLoading: true,
-      listQuery: {
-        page: 1,
-        limit: 10,
-        importance: undefined,
-        title: undefined,
-        type: undefined,
-        sort: "+No"
+      searchForm: {
+        planName: "",
+        content: "",
+        startDate1: [],
       },
       tableData: [
         {
-          id: "",
-          memberAccount: "",
-          channel: "",
-          rule: "",
-          type: "",
-          count: "",
-          growth: "",
-          endTime: "",
-          level: ""
-        }
+          planName: "1",
+          content: "安环部",
+          date: "2020-12-15",
+          dutyName: "2021年部门年度计划（安环部）",
+          startDate1: "2020-1-8",
+          endDate1: "2021-1-7",
+          startDate2: "2020-1-15",
+          endDate2: "2021-1-14",
+          process: "年度阶段",
+          type: "安全考核",
+        },
+        {
+          planName: "2",
+          content: "催化剂装置",
+          date: "2020-12-28",
+          dutyName: "2021年部门年度计划（催化剂装置）",
+          startDate1: "2020-1-8",
+          endDate1: "2020-2-7",
+          startDate2: "2020-1-15",
+          endDate2: "2020-2-14",
+          process: "月度阶段",
+          type: "安全考核",
+        },
+        {
+          planName: "3",
+          content: "技术部",
+          date: "2020-12-24",
+          dutyName: "2021年部门年度计划（技术部）",
+          startDate1: "2020-2-8",
+          endDate1: "2020-3-7",
+          startDate2: "2020-2-15",
+          endDate2: "2020-3-14",
+          process: "月度阶段",
+          type: "安全考核",
+        },
+        {
+          planName: "4",
+          content: "发展部",
+          date: "2021-01-11",
+          dutyName: "2021年部门年度培训计划（发展部）",
+          startDate1: "2020-3-8",
+          endDate1: "2020-4-7",
+          startDate2: "2020-3-15",
+          endDate2: "2020-4-14",
+          process: "月度阶段",
+          type: "安全考核",
+        },
+        {
+          planName: "5",
+          content: "丙烯酸装置",
+          date: "2021-05-10",
+          dutyName: "2021年部门培训计划（丙烯酸装置）",
+          startDate1: "2020-4-8",
+          endDate1: "2020-5-7",
+          startDate2: "2020-4-15",
+          endDate2: "2020-5-14",
+          process: "月度阶段",
+          type: "安全考核",
+        },
+        {
+          planName: "6",
+          content: "质检中心",
+          date: "2021-01-11",
+          dutyName: "2021年部门培训计划（质检中心）",
+          startDate1: "2020-5-8",
+          endDate1: "2020-6-7",
+          startDate2: "2020-5-15",
+          endDate2: "2020-6-14",
+          process: "月度阶段",
+          type: "安全考核",
+        },
+        {
+          planName: "7",
+          content: "综合办公室",
+          date: "2021-01-11",
+          dutyName: "2021年部门培训计划（综合办公室）",
+          startDate1: "2020-6-8",
+          endDate1: "2020-7-7",
+          startDate2: "2020-6-15",
+          endDate2: "2020-7-14",
+          process: "月度阶段",
+          type: "安全考核",
+        },
+        {
+          planName: "8",
+          content: "生产管理部",
+          date: "2021-01-06",
+          dutyName: "2021年度部门年度计划(生产管理部）",
+          startDate1: "2020-7-8",
+          endDate1: "2020-8-7",
+          startDate2: "2020-7-15",
+          endDate2: "2020-8-14",
+          process: "月度阶段",
+          type: "安全考核",
+        },
+        {
+          planName: "9",
+          content: "SAP装置",
+          date: "2021-01-12",
+          dutyName: "2021年度部门培训计划（SAP装置）",
+          startDate1: "2020-9-8",
+          endDate1: "2020-10-7",
+          startDate2: "2020-9-15",
+          endDate2: "2020-10-14",
+          process: "月度阶段",
+          type: "安全考核",
+        },
       ],
-      time: "",
-      pickerOptions: {
-        disabledDate(time) {
-          return time.getTime() > Date.now();
-        }
-      },
-      cashForm: {
-        userName: "",
-        isp: null
-      },
-      formInlinedata:{
-        id:null,
-        multiple:null,
-      }
-    }; //return
-  }, //methods
+      saveData: [],
+    };
+  },
+  mounted() {
+    // 保存原始数据
+    this.saveData = JSON.parse(JSON.stringify(this.tableData));
+  },
   methods: {
-    showValue(data) {
-      this.show = data;
-    },
-    getList() {
-      const sendParams = this.cashForm;
+    handleEdit(row, i) {
+      const link = document.createElement("a");
+      link.style.display = "none";
+      if (i == 0) {
+        link.href = "../../../static/files/0.docx";
+        link.setAttribute("download", "2021年部门年度计划（安环部）.docx");
+      }
+      if (i == 1) {
+        link.href = "../../../static/files/1.docx";
+        link.setAttribute("download", "2021年部门年度计划（催化剂装置）.docx");
+      }
+      if (i == 2) {
+        link.href = "../../../static/files/2.docx";
+        link.setAttribute("download", "2021年部门年度计划（技术部）.docx");
+      }
+      if (i == 3) {
+        link.href = "../../../static/files/3.docx";
+        link.setAttribute("download", "2021年部门年度培训计划（发展部）.docx");
+      }
+      if (i == 4) {
+        link.href = "../../../static/files/4.docx";
+        link.setAttribute("download", "2021年部门培训计划（丙烯酸装置）.docx");
+      }
+      if (i == 5) {
+        link.href = "../../../static/files/5.docx";
+        link.setAttribute("download", "2021年部门培训计划（质检中心）.docx");
+      }
+      if (i == 6) {
+        link.href = "../../../static/files/6.docx";
+        link.setAttribute("download", "2021年部门培训计划（综合办公室）.docx");
+      }
+      if (i == 7) {
+        link.href = "../../../static/files/7.docx";
+        link.setAttribute("download", "2021年度部门年度计划(生产管理部）.docx");
+      } if (i == 8) {
+        link.href = "../../../static/files/8.xlsx";
+        link.setAttribute("download", "2021年度部门培训计划（SAP装置）.xlsx");
+      }
 
-      sendParams.pageSize = this.listQuery.limit;
-      sendParams.pageNo = this.listQuery.page;
-      console.log(sendParams);
-      this.$Service.post("/api/getUserList.action", JSON.stringify(sendParams), {
-        headers: {
-          "Access-Control-Allow-Origin": "*", //解决cors头问题
-          "Access-Control-Allow-Credentials": "true", //解决session问题
-          "Content-Type": "application/json;charset=UTF-8" //将表单数据传递转化为form-data类型
-        },
-        withCredentials: true
-      })
-        .then(res => {
-          console.log(res);
-          if (res.data.status == 0) {
-            this.dataForm = res.data.data;
-            this.tableData = res.data.data;
-            this.total = res.data.count;
-            this.tableData.map(val => {
-              switch (val.isp) {
-                case "0":
-                case 0:
-                  val.isp = "移动";
-                  break;
-                case "1":
-                case 1:
-                  val.isp = "联通";
-                  break;
-                case "2":
-                case 2:
-                  val.isp = "电信";
-                  break;
-              }
-            });
-          } else {
-            this.$message.error("获取数据失败!");
-          }
-        })
-        .catch(error => {
-          this.$message.error("未获得数据,接口原因");
-        });
-      
+       document.body.appendChild(link);
+        link.click();
     },
-    res() {},
-    handleClick(row) {
-      this.show = true;
-      console.log(row);
-      this.curRow = row;
+    handleSearch() {
+      this.tableData = this.saveData.filter((item) => {
+        let nameKey = "planName";
+        let contentKey = "content";
+        let dateKey = "startDate1";
+
+        let nameIn = this.searchForm[nameKey]
+          ? item[nameKey].indexOf(this.searchForm[nameKey]) >= 0
+          : true;
+        let contentIn = this.searchForm[contentKey]
+          ? item[contentKey].indexOf(this.searchForm[contentKey]) >= 0
+          : true;
+
+        let sDate = this.searchForm[dateKey][0];
+        let eDate = this.searchForm[dateKey][1];
+
+        console.log(sDate);
+
+        let getTimeFromStr = (str) => {
+          return new Date(str).getTime();
+        };
+
+        let dateIn =
+          sDate && eDate
+            ? getTimeFromStr(item[dateKey]) <= eDate.getTime() &&
+              getTimeFromStr(item[dateKey]) >= sDate.getTime()
+            : true;
+
+        return nameIn && contentIn && dateIn;
+      });
     },
-    handleEdit(row) {
-      const Info={};
-      Info.userId=row.userId;
-      this.$Service.post("/api/getUserInfo.action",JSON.stringify(Info),{
-        headers: {
-          "Access-Control-Allow-Origin": "*", //解决cors头问题
-          "Access-Control-Allow-Credentials": "true", //解决session问题
-          "Content-Type": "application/json;charset=UTF-8" //将表单数据传递转化为form-data类型
-        },
-        withCredentials: true
-      }).then(res=>{
-        console.log(res);
-        if(res.data.status==0){
-           this.formInline = res.data.data;
-        }else{
-          this.$message.error("未获得数据!");
-        
-        }
-        this.dialogFormVisible = true;
-       
-      }).catch(error=>{
-        this.$message.error("未获得数据,接口原因");
-        this.formInline = row;
-      })
-      
+    handleReset() {
+      this.tableData = JSON.parse(JSON.stringify(this.saveData));
+      this.searchForm = {
+        startDate1: [],
+        planName: "",
+        content: "",
+      };
     },
-    handleDelete(row) {
-      
-      this.formInlinedata.id=row.id;
-      this.formInlinedata.multiple;
-      this.dialogFormVisible1 = true;
-      
-    },
-    onSure(){
-      console.log(JSON.stringify(this.formInlinedata))
-      this.$Service.post("/api/addOrUpdateUser.action",JSON.stringify(this.formInlinedata), {
-        headers: {
-          "Access-Control-Allow-Origin": "*", //解决cors头问题
-          "Access-Control-Allow-Credentials": "true", //解决session问题
-          "Content-Type": "application/json;charset=UTF-8" //将表单数据传递转化为form-data类型
-        },
-        withCredentials: true
-      }).then(res=>{
-        console.log(res)
-      }).catch(_=>{
-        this.$message.error("未获得数据,接口原因");
-      })
-      this.dialogFormVisible1 = false;
-    },
-    onSave() {}
-  }
+  },
 };
 </script>
-<style scoped>
-.userPointList {
-  width: 100%;
-  height: 900px;
-  background-color: rgba(255, 255, 255, 0.2);
-}
-.main-header {
-  width: 1150px;
-  height: 608px;
-  background-color: #fff;
-  padding: 0px;
+
+<style scoped lang="less">
+.testplan {
+  padding: 20px;
   text-align: left;
-  font-size: 14px;
-  color: rgba(60, 67, 83, 1);
-  margin-top: 15px;
-  box-sizing: border-box;
-  overflow: hidden;
 }
-.el-button--success {
-  background: rgba(10, 171, 149, 1);
-  border-radius: 4px;
+.form-outer {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  .item {
+    width: 200px;
+    margin-right: 10px;
+  }
+  .label {
+    line-height: 40px;
+  }
 }
 </style>
