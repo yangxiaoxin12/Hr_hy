@@ -62,9 +62,9 @@ Vue.prototype.axios = axios
 //配全局属性配置，在任意组件内可以使用this.$qs获取qs对象
 
 Vue.prototype.$qs = qs
-    //定义全局变量
-    // Vue.prototype.$post = post;
-    // Vue.prototype.$get = get;
+//定义全局变量
+// Vue.prototype.$post = post;
+// Vue.prototype.$get = get;
 
 Vue.prototype.$echarts = echarts
 
