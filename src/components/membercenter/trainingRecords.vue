@@ -7,12 +7,17 @@
         v-model="searchForm.type"
         placeholder="请输入培训类型"
       ></el-input>
-
       <el-button class="button" @click="handleSearch">查询</el-button>
       <el-button class="button" @click="handleReset">重置</el-button>
       <el-button class="button" type="primary">新增</el-button>
     </div>
-    <el-table border :data="tableData.slice((currentPage - 1) * pageSize,currentPage * pageSize)" style="width: 100%">
+    <el-table
+      border
+      :data="
+        tableData.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      "
+      style="width: 100%"
+    >
       <el-table-column fixed prop="num" label="序号" width="50">
       </el-table-column>
       <el-table-column prop="type" label="培训类型" width="150">
@@ -54,7 +59,7 @@ export default {
     return {
       currentPage: 1, //初始页
       pagesize: 10, //    每页的数据
-      totals: 0,
+      totals: 145,
       searchForm: {
         planName: "",
         content: "",
@@ -2665,11 +2670,9 @@ export default {
   methods: {
     handleSizeChange(pages) {
       this.pagesize = pages;
-      this.handleSearch();
     },
     handleCurrentChange(currentPage) {
       this.currentPage = currentPage;
-      this.handleSearch();
     },
     handleSearch() {
       this.currentPage = 1;
