@@ -1,5 +1,5 @@
 <template>
-  <div class="activitytheme">
+  <div class="testplan">
     <div class="bartop">
       
     </div>
@@ -206,7 +206,7 @@ div {
   padding: 0px !important;
 }
 
-.activitytheme {
+.testplan {
   width: 100%;
   width: 1200px;
   height: 800px;

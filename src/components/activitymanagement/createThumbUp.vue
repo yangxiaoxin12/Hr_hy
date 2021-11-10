@@ -304,7 +304,7 @@ export default {
     }, //
     createActivity() {
       
-      this.$router.push("/activitytheme");
+      this.$router.push("/testplan");
     },
     //backPrev
     checkActivity() {
