@@ -1,59 +1,60 @@
 <template>
   <div>
     <div class="form-outer">
-      <div class="label">部门：</div>
+      <div class="label">培训类型：</div>
       <el-input
         class="item"
-        v-model="searchForm.content"
-        placeholder="请输入部门名称"
+        v-model="searchForm.type"
+        placeholder="请输入培训类型"
       ></el-input>
 
       <el-button class="button" @click="handleSearch">查询</el-button>
       <el-button class="button" @click="handleReset">重置</el-button>
       <el-button class="button" type="primary">新增</el-button>
     </div>
-    "num": "1", "type": "技能培训", "content": "动设备、润滑油相关知识", "bm":
-    "丙烯酸装置", "sz": "黄苍昊", "spry": "广新实习人员", "pxsj": "2020-11-27",
-    "pxks": "2", "rc": "10", "zks": "20", "fy": "200", "fyqx": "培训费打卡",
-    "jsqk": "结算", "jssj": "2021-1-12", "rzsj": "2021-1-12", "fyfsbm":
-    "丙烯酸装置-管理"
-    <el-table border :data="tableData" style="width: 100%">
-      <el-table-column fixed prop="num" label="序号" width="100">
+    <el-table border :data="tableData.slice((currentPage - 1) * pageSize,currentPage * pageSize)" style="width: 100%">
+      <el-table-column fixed prop="num" label="序号" width="50">
       </el-table-column>
-      <el-table-column prop="type" label="培训类型" width="200">
+      <el-table-column prop="type" label="培训类型" width="150">
       </el-table-column>
       <el-table-column prop="content" label="培训内容" width="200">
       </el-table-column>
       <el-table-column prop="bm" label="培训部门"> </el-table-column>
-      <el-table-column prop="bm" label="培训部门"> </el-table-column
-      ><el-table-column prop="bm" label="培训部门"> </el-table-column
-      ><el-table-column prop="bm" label="培训部门"> </el-table-column
-      ><el-table-column prop="bm" label="培训部门"> </el-table-column
-      ><el-table-column prop="bm" label="培训部门"> </el-table-column
-      ><el-table-column prop="bm" label="培训部门"> </el-table-column
-      ><el-table-column prop="bm" label="培训部门"> </el-table-column>
-      <el-table-column fixed="right" label="操作" width="200">
-        <template slot-scope="scope">
-          <el-button
-            type="text"
-            size="small"
-            @click="handleEdit(scope.row, scope.$index)"
-            >下载</el-button
-          >
-          <el-button type="text" style="color: red" size="small"
-            >删除</el-button
-          >
-        </template>
+      <el-table-column prop="sz" label="师资"> </el-table-column
+      ><el-table-column prop="spry" label="受培人员"> </el-table-column
+      ><el-table-column prop="pxsj" label="培训时间"> </el-table-column
+      ><el-table-column prop="pxks" label="课时" width="50"> </el-table-column
+      ><el-table-column prop="rc" label="人次" width="50"> </el-table-column
+      ><el-table-column prop="zks" label="总课时" width="80"> </el-table-column
+      ><el-table-column prop="fy" label="培训费" width="80"> </el-table-column
+      ><el-table-column prop="fyqx" label="费用去向"> </el-table-column
+      ><el-table-column prop="jsqk" label="结算情况" width="80">
       </el-table-column>
+      <el-table-column prop="jssj" label="结算时间"> </el-table-column>
+      <el-table-column prop="rzsj" label="入账时间"> </el-table-column>
+      <el-table-column prop="fyfsbm" label="费用发生部门"> </el-table-column>
     </el-table>
+    <el-pagination
+      style="margin-top: 8px"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-sizes="[10, 20, 30, 40]"
+      :page-size="pagesize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="totals"
+    >
+    </el-pagination>
   </div>
 </template>
 
 <script>
-import data1 from "@/assets/jh.json";
 export default {
   data() {
     return {
+      currentPage: 1, //初始页
+      pagesize: 10, //    每页的数据
+      totals: 0,
       searchForm: {
         planName: "",
         content: "",
@@ -2662,36 +2663,41 @@ export default {
     this.saveData = JSON.parse(JSON.stringify(this.tableData));
   },
   methods: {
+    handleSizeChange(pages) {
+      this.pagesize = pages;
+      this.handleSearch();
+    },
+    handleCurrentChange(currentPage) {
+      this.currentPage = currentPage;
+      this.handleSearch();
+    },
     handleSearch() {
+      this.currentPage = 1;
+      this.pagesize = 10;
       this.tableData = this.saveData.filter((item) => {
-        let nameKey = "planName";
+        let nameKey = "type";
         let contentKey = "content";
         let dateKey = "startDate1";
-
         let nameIn = this.searchForm[nameKey]
           ? item[nameKey].indexOf(this.searchForm[nameKey]) >= 0
           : true;
         let contentIn = this.searchForm[contentKey]
           ? item[contentKey].indexOf(this.searchForm[contentKey]) >= 0
           : true;
-
         let sDate = this.searchForm[dateKey][0];
         let eDate = this.searchForm[dateKey][1];
-
         console.log(sDate);
-
         let getTimeFromStr = (str) => {
           return new Date(str).getTime();
         };
-
         let dateIn =
           sDate && eDate
             ? getTimeFromStr(item[dateKey]) <= eDate.getTime() &&
               getTimeFromStr(item[dateKey]) >= sDate.getTime()
             : true;
-
         return nameIn && contentIn && dateIn;
       });
+      this.totals = this.tableData.length;
     },
     handleReset() {
       this.tableData = JSON.parse(JSON.stringify(this.saveData));
