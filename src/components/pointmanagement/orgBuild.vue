@@ -2,80 +2,21 @@
 <template>
   <div class="orgBuild">
     <div class="main-header">
-      <el-form
-        :inline="true"
-        :model="userForm"
-        label-width="100px"
-        class="demo-form-inline"
-      >
-        <el-form-item label="用户名称:">
-          <el-input v-model="userForm.userName" placeholder></el-input>
-        </el-form-item>
-        <el-form-item prop="mobile" label="手机号">
-          <el-input v-model="userForm.mobile"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button class="searchCss" type="success" @click="getList"
-            >查询</el-button
-          >
-          <el-button class="addThemeCss" type="primary" @click="res"
-            >重置</el-button
-          >
-        </el-form-item>
-      </el-form>
-      <el-table
-        class="tableDataCss"
-        :data="tableData"
-        border
-        stripe
-        :row-style="{ height: '47px' }"
-        :cell-style="{ padding: '5px 0px' }"
-        style="width: 100%"
-      >
-        <el-table-column prop="id" sortable label="id"></el-table-column>
-
-        <el-table-column prop="wxname" label="微信昵称"></el-table-column>
-
-        <el-table-column
-          prop="integral"
-          sortable
-          label="总积分"
-        ></el-table-column>
-
-        <el-table-column prop="userName" label="用户名"></el-table-column>
-        <el-table-column prop="userNumber" label="账号"></el-table-column>
-        <el-table-column prop="mobile" label="手机号"></el-table-column>
-        <el-table-column prop="opt" width="190px" label="操作">
-          <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small"
-              >明细</el-button
-            >
-          </template>
-        </el-table-column>
-      </el-table>
+      <img src="../../assets/zz.jpg" style="width: 65%" />
     </div>
-    <memberDetail
-      :show.sync="show"
-      :curRow.sync="curRow"
-      @showValue="showValue"
-    />
-    <pagination
-      v-show="total > 0"
-      :total="total"
-      :page.sync="listQuery.page"
-      :limit.sync="listQuery.limit"
-      @pagination="getList"
-    />
+    <div id="remark" style="text-align: left">
+      <p>
+        备注：<br />
+        （1）党委办公室、宣传部、纪委办公室、工会、团委合署办公，称作党群工作部；<br />
+        （2）组织部与人力资源部合署办公；<br />
+        （3）武装保卫部与安全环保部合署办公。
+      </p>
+    </div>
   </div>
 </template>
 <script>
-import Pagination from "@/components/Pagination"; // secondary package based on el-pagination
-import memberDetail from "@/components/pointmanagement/pointUserListDetail";
 export default {
-  components: {
-    Pagination,
-    memberDetail,
-  },
+  components: {},
   mounted() {
     this.getList();
   },
@@ -165,14 +106,14 @@ export default {
 <style scoped>
 .orgBuild {
   width: 100%;
-  height: 860px;
+  /* height: 860px; */
 }
 .main-header {
   width: 100%;
   height: 80%;
   background-color: #fff;
   padding: 0px;
-  text-align: left;
+  text-align: center;
   font-size: 14px;
   color: rgba(60, 67, 83, 1);
   margin-top: 15px;
@@ -182,5 +123,10 @@ export default {
 .el-button--success {
   background: rgba(10, 171, 149, 1);
   border-radius: 4px;
+}
+#remark {
+  margin-left: 21%;
+  width: 80%;
+  font-size: 18px;
 }
 </style>

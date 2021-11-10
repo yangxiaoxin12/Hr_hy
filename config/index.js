@@ -11,7 +11,6 @@ module.exports = {
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {
-            //http://localhost:8083/SX_activitycenter
             '/SX_activitycenter': {
                 target: 'http://172.21.1.12:8083/SX_activitycenter', //设置你调用的接口域名和端口号 别忘了加http
                 changeOrigin: true,

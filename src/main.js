@@ -9,41 +9,28 @@ import 'lib-flexible/flexible'
 // 引入element-ui
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-
-// //引入baseUrl
-// import baseUrl from './config/interface';
-
-// localStorage.setItem('BASE_URL', baseUrl);
-
-
-//引入Service
-import Service from './utils/http'
-
-
 import App from './App'
 //引入vuex
 import store from './store/store'
-// //引入store----vuex
-// import store from './store'
 
 import router from './router'
 import echarts from 'echarts'
-// 引入图标
 import './icons'
+import api from "./utils/api";
+import http from "./utils/http";
 
 // 引入axios
 import axios from 'axios'
-
 import qs from 'qs'
-// 引入axios封装好的post和get
-// import { post, get } from './utils/http'
 import HappyScroll from 'vue-happy-scroll'
 import 'vue-happy-scroll/docs/happy-scroll.css'
 //引入vuescroll
 import vuescroll from 'vuescroll';
 import Echarts from 'echarts'
 Vue.prototype.$echarts = Echarts
-Vue.prototype.$Service = Service
+Vue.prototype.$api = api;
+// 对请求方式 进行全局注册
+Vue.prototype.$http = http;
 Vue.use(Echarts)
 Vue.use(vuescroll); // install the vuescroll first
 //将axios挂载到原型上
@@ -55,7 +42,7 @@ Vue.prototype.$vuescrollConfig = {
 
 
 // 将axios挂载到原型上
-Vue.prototype.$http = axios
+Vue.prototype.axios = axios
 
 
 
