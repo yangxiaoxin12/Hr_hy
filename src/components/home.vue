@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-
     <el-header style="text-align: left; font-size: 12px">
         <el-tag
           :key="tag"
@@ -38,9 +37,6 @@
       handleClose(tag) {
         this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
       },
-
-
-
       handleInputConfirm() {
         let inputValue = this.inputValue;
         if (inputValue) {

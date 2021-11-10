@@ -28,6 +28,7 @@
           <el-menu-item-group>
             <el-menu-item
               v-for="(item, index) in item.menulist"
+              v-show="!item.hideInMenu"
               :index="'/' + item.router"
               :key="index"
               >{{ item.text }}</el-menu-item
@@ -59,6 +60,11 @@ export default {
             {
               router: "activitytype",
               text: "绩效档案",
+            },
+            {
+              router: "workSpace",
+              text: "工作台",
+              hideInMenu: true,
             },
           ],
         },
