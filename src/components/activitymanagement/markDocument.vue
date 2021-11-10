@@ -1,5 +1,5 @@
 <template>
-  <div class="activitytype">
+  <div class="markDocument">
     <div class="main-header">
       <el-form
         :inline="true"
@@ -115,7 +115,7 @@
   </div>
 </template>
 <style scoped>
-.activitytype {
+.markDocument {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.7);
   font-family: PingFang SC;
@@ -318,7 +318,7 @@ export default {
     },
     // 添加活动
     addActivity() {
-      this.$router.push("/activitytheme");
+      this.$router.push("/testplan");
     },
     filterInput() {
       const sendParams =

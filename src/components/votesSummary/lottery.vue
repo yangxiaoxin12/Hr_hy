@@ -1,5 +1,5 @@
 <template>
-  <div class='activitytype'>
+  <div class='markDocument'>
     <el-table :data='tableData'  border style='width: 100%'>
       <el-table-column prop='id' label='编号' sortable width='180'> </el-table-column>
       <el-table-column prop='name' label='活动主题名称'   width='300'> </el-table-column>

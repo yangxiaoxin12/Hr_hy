@@ -500,7 +500,7 @@ export default {
     createActivity() {
       // this.active=3;
       //alert("未开发");
-      this.$router.push("/activitytheme");
+      this.$router.push("/testplan");
     }, //
     checkActivity() {
       // this.active=3;

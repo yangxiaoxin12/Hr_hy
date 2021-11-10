@@ -399,7 +399,7 @@ export default {
     },
     createActivity() {
       
-      this.$router.push("/activitytheme");
+      this.$router.push("/testplan");
     }, //
     checkActivity() {
       // this.active=3;

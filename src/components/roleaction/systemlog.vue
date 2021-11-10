@@ -1,5 +1,5 @@
 <template>
-  <div class="activitytheme">
+  <div class="testplan">
     
     <el-header style="text-align: left; font-size: 12px">
         <el-tag
@@ -233,7 +233,7 @@
   color: #333;
   line-height: 60px;
 }
-.activitytheme {
+.testplan {
   width: 100%;
 }
 .serachTab{

@@ -106,7 +106,7 @@ export default {
       }
     },
     tiaozhuan() {
-      this.$router.push("/activitytype");
+      this.$router.push("/markDocument");
     },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {

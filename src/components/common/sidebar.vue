@@ -54,11 +54,11 @@ export default {
           text: "绩效",
           menulist: [
             {
-              router: "activitytheme",
+              router: "testplan",
               text: "考核计划",
             },
             {
-              router: "activitytype",
+              router: "markDocument",
               text: "绩效档案",
             },
             {

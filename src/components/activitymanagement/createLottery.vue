@@ -323,7 +323,7 @@ export default {
       //this.active = 3;
     },
     createActivity() {
-      this.$router.push("/activitytheme");
+      this.$router.push("/testplan");
     },
     checkActivity() {
       this.$router.push("/voteDetails");

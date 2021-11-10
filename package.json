@@ -15,7 +15,7 @@
     "clipboard": "^2.0.4",
     "cookie.js": "^5.0.0",
     "dropzone": "^5.5.1",
-    "echarts": "^4.8.0",
+    "echarts": "^4.9.0",
     "element-ui": "^2.13.0",
     "jsonlint": "^1.6.3",
     "normalize.css": "^8.0.1",

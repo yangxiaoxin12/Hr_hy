@@ -48,12 +48,12 @@ export default {
       editableTabsValue: this.$route.path,
       editableTabs: [
         {
-          router: "/activitytype",
-          text: "活动分类"
+          router: "/markDocument",
+          text: "绩效档案"
         },
         {
-          router: "/activitytheme",
-          text: "新建活动"
+          router: "/testplan",
+          text: "考核计划"
         }
       ],
       editableTabsClos: []
@@ -106,7 +106,7 @@ export default {
     }
 
     bus.$on("message", e => {
-      if (e.router == "/activitytype" || e.router == "/activitytheme") {
+      if (e.router == "/markDocument" || e.router == "/testplan") {
         this.editableTabsValue = e.router;
       } else {
         let indexofTab = JSON.stringify(this.editableTabsClos).indexOf(
@@ -149,7 +149,7 @@ export default {
 .el-icon-arrow-down {
   font-size: 12px;
 }
->>> .el-tabs__header {
+.el-tabs__header {
   margin: 0px 0 10px 15px;
   padding-top: 10px;
 }

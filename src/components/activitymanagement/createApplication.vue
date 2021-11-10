@@ -607,7 +607,7 @@ export default {
       console.log(this.active);
     },
     createActivity() {
-      this.$router.push("/activitytheme");
+      this.$router.push("/testplan");
     }, //
     checkActivity() {
       alert("未开发");
