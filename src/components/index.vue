@@ -58,7 +58,6 @@
       <div class="right" style="width: calc(100% - 210px); margin-left: 240px">
         <!-- 上导航 card -->
         <publiccard class="main-container"> </publiccard>
-        <setting class="optSetting"></setting>
       </div>
 
       <!-- 右侧内容 -->
@@ -70,14 +69,12 @@
 </template>
 <script>
 import sidebar from "@/components/common/sidebar";
-import setting from "@/components/common/setting";
 import publiccard from "@/components/common/publiccard";
 
 export default {
   components: {
     sidebar,
     publiccard,
-    setting,
   },
   data() {
     return {

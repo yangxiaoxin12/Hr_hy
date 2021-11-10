@@ -48,12 +48,8 @@ export default {
       editableTabsValue: this.$route.path,
       editableTabs: [
         {
-          router: "/markDocument",
-          text: "绩效档案"
-        },
-        {
-          router: "/testplan",
-          text: "考核计划"
+          router: "/workSpace",
+          text: "首页"
         }
       ],
       editableTabsClos: []
@@ -96,17 +92,9 @@ export default {
     }
   },
   created() {
-    console.log("1");
-    if (sessionStorage.getItem("editableTabsClos")) {
-      var editableTabsClos = JSON.parse(
-        sessionStorage.getItem("editableTabsClos")
-      );
-      console.log(editableTabsClos);
-      this.editableTabsClos = editableTabsClos;
-    }
-
-    bus.$on("message", e => {
-      if (e.router == "/markDocument" || e.router == "/testplan") {
+    this.$router.push("/workSpace");
+    bus.$on("message", (e) => {
+      if (e.router == "/workSpace") {
         this.editableTabsValue = e.router;
       } else {
         let indexofTab = JSON.stringify(this.editableTabsClos).indexOf(
