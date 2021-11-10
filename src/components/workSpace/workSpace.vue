@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="header">
-      <div class="header-item ra">1</div>
+      <div class="header-item ra">
+          <div class="">0人</div>
+      </div>
       <div class="header-item ra">1</div>
       <div class="header-item ra">1</div>
       <div class="header-item ra">1</div>

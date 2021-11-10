@@ -74,11 +74,11 @@ export default {
           text: "组织",
           menulist: [
             {
-              router: "userPointList",
+              router: "orgBuild",
               text: "组织架构",
             },
             {
-              router: "cashPointList",
+              router: "jobDescription",
               text: "岗位说明书",
             },
           ],

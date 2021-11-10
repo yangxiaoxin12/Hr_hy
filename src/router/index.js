@@ -39,15 +39,17 @@ const createSignIn = () =>
 const createRedPacket = () =>
   import("@/components/activitymanagement/createRedPacket"); // 导入
 const createThumbUp = () =>
-  import("@/components/activitymanagement/createThumbUp"); // 导入
-const voteDetails = () => import("@/components/activitymanagement/voteDetails"); // 导入
-const userPointList = () =>
-  import("@/components/pointmanagement/userPointList"); // 导入
+    import('@/components/activitymanagement/createThumbUp') // 导入
+const voteDetails = () =>
+    import('@/components/activitymanagement/voteDetails') // 导入
+const orgBuild = () =>
+    import('@/components/pointmanagement/orgBuild') // 导入
 const prizePointList = () =>
-  import("@/components/pointmanagement/prizePointList"); // 导入
-const cashPointList = () =>
-  import("@/components/pointmanagement/cashPointList"); // 导入
-const eCard = () => import("@/components/cardvolumemanagement/eCard"); // 导入
+    import('@/components/pointmanagement/prizePointList') // 导入
+const jobDescription = () =>
+    import('@/components/pointmanagement/jobDescription') // 导入
+const eCard = () =>
+    import('@/components/cardvolumemanagement/eCard') // 导入
 
 const cardvolumemanagement = () =>
   import("@/components/cardvolumemanagement/cardvolumemanagement"); // 导入
@@ -271,9 +273,10 @@ export default new Router({
           component: createThumbUp
         },
         {
-          path: "/userPointList",
-          name: "userPointList",
-          component: userPointList
+            path: '/orgBuild',
+            name: 'orgBuild',
+            component: orgBuild
+
         },
         {
           path: "/prizePointList",
@@ -282,9 +285,10 @@ export default new Router({
         },
 
         {
-          path: "/cashPointList",
-          name: "cashPointList",
-          component: cashPointList
+            path: '/jobDescription',
+            name: 'jobDescription',
+            component: jobDescription
+
         },
         {
           path: "/cardvolumemanagement",

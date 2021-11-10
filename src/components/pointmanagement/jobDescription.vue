@@ -1,5 +1,5 @@
 <template>
-  <div class="cashPointList">
+  <div class="jobDescription">
     <div class="main-header">
       <el-form
         :inline="true"
@@ -153,17 +153,19 @@ export default {
 };
 </script>
 <style scoped>
-.userPointList {
+.jobDescription {
   width: 100%;
-  height: 900px;
+  height: 860px;
   background-color: rgba(255, 255, 255, 0.2);
 }
 .main-header {
-  width: 1150px;
-  height: 608px;
+  width: 100%;
+  height: 80%;
   background-color: #fff;
   padding: 0px;
   text-align: left;
+    border: 1px solid red;
+
   font-size: 14px;
   color: rgba(60, 67, 83, 1);
   margin-top: 15px;
