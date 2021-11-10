@@ -33,11 +33,10 @@
     </div>
 
     <el-table border :data="tableData" style="width: 100%">
-      <el-table-column type="index"  width="50">
-      </el-table-column>
+      <el-table-column type="index" width="50"> </el-table-column>
       <el-table-column prop="endDate1" label="提出时间" width="150">
       </el-table-column>
-      <el-table-column prop="content" label="提案内容" width="150">
+      <el-table-column prop="content" label="提案内容" width="300">
       </el-table-column>
       <el-table-column prop="dutyName" label="提案人" width="200">
       </el-table-column>
@@ -47,9 +46,7 @@
       </el-table-column>
       <el-table-column prop="grade" label="公司评估" width="120">
       </el-table-column>
-      <el-table-column prop="back" label="反馈" width="120">
-      </el-table-column>
-      
+      <el-table-column prop="back" label="反馈" width="120"> </el-table-column>
     </el-table>
   </div>
 </template>
@@ -66,107 +63,55 @@ export default {
       tableData: [
         {
           planName: "2020年度安全员考核计划",
-          content: "年度系统总结报告",
+          content: ` U300不合格料回收系统
+MMA装置U300在100%负荷下P344不合格料排放量约为250kg/h，此部分废液与废水混合后直接去热氧化炉进行焚烧，该过程中虽然会产生一部分热量，但不合格料废液内含有60~70wt%MAA，因此设法从不合格料内提取出MAA进行回收，会大幅降低装置的物耗水平，有着显著的经济效益。
+方案：设计P344不合格料与废水按照一定比例稀释后，再与甲苯混合进行萃取分层，萃取出不合格料内的MAA，含MAA和甲苯的油相进行回收利用。`,
           date: "2020-1-8～2021-1-7",
-          back:22,
-          grade:"优秀",
-          dutyName: "刘宗宪",
+          back: "奖金人力应该有统计，个人不知道，算在年终奖里面了。",
+          grade: `评估结果：采用甲苯萃取U300不合格料内的MAA方法可行，回收率较高，甲苯跑损率较低。并且萃取后油相和水相分层时间短、分层情况较好，水相内虽然会析出固体黏稠物，但流动性较好，能够用机泵输送。
+最终评为当年合理化建议1等奖。`,
+          dutyName: "山东玉皇",
           startDate1: "2020-1-8",
-          endDate1: "2021-1-7",
+          endDate1: "2020年",
           startDate2: "2020-1-15",
           endDate2: "2021-1-14",
-          process: "是",
-          type: "170000.00",
+          process: "已落地",
+          type: "估算经济效益节约：1485.2万元/年。实际918万元/年",
         },
         {
           planName: "2020年1月度安全员考核计划",
-          content: "行政体系革新申请",
-          date: "2020-1-8～2020-2-7",grade:"优秀",back:48,
-          dutyName: "王云",
+          content: `622焚烧炉系统节能及长周期运行优化改进
+内容：本项目对622焚烧炉温度控制进行优化，由原950-1000℃优化至830-850℃；622废水枪雾化型式改为内混式，原822废水枪为外混式；提高622焚烧炉第一通道烟气停留时间，其多于822焚烧炉；停用炉底熔盐枪。`,
+          date: "2020-1-8～2020-2-7",
+          grade: `评估结果：622范围焚烧炉能够稳定连续稳定运行，液化气用量大幅降低。
+最终评为当年合理化建议2等奖。`,
+          back: "同上",
+          dutyName: `上海新材料技术部
+（赵兵兵）`,
           startDate1: "2020-1-8",
-          endDate1: "2020-2-7",
+          endDate1: "2019年",
           startDate2: "2020-1-15",
           endDate2: "2020-2-14",
-          process: "是",
-          type: "370000.00",
+          process: "已落地",
+          type: "节省液化气约200万元/年。",
         },
         {
           planName: "2020年2月度安全员考核计划",
-          content: "后勤供应链改良",
-          date: "2020-2-8～2020-3-7",grade:"优秀",back:36,
+          content: `氧化阻聚剂调整项目
+方案：逐渐降低111/113D13和111/113D15的阻聚剂加入量，降低阻聚剂单耗和过滤器拆洗频率。将HQ/AA单耗从4.0kg/t降至3.8kg/t； AI61A/AA单耗从1.2kg/t降至1.1kg/t；AI61R/AA单耗从0.19kg/t降至0.17kg/t。`,
+          date: "2020-2-8～2020-3-7",
+          grade: `评估结果：在年初阻聚剂单耗水平上，逐渐降低阻聚剂单耗。
+最终评为当年合理化建议3等奖。`,
+          back: "同上",
 
-          dutyName: "李青",
+          dutyName: `上海新材料生产装置
+（具体人员待确定）`,
           startDate1: "2020-2-8",
-          endDate1: "2020-3-7",
+          endDate1: "2020年",
           startDate2: "2020-2-15",
           endDate2: "2020-3-14",
-          process: "是",
-          type: "450000.00",
-        },
-        {
-          planName: "2020年3月度安全员考核计划",
-          content: "新增报销流程",
-          date: "2020-3-8～2020-4-7",grade:"优秀",back:55,
-
-          dutyName: "刘淑媛",
-          startDate1: "2020-3-8",
-          endDate1: "2020-4-7",
-          startDate2: "2020-3-15",
-          endDate2: "2020-4-14",
-          process: "是",
-          type: "56742.00",
-        },
-        {
-          planName: "2020年4月度安全员考核计划",
-          content: "财务水平测试考试提案",
-          date: "2020-4-8～2020-5-7",grade:"优秀",back:68,
-
-          dutyName: "陈思远",
-          startDate1: "2020-4-8",
-          endDate1: "2020-5-7",
-          startDate2: "2020-4-15",
-          endDate2: "2020-5-14",
-          process: "是",
-          type: "176562.00",
-        },
-        {
-          planName: "2020年5月度安全员考核计划",
-          content: "化工水平测试提案",
-          date: "2020-5-8～2020-6-7",grade:"优秀",back:19,
-
-          dutyName: "任柯泽",
-          startDate1: "2020-5-8",
-          endDate1: "2020-6-7",
-          startDate2: "2020-5-15",
-          endDate2: "2020-6-14",
-          process: "否",
-          type: "76542.00",
-        },
-        {
-          planName: "2020年6月度安全员考核计划",
-          content: "IT技术水平培训",
-          date: "2020-6-8～2020-7-7",grade:"优秀",back:226,
-
-          dutyName: "王建路",
-          startDate1: "2020-6-8",
-          endDate1: "2020-7-7",
-          startDate2: "2020-6-15",
-          endDate2: "2020-7-14",
-          process: "是",
-          type: "781333.00",
-        },
-        {
-          planName: "2020年7月度安全员考核计划",
-          content: "重大事故预警系统革新",
-          date: "2020-7-8～2020-8-7",grade:"优秀",back:127,
-
-          dutyName: "赵汤峪",
-          startDate1: "2020-7-8",
-          endDate1: "2020-8-7",
-          startDate2: "2020-7-15",
-          endDate2: "2020-8-14",
-          process: "否",
-          type: "98721.00",
+          process: "已落地",
+          type: '节省阻聚剂单耗成本约445万元/年。',
         },
         
       ],
