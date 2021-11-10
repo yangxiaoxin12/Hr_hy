@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="form-outer">
-      <div class="label">提案名称：</div>
+      <div class="label">提案人：</div>
       <el-input
         class="item"
         v-model="searchForm.planName"
-        placeholder="请输入计划名称"
+        placeholder="请输入提案人"
       ></el-input>
-      <div class="label">创新内容</div>
+      <div class="label">创新内容：</div>
       <el-input
         class="item"
         v-model="searchForm.content"
