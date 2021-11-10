@@ -108,15 +108,15 @@ export default {
               text: "培训计划",
             },
             {
-              router: "configurationrule",
+              router: "trainingImplementation",
               text: "培训实施",
             },
             {
-              router: "levelmanagement",
+              router: "trainingRecords",
               text: "培训记录",
             },
             {
-              router: "levelmanagement",
+              router: "learnPlatform",
               text: "学习平台",
             },
           ],
@@ -127,19 +127,19 @@ export default {
           text: "招聘",
           menulist: [
             {
-              router: "activityParticipation",
+              router: "recruitPlan",
               text: "招聘计划",
             },
             {
-              router: "votingStatistics",
+              router: "postRelease",
               text: "职位发布",
             },
             {
-              router: "zhongjiang",
+              router: "filterRelease",
               text: "筛选-发布",
             },
             {
-              router: "tongji",
+              router: "toExamine",
               text: " 审批",
             },
           ],
