@@ -41,7 +41,7 @@
       </el-table-column>
       <el-table-column prop="process" label="所属阶段" width="150">
       </el-table-column>
-      <el-table-column prop="type" label="计划考核类型" width="150">
+      <el-table-column prop="type" label="考核形式" width="150">
       </el-table-column>
       <el-table-column prop="dutyName" label="计划负责人" width="120">
       </el-table-column>
