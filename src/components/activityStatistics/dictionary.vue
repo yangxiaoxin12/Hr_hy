@@ -46,6 +46,16 @@
       </el-table-column>
       <el-table-column prop="endDate1" label="有效期" width="120">
       </el-table-column>
+      <el-table-column fixed="right" label="操作" width="200">
+        <template slot-scope="scope">
+          <el-button
+            type="text"
+            size="small"
+            @click="handleEdit(scope.row, scope.$index)"
+            >下载附件</el-button
+          >
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -72,7 +82,7 @@ export default {
           startDate2: "2020-1-15",
           endDate2: "2021-1-14",
           process: "",
-          type: 'ZL 201810304514.4',
+          type: "ZL 201810304514.4",
         },
         {
           planName: "2020年1月度安全员考核计划",
@@ -86,7 +96,7 @@ export default {
           startDate2: "2020-1-15",
           endDate2: "2020-2-14",
           process: "",
-          type: 'ZL 201810288982.7',
+          type: "ZL 201810288982.7",
         },
         {
           planName: "2020年2月度安全员考核计划",
@@ -101,7 +111,7 @@ export default {
           startDate2: "2020-2-15",
           endDate2: "2020-3-14",
           process: "201911141983.X",
-          type: '/',
+          type: "/",
         },
         {
           planName: "2020年3月度安全员考核计划",
@@ -116,22 +126,35 @@ export default {
           startDate2: "2020-3-15",
           endDate2: "2020-4-14",
           process: "CNGSBC-0192.199408",
-          type: '/',
+          type: "/",
         },
       ],
       saveData: [],
     };
   },
   mounted() {
-    this.tableData.forEach((item) => {
-      
-    });
+    this.tableData.forEach((item) => {});
     // 保存原始数据
     this.saveData = JSON.parse(JSON.stringify(this.tableData));
   },
   methods: {
-    handleEdit(row) {
-      console.log(row);
+    handleEdit(list, i) {
+      const link = document.createElement("a");
+      link.style.display = "none";
+      if (i == 0) {
+        link.href = "../../../static/zl/0.pdf";
+        link.setAttribute("download", "CN201810288982.7-发明专利证书.pdf");
+      }
+      if (i == 1) {
+        link.href = "../../../static/zl/1.pdf";
+        link.setAttribute("download", "CN201810304514.4-发明专利证书-.pdf");
+      }
+      if (i == 2) {
+        link.href = "../../../static/zl/2.pdf";
+        link.setAttribute("download", "CN201911141983.X-发明专利证书.pdf");
+      }
+      document.body.appendChild(link);
+      link.click();
     },
     handleSearch() {
       this.tableData = this.saveData.filter((item) => {

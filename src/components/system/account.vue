@@ -36,8 +36,7 @@
       <el-table-column type="index" width="50"> </el-table-column>
       <el-table-column prop="endDate1" label="提出时间" width="150">
       </el-table-column>
-      <el-table-column prop="content" label="创新内容" >
-      </el-table-column>
+      <el-table-column prop="content" label="创新内容"> </el-table-column>
       <el-table-column prop="dutyName" label="提案人" width="200">
       </el-table-column>
       <el-table-column prop="process" label="提案是否落地" width="150">
@@ -45,6 +44,18 @@
       <el-table-column prop="type" label="公司收益" width="150">
       </el-table-column>
       <el-table-column prop="grade" label="公司评估" width="120">
+      </el-table-column>
+      <el-table-column fixed="right" label="操作" width="200">
+        <template slot-scope="scope">
+          <span v-if="scope.$index == 0 || scope.$index == 1">/</span>
+          <el-button
+            v-else
+            type="text"
+            size="small"
+            @click="handleEdit(scope.row, scope.$index)"
+            >下载附件</el-button
+          >
+        </template>
       </el-table-column>
     </el-table>
   </div>
@@ -114,21 +125,42 @@ export default {
           process: "已落地",
           type: "待确认",
         },
-        
       ],
       saveData: [],
     };
   },
   mounted() {
-    this.tableData.forEach((item) => {
-      
-    });
+    this.tableData.forEach((item) => {});
     // 保存原始数据
     this.saveData = JSON.parse(JSON.stringify(this.tableData));
   },
   methods: {
-    handleEdit(row) {
-      console.log(row);
+    handleEdit(list, i) {
+      const link = document.createElement("a");
+      link.style.display = "none";
+      if (i == 0) {
+        link.href = "../../../static/hlhjy/0.doc";
+        link.setAttribute(
+          "download",
+          "合理化建议技术改进成果登记表(赵兵兵-工艺).doc"
+        );
+      }
+      if (i == 1) {
+        link.href = "../../../static/hlhjy/1.doc";
+        link.setAttribute(
+          "download",
+          "合理化建议技术改进成果登记表（氧化阻聚剂调整项目）.doc"
+        );
+      }
+      if (i == 2) {
+        link.href = "../../../static/jscx/0.docx";
+        link.setAttribute(
+          "download",
+          "烟气甲醛脱除项目工作总结（技术部）汤杰.docx"
+        );
+      }
+      document.body.appendChild(link);
+      link.click();
     },
     handleSearch() {
       this.tableData = this.saveData.filter((item) => {
