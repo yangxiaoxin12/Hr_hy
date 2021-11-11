@@ -1,151 +1,336 @@
 <template>
   <div>
-    <el-row :gutter="20">
-      <el-col :span="2">
-        <el-select v-model="month" filterable placeholder="请选择" @change="handleMonthChange">
-          <el-option
-            v-for="item in monthOptions"
-            :key="item.id"
-            :label="item.name"
-            :value="item.id">
-          </el-option>
-        </el-select>
-      </el-col>
-      <el-col :span="22">
-
-      </el-col>
-    </el-row>
-    <div class="chart" ref="chart"></div>
-
-    <el-dialog
-      title="详情"
-      :visible.sync="dialogVisible"
-      width="300px"
-      :before-close="handleClose"
-      style="z-index: 1000">
-      <el-form ref="form" :model="form" label-width="100px">
-        <el-form-item label="日期">
-          <el-input v-model="form.a"></el-input>
-        </el-form-item>
-        <el-form-item label="当日库存">
-          <el-input v-model="form.value"></el-input>
-        </el-form-item>
-        <el-form-item label="日用量" v-if="form.c">
-          <el-input v-model="form.c"></el-input>
-        </el-form-item>
-        <el-form-item label="日到货量" v-if="form.d">
-          <el-input v-model="form.d"></el-input>
-        </el-form-item>
-        <el-form-item label="订单数量" v-if="form.e">
-          <el-input v-model="form.e"></el-input>
-        </el-form-item>
-      </el-form>
-    </el-dialog>
+    <div class="form-outer">
+      <div class="label">岗位：</div>
+      <el-input
+        class="item"
+        v-model="searchForm.content"
+        placeholder="请输入岗位名称"
+      ></el-input>
+      <el-button class="button" @click="handleSearch">查询</el-button>
+      <el-button class="button" @click="handleReset">重置</el-button>
+      <el-button class="button" type="primary">新增</el-button>
+    </div>
+    <el-table
+      :data="tableData"
+      style="width: 100%; margin-bottom: 20px"
+      row-key="id"
+      :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+    >
+      <el-table-column
+        v-for="(item, index) in tableList"
+        :key="index"
+        :label="item.label"
+        :prop="item.prop"
+      ></el-table-column>
+      <el-table-column label="操作" width="200">
+        <template slot-scope="scope">
+          <el-button
+            @click="handleClick(scope.row, scope.$index)"
+            type="primary"
+            size="mini"
+            v-if="!scope.row.date"
+            >下载</el-button
+          >
+        </template>
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
 <script>
-import echarts from 'echarts'
-import option from './options'
-import { data8, data9 } from './data'
-
 export default {
-  name: 'index',
   data() {
     return {
-      option: undefined,
-      month: 8,
-      monthOptions: [
-        {id: 8, name: '2021年8月'},
-        {id: 9, name: '2021年9月'}
-      ],
-      dialogVisible: false,
-      form: {}
-    }
-  },
-  watch: {
-    option: {
-      handler: function(newVal, oldVal){
-        console.log(newVal)
-        this.$nextTick(() => {
-          this.echarts.setOption(newVal, true)
-        })
+      searchForm: {
+        planName: "",
+        content: "",
+        startDate1: [],
       },
-      deep: true
-    }
+      tableList: [
+        {
+          label: "部门",
+          prop: "date",
+        },
+        {
+          label: "岗位",
+          prop: "name",
+        },
+        {
+          label: "下发时间",
+          prop: "alias",
+        },
+        {
+          label: "岗位说明书",
+          prop: "operator",
+        },
+      ],
+      tableData: [
+        {
+          id: 1,
+          date: "数字化工作室",
+          children: [
+            {
+              id: 11,
+              name: "产品经理",
+              alias: "2020-12-18",
+              operator: "数字化工作室-产品经理-岗位说明书",
+            },
+            {
+              id: 12,
+              name: "转译员",
+              alias: "2020-12-28",
+              operator: "数字化工作室-转译员-岗位说明书",
+            },
+            {
+              id: 13,
+              name: "敏捷教练",
+              alias: "2020-11-28",
+              operator: "数字化工作室-敏捷教练-岗位说明书",
+            },
+          ],
+        },
+        {
+          id: 2,
+          date: "生产管理部",
+          children: [
+            {
+              id: 21,
+              name: "生产经理",
+              alias: "2020-12-18",
+              operator: "生产管理部-生产经理-岗位说明书",
+            },
+            {
+              id: 22,
+              name: "经理助理",
+              alias: "2020-12-28",
+              operator: "生产管理部-经理助理-岗位说明书",
+            },
+            {
+              id: 23,
+              name: "仪表技术专家",
+              alias: "2020-11-28",
+              operator: "生产管理部-仪表技术专家-岗位说明书",
+            },
+          ],
+        },
+
+        {
+          id: 3,
+          date: "安全环保部 ",
+          children: [
+            {
+              id: 21,
+              name: "经理",
+              alias: "2020-12-18",
+              operator: "安全环保部-经理-岗位说明书",
+            },
+            {
+              id: 22,
+              name: "安全环保管理员",
+              alias: "2020-12-28",
+              operator: "安全环保部-安全环保管理员-岗位说明书",
+            },
+            {
+              id: 23,
+              name: "消防队长",
+              alias: "2020-11-28",
+              operator: "安全环保部-消防队长-岗位说明书",
+            },
+            {
+              id: 24,
+              name: "质检中心班长",
+              alias: "2020-11-28",
+              operator: "安全环保部-质检中心班长-岗位说明书",
+            },
+          ],
+        },
+        {
+          id: 4,
+          date: "研究所 ",
+          children: [
+            {
+              id: 41,
+              name: "所长",
+              alias: "2020-12-18",
+              operator: "研究所-所长-岗位说明书",
+            },
+            {
+              id: 42,
+              name: "副所长",
+              alias: "2020-12-28",
+              operator: "研究所-副所长-岗位说明书",
+            },
+            {
+              id: 43,
+              name: "研发技术员",
+              alias: "2020-11-28",
+              operator: "研究所-研发技术员-岗位说明书",
+            },
+            {
+              id: 44,
+              name: "实验员",
+              alias: "2020-11-28",
+              operator: "研究所-实验员-岗位说明书",
+            },
+          ],
+        },
+        {
+          id: 5,
+          date: "技术部 ",
+          children: [
+            {
+              id: 51,
+              name: "经理",
+              alias: "2020-12-18",
+              operator: "技术部-经理-岗位说明书",
+            },
+            {
+              id: 52,
+              name: "副经理",
+              alias: "2020-12-28",
+              operator: "技术部-副经理-岗位说明书",
+            },
+            {
+              id: 53,
+              name: "经理助理",
+              alias: "2020-11-28",
+              operator: "技术部-经理助理-岗位说明书",
+            },
+            {
+              id: 54,
+              name: "实验员",
+              alias: "2020-11-28",
+              operator: "技术部-实验员-岗位说明书",
+            },
+          ],
+        },
+        {
+          id: 6,
+          date: "发展部 ",
+          children: [
+            {
+              id: 61,
+              name: "发展部经理",
+              alias: "2020-12-18",
+              operator: "发展部-发展部经理-岗位说明书",
+            },
+            {
+              id: 62,
+              name: "副总工程师",
+              alias: "2020-12-28",
+              operator: "发展部-副总工程师-岗位说明书",
+            },
+            {
+              id: 63,
+              name: "投资分析师（规划、项目）",
+              alias: "2020-11-28",
+              operator: "发展部-投资分析师（规划、项目）-岗位说明书",
+            },
+            {
+              id: 64,
+              name: "项目现场管理",
+              alias: "2020-11-28",
+              operator: "发展部-项目现场管理-岗位说明书",
+            },
+          ],
+        },
+      ],
+    };
   },
-  mounted () {
-    this.echarts = echarts.init(this.$refs['chart'])
-
-    let vm = this
-    this.echarts.on('click', function (params) {
-      console.log('---图表点击---', params.data);
-        vm.$nextTick(() => {
-          vm.form = params.data
-          vm.dialogVisible = true
-        })
-
-    })
-
-    let xData = data8.map(item => {
-      let temp = item.a.substring(item.a.indexOf('月') + 1, item.a.length - 1)
-      return '8/' + temp
-    })
-    option.xAxis[0].data = xData
-    option.series[0].data = data8
-    option.series[0].markLine.data[0].yAxis = 500
-    option.series[0].markLine.data[1].yAxis = 500
-    this.option = option
+  mounted() {
+    // 保存原始数据
+    this.saveData = JSON.parse(JSON.stringify(this.tableData));
   },
   methods: {
-    deepClone(source) {
-      const targetObj = source.constructor === Array ? [] : {}
-      Object.keys(source).forEach(keys => {
-        if (source[keys] && typeof source[keys] === 'object') {
-          targetObj[keys] = this.deepClone(source[keys])
-        } else {
-          targetObj[keys] = source[keys]
-        }
-      })
-      return targetObj
-    },
-    getDays(month) {
-      let thisDate = new Date(new Date().getFullYear(),month,0); //当天数为0 js自动处理为上一月的最后一天
-      return thisDate.getDate();
-    },
-    handleMonthChange(evt) {
-      let xData = []
-      if(evt === 8) {
-        xData = data8.map(item => {
-          let temp = item.a.substring(item.a.indexOf('月') + 1, item.a.length - 1)
-          return '8/' + temp
-        })
-        option.series[0].data = data8
-        option.series[0].markLine.data[0].yAxis = 500
-        option.series[0].markLine.data[1].yAxis = 500
-      } else if(evt === 9) {
-        xData = data9.map(item => {
-          let temp = item.a.substring(item.a.indexOf('月') + 1, item.a.length - 1)
-          return '9/' + temp
-        })
-        option.series[0].data = data9
-        option.series[0].markLine.data[0].yAxis = 600
-        option.series[0].markLine.data[1].yAxis = 600
+    handleClick(row, i) {
+      alert(i);
+      const link = document.createElement("a");
+      link.style.display = "none";
+      if (i == 1) {
+        link.href = "../../../static/file/0.docx";
+        link.setAttribute("download", "数字化工作室—产品经理—岗位说明书.docx");
       }
-      option.xAxis[0].data = xData
-      this.option = option
+      if (i == 2) {
+        link.href = "../../../static/file/1.docx";
+        link.setAttribute("download", "数字化工作室-转译员-岗位说明书.docx");
+      }
+      if (i == 5) {
+        link.href = "../../../static/file/2.docx";
+        link.setAttribute("download", "生产管理部-经理-岗位说明书.docx");
+      }
+      if (i == 10) {
+        link.href = "../../../static/file/3.docx";
+        link.setAttribute(
+          "download",
+          "安全环保部-安全环保管理-岗位说明书.docx"
+        );
+      }
+
+      document.body.appendChild(link);
+      link.click();
+
+      // document.body.appendChild(link);
+      // link.click();
     },
-    handleClose() {
-      this.dialogVisible = false
-      this.form = {}
-    }
-  }
-}
+    handleSearch() {
+      this.tableData = this.saveData.filter((item) => {
+        let nameKey = "planName";
+        let contentKey = "content";
+        let dateKey = "startDate1";
+
+        let nameIn = this.searchForm[nameKey]
+          ? item[nameKey].indexOf(this.searchForm[nameKey]) >= 0
+          : true;
+        let contentIn = this.searchForm[contentKey]
+          ? item[contentKey].indexOf(this.searchForm[contentKey]) >= 0
+          : true;
+
+        let sDate = this.searchForm[dateKey][0];
+        let eDate = this.searchForm[dateKey][1];
+
+        console.log(sDate);
+
+        let getTimeFromStr = (str) => {
+          return new Date(str).getTime();
+        };
+
+        let dateIn =
+          sDate && eDate
+            ? getTimeFromStr(item[dateKey]) <= eDate.getTime() &&
+              getTimeFromStr(item[dateKey]) >= sDate.getTime()
+            : true;
+
+        return nameIn && contentIn && dateIn;
+      });
+    },
+    handleReset() {
+      this.tableData = JSON.parse(JSON.stringify(this.saveData));
+      this.searchForm = {
+        startDate1: [],
+        planName: "",
+        content: "",
+      };
+    },
+  },
+};
 </script>
 
-<style scoped>
-.chart{
-  width: 100%;
-  height: 700px;
+<style scoped lang="less">
+.testplan {
+  padding: 20px;
+  text-align: left;
+}
+.form-outer {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  .item {
+    width: 200px;
+    margin-right: 10px;
+  }
+  .label {
+    line-height: 40px;
+  }
 }
 </style>

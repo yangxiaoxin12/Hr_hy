@@ -160,6 +160,18 @@ export default {
           process: "月度阶段",
           type: "安全考核",
         },
+        {
+          planName: "10",
+          content: "数字化工作室",
+          date: "2021-01-12",
+          dutyName: "2021年度部门培训计划（数字化工作室）",
+          startDate1: "2020-9-8",
+          endDate1: "2020-10-7",
+          startDate2: "2020-9-15",
+          endDate2: "2020-10-14",
+          process: "月度阶段",
+          type: "安全考核",
+        },
       ],
       saveData: [],
     };
@@ -207,6 +219,11 @@ export default {
         link.href = "../../../static/files/8.xlsx";
         link.setAttribute("download", "2021年度部门培训计划（SAP装置）.xlsx");
       }
+       if (i == 9) {
+        link.href = "../../../static/files/9.pdf";
+        link.setAttribute("download", "数字化岗位培训计划(1).pdf");
+      }
+      
 
        document.body.appendChild(link);
         link.click();

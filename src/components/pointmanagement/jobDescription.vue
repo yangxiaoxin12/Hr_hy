@@ -11,28 +11,26 @@
       <el-button class="button" @click="handleReset">重置</el-button>
       <el-button class="button" type="primary">新增</el-button>
     </div>
-
-    <el-table border :data="tableData" style="width: 100%">
-      <el-table-column fixed prop="planName" label="序号" width="100">
-      </el-table-column>
-      <el-table-column prop="content" label="部门" width="280">
-      </el-table-column>
-      <el-table-column prop="gw" label="岗位" width="280">
-      </el-table-column>
-      <el-table-column prop="date" label="下发时间" width="200">
-      </el-table-column>
-      <el-table-column prop="dutyName" label="岗位说明书名称">
-      </el-table-column>
-      <el-table-column fixed="right" label="操作" width="200">
+    <el-table
+      :data="tableData"
+      style="width: 100%; margin-bottom: 20px"
+      row-key="id"
+      :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+    >
+      <el-table-column
+        v-for="(item, index) in tableList"
+        :key="index"
+        :label="item.label"
+        :prop="item.prop"
+      ></el-table-column>
+      <el-table-column label="操作" width="200">
         <template slot-scope="scope">
           <el-button
-            type="text"
-            size="small"
-            @click="handleEdit(scope.row, scope.$index)"
+            @click="handleClick(scope.row, scope.$index)"
+            type="primary"
+            size="mini"
+            v-if="!scope.row.date"
             >下载</el-button
-          >
-          <el-button type="text" style="color: red" size="small"
-            >删除</el-button
           >
         </template>
       </el-table-column>
@@ -49,61 +47,195 @@ export default {
         content: "",
         startDate1: [],
       },
-      tableData: [
+      tableList: [
         {
-          planName: "1",
-          content: "数字化工作室",
-          date: "2020-12-15",
-          dutyName: "数字化工作室—产品经理—岗位说明书",
-          gw:"产品经理",
-          startDate1: "2020-1-8",
-          endDate1: "2021-1-7",
-          startDate2: "2020-1-15",
-          endDate2: "2021-1-14",
-          process: "年度阶段",
-          type: "安全考核",
+          label: "部门",
+          prop: "date",
         },
         {
-          planName: "2",
-          content: "数字化工作室",
-          gw:"转译员",
-          date: "2020-12-28",
-          dutyName: "数字化工作室-转译员-岗位说明书",
-          startDate1: "2020-1-8",
-          endDate1: "2020-2-7",
-          startDate2: "2020-1-15",
-          endDate2: "2020-2-14",
-          process: "月度阶段",
-          type: "安全考核",
+          label: "岗位",
+          prop: "name",
         },
         {
-          planName: "3",
-          content: "生产管理部",
-          date: "2020-12-24",
-           gw:"经理",
-          dutyName: "生产管理部-经理-岗位说明书",
-          startDate1: "2020-2-8",
-          endDate1: "2020-3-7",
-          startDate2: "2020-2-15",
-          endDate2: "2020-3-14",
-          process: "月度阶段",
-          type: "安全考核",
+          label: "下发时间",
+          prop: "alias",
         },
         {
-          planName: "4",
-          content: "安全环保部",
-          date: "2020-12-24",
-           gw:"安全环保管理",
-          dutyName: "安全环保部-安全环保管理-岗位说明书",
-          startDate1: "2020-2-8",
-          endDate1: "2020-3-7",
-          startDate2: "2020-2-15",
-          endDate2: "2020-3-14",
-          process: "月度阶段",
-          type: "安全考核",
+          label: "岗位说明书",
+          prop: "operator",
         },
       ],
-      saveData: [],
+      tableData: [
+        {
+          id: 1,
+          date: "数字化工作室",
+          children: [
+            {
+              id: 11,
+              name: "产品经理",
+              alias: "2020-12-18",
+              operator: "数字化工作室-产品经理-岗位说明书",
+            },
+            {
+              id: 12,
+              name: "转译员",
+              alias: "2020-12-28",
+              operator: "数字化工作室-转译员-岗位说明书",
+            },
+            {
+              id: 13,
+              name: "敏捷教练",
+              alias: "2020-11-28",
+              operator: "数字化工作室-敏捷教练-岗位说明书",
+            },
+          ],
+        },
+        {
+          id: 2,
+          date: "生产管理部",
+          children: [
+            {
+              id: 21,
+              name: "生产经理",
+              alias: "2020-12-18",
+              operator: "生产管理部-生产经理-岗位说明书",
+            },
+            {
+              id: 22,
+              name: "经理助理",
+              alias: "2020-12-28",
+              operator: "生产管理部-经理助理-岗位说明书",
+            },
+            {
+              id: 23,
+              name: "仪表技术专家",
+              alias: "2020-11-28",
+              operator: "生产管理部-仪表技术专家-岗位说明书",
+            },
+          ],
+        },
+
+        {
+          id: 3,
+          date: "安全环保部 ",
+          children: [
+            {
+              id: 21,
+              name: "经理",
+              alias: "2020-12-18",
+              operator: "安全环保部-经理-岗位说明书",
+            },
+            {
+              id: 22,
+              name: "安全环保管理员",
+              alias: "2020-12-28",
+              operator: "安全环保部-安全环保管理员-岗位说明书",
+            },
+            {
+              id: 23,
+              name: "消防队长",
+              alias: "2020-11-28",
+              operator: "安全环保部-消防队长-岗位说明书",
+            },
+            {
+              id: 24,
+              name: "质检中心班长",
+              alias: "2020-11-28",
+              operator: "安全环保部-质检中心班长-岗位说明书",
+            },
+          ],
+        },
+        {
+          id: 4,
+          date: "研究所 ",
+          children: [
+            {
+              id: 41,
+              name: "所长",
+              alias: "2020-12-18",
+              operator: "研究所-所长-岗位说明书",
+            },
+            {
+              id: 42,
+              name: "副所长",
+              alias: "2020-12-28",
+              operator: "研究所-副所长-岗位说明书",
+            },
+            {
+              id: 43,
+              name: "研发技术员",
+              alias: "2020-11-28",
+              operator: "研究所-研发技术员-岗位说明书",
+            },
+            {
+              id: 44,
+              name: "实验员",
+              alias: "2020-11-28",
+              operator: "研究所-实验员-岗位说明书",
+            },
+          ],
+        },
+        {
+          id: 5,
+          date: "技术部 ",
+          children: [
+            {
+              id: 51,
+              name: "经理",
+              alias: "2020-12-18",
+              operator: "技术部-经理-岗位说明书",
+            },
+            {
+              id: 52,
+              name: "副经理",
+              alias: "2020-12-28",
+              operator: "技术部-副经理-岗位说明书",
+            },
+            {
+              id: 53,
+              name: "经理助理",
+              alias: "2020-11-28",
+              operator: "技术部-经理助理-岗位说明书",
+            },
+            {
+              id: 54,
+              name: "实验员",
+              alias: "2020-11-28",
+              operator: "技术部-实验员-岗位说明书",
+            },
+          ],
+        },
+        {
+          id: 6,
+          date: "发展部 ",
+          children: [
+            {
+              id: 61,
+              name: "发展部经理",
+              alias: "2020-12-18",
+              operator: "发展部-发展部经理-岗位说明书",
+            },
+            {
+              id: 62,
+              name: "副总工程师",
+              alias: "2020-12-28",
+              operator: "发展部-副总工程师-岗位说明书",
+            },
+            {
+              id: 63,
+              name: "投资分析师（规划、项目）",
+              alias: "2020-11-28",
+              operator: "发展部-投资分析师（规划、项目）-岗位说明书",
+            },
+            {
+              id: 64,
+              name: "项目现场管理",
+              alias: "2020-11-28",
+              operator: "发展部-项目现场管理-岗位说明书",
+            },
+          ],
+        },
+      ],
     };
   },
   mounted() {
@@ -111,39 +243,35 @@ export default {
     this.saveData = JSON.parse(JSON.stringify(this.tableData));
   },
   methods: {
-    handleEdit(row, i) {
-      if (i == 0) {
-        const link = document.createElement("a");
-        link.style.display = "none";
+    handleClick(row, i) {
+      alert(i);
+      const link = document.createElement("a");
+      link.style.display = "none";
+      if (i == 1) {
         link.href = "../../../static/file/0.docx";
         link.setAttribute("download", "数字化工作室—产品经理—岗位说明书.docx");
-        document.body.appendChild(link);
-        link.click();
-      }
-      if (i == 1) {
-        const link = document.createElement("a");
-        link.style.display = "none";
-        link.href = "../../../static/file/1.docx";
-        link.setAttribute("download", "数字化工作室-转译员-岗位说明书.docx");
-        document.body.appendChild(link);
-        link.click();
       }
       if (i == 2) {
-        const link = document.createElement("a");
-        link.style.display = "none";
+        link.href = "../../../static/file/1.docx";
+        link.setAttribute("download", "数字化工作室-转译员-岗位说明书.docx");
+      }
+      if (i == 5) {
         link.href = "../../../static/file/2.docx";
         link.setAttribute("download", "生产管理部-经理-岗位说明书.docx");
-        document.body.appendChild(link);
-        link.click();
       }
-      if (i ==3) {
-        const link = document.createElement("a");
-        link.style.display = "none";
+      if (i == 10) {
         link.href = "../../../static/file/3.docx";
-        link.setAttribute("download", "安全环保部-安全环保管理-岗位说明书.docx");
-        document.body.appendChild(link);
-        link.click();
+        link.setAttribute(
+          "download",
+          "安全环保部-安全环保管理-岗位说明书.docx"
+        );
       }
+
+      document.body.appendChild(link);
+      link.click();
+
+      // document.body.appendChild(link);
+      // link.click();
     },
     handleSearch() {
       this.tableData = this.saveData.filter((item) => {
