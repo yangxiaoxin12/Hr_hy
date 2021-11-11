@@ -44,7 +44,17 @@
       </el-table-column>
       <el-table-column prop="type" label="公司收益" width="150">
       </el-table-column>
-      <el-table-column prop="grade" label="公司评估" >
+      <el-table-column prop="pm" label="排名" width="150"> </el-table-column>
+      <el-table-column prop="grade" label="公司评估"> </el-table-column>
+      <el-table-column fixed="right" label="操作" width="200">
+        <template slot-scope="scope">
+          <el-button
+            type="text"
+            size="small"
+            @click="handleEdit(scope.row, scope.$index)"
+            >下载附件</el-button
+          >
+        </template>
       </el-table-column>
     </el-table>
   </div>
@@ -72,6 +82,7 @@ MMA装置U300在100%负荷下P344不合格料排放量约为250kg/h，此部分�
           dutyName: "山东玉皇",
           startDate1: "2020-1-8",
           endDate1: "2020年",
+          pm: "一等奖",
           startDate2: "2020-1-15",
           endDate2: "2021-1-14",
           process: "已落地",
@@ -85,6 +96,7 @@ MMA装置U300在100%负荷下P344不合格料排放量约为250kg/h，此部分�
           grade: `评估结果：622范围焚烧炉能够稳定连续稳定运行，液化气用量大幅降低。
 最终评为当年合理化建议2等奖。`,
           back: "同上",
+          pm: "二等奖",
           dutyName: `上海新材料技术部
 （赵兵兵）`,
           startDate1: "2020-1-8",
@@ -105,14 +117,14 @@ MMA装置U300在100%负荷下P344不合格料排放量约为250kg/h，此部分�
 
           dutyName: `上海新材料生产装置
 （具体人员待确定）`,
+          pm: "三等奖",
           startDate1: "2020-2-8",
           endDate1: "2020年",
           startDate2: "2020-2-15",
           endDate2: "2020-3-14",
           process: "已落地",
-          type: '节省阻聚剂单耗成本约445万元/年。',
+          type: "节省阻聚剂单耗成本约445万元/年。",
         },
-        
       ],
       saveData: [],
     };
@@ -155,6 +167,24 @@ MMA装置U300在100%负荷下P344不合格料排放量约为250kg/h，此部分�
 
         return nameIn && contentIn && dateIn;
       });
+    },
+    handleEdit(list, i) {
+      const link = document.createElement("a");
+      link.style.display = "none";
+      if (i == 0) {
+        link.href = "../../../static/hlhjy/0.doc";
+        link.setAttribute("download", "合理化建议技术改进成果登记表(赵兵兵-工艺).doc");
+      }
+      if (i == 1) {
+        link.href = "../../../static/hlhjy/1.doc";
+        link.setAttribute("download", "合理化建议技术改进成果登记表（氧化阻聚剂调整项目）.doc");
+      }
+      if (i == 2) {
+        link.href = "../../../static/hlhjy/2.doc";
+        link.setAttribute("download", "合理化建议技术改进成果登记表-U300不合格料回收系统.doc");
+      }
+      document.body.appendChild(link);
+      link.click();
     },
     handleReset() {
       this.tableData = JSON.parse(JSON.stringify(this.saveData));
