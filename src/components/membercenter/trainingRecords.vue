@@ -1,13 +1,31 @@
 <template>
   <div>
     <div class="form-outer">
-      <div class="label">培训类型：</div>
+      <div class="label">培训类别：</div>
       <el-input
         class="item"
         v-model="searchForm.type"
-        placeholder="请输入培训类型"
+        placeholder="请输入培训类别"
       ></el-input>
-      <el-button class="button" @click="handleSearch">查询</el-button>
+      <div class="label">部门：</div>
+      <el-input
+        class="item"
+        v-model="searchForm.bm"
+        placeholder="请输入培训部门"
+      ></el-input>
+      <div class="label">姓名：</div>
+      <el-input
+        class="item"
+        v-model="searchForm.xm"
+        placeholder="请输入姓名"
+      ></el-input>
+      <div class="label">培训日期：</div>
+       <el-date-picker
+      v-model="searchForm.date"
+      type="date"
+      placeholder="选择日期">
+    </el-date-picker>
+      <el-button style="margin-left:10px" class="button" @click="handleSearch">查询</el-button>
       <el-button class="button" @click="handleReset">重置</el-button>
       <el-button class="button" type="primary">新增</el-button>
     </div>

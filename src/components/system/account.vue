@@ -36,7 +36,7 @@
       <el-table-column type="index" width="50"> </el-table-column>
       <el-table-column prop="endDate1" label="提出时间" width="150">
       </el-table-column>
-      <el-table-column prop="content" label="创新内容" width="300">
+      <el-table-column prop="content" label="创新内容" >
       </el-table-column>
       <el-table-column prop="dutyName" label="提案人" width="200">
       </el-table-column>
@@ -46,7 +46,6 @@
       </el-table-column>
       <el-table-column prop="grade" label="公司评估" width="120">
       </el-table-column>
-      <el-table-column prop="back" label="反馈" width="120"> </el-table-column>
     </el-table>
   </div>
 </template>

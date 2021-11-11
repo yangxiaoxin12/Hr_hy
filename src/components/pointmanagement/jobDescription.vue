@@ -15,7 +15,9 @@
     <el-table border :data="tableData" style="width: 100%">
       <el-table-column fixed prop="planName" label="序号" width="100">
       </el-table-column>
-      <el-table-column prop="content" label="岗位" width="280">
+      <el-table-column prop="content" label="部门" width="280">
+      </el-table-column>
+      <el-table-column prop="gw" label="岗位" width="280">
       </el-table-column>
       <el-table-column prop="date" label="下发时间" width="200">
       </el-table-column>
@@ -50,9 +52,10 @@ export default {
       tableData: [
         {
           planName: "1",
-          content: "UI",
+          content: "数字化工作室",
           date: "2020-12-15",
-          dutyName: "岗位说明书目录（ui用）",
+          dutyName: "数字化工作室—产品经理—岗位说明书",
+          gw:"产品经理",
           startDate1: "2020-1-8",
           endDate1: "2021-1-7",
           startDate2: "2020-1-15",
@@ -62,9 +65,10 @@ export default {
         },
         {
           planName: "2",
-          content: "新材料公司",
+          content: "数字化工作室",
+          gw:"转译员",
           date: "2020-12-28",
-          dutyName: "新材料公司岗位",
+          dutyName: "数字化工作室-转译员-岗位说明书",
           startDate1: "2020-1-8",
           endDate1: "2020-2-7",
           startDate2: "2020-1-15",
@@ -74,9 +78,23 @@ export default {
         },
         {
           planName: "3",
-          content: "数字化工作室",
+          content: "生产管理部",
           date: "2020-12-24",
-          dutyName: "新材料公司岗位",
+           gw:"经理",
+          dutyName: "生产管理部-经理-岗位说明书",
+          startDate1: "2020-2-8",
+          endDate1: "2020-3-7",
+          startDate2: "2020-2-15",
+          endDate2: "2020-3-14",
+          process: "月度阶段",
+          type: "安全考核",
+        },
+        {
+          planName: "4",
+          content: "安全环保部",
+          date: "2020-12-24",
+           gw:"安全环保管理",
+          dutyName: "安全环保部-安全环保管理-岗位说明书",
           startDate1: "2020-2-8",
           endDate1: "2020-3-7",
           startDate2: "2020-2-15",
@@ -98,7 +116,7 @@ export default {
         const link = document.createElement("a");
         link.style.display = "none";
         link.href = "../../../static/file/0.docx";
-        link.setAttribute("download", "岗位说明书目录（ui用）.docx");
+        link.setAttribute("download", "数字化工作室—产品经理—岗位说明书.docx");
         document.body.appendChild(link);
         link.click();
       }
@@ -106,7 +124,7 @@ export default {
         const link = document.createElement("a");
         link.style.display = "none";
         link.href = "../../../static/file/1.docx";
-        link.setAttribute("download", "新材料公司岗位说明书.docx");
+        link.setAttribute("download", "数字化工作室-转译员-岗位说明书.docx");
         document.body.appendChild(link);
         link.click();
       }
@@ -114,7 +132,15 @@ export default {
         const link = document.createElement("a");
         link.style.display = "none";
         link.href = "../../../static/file/2.docx";
-        link.setAttribute("download", "数字化工作室岗位说明书.docx");
+        link.setAttribute("download", "生产管理部-经理-岗位说明书.docx");
+        document.body.appendChild(link);
+        link.click();
+      }
+      if (i ==3) {
+        const link = document.createElement("a");
+        link.style.display = "none";
+        link.href = "../../../static/file/3.docx";
+        link.setAttribute("download", "安全环保部-安全环保管理-岗位说明书.docx");
         document.body.appendChild(link);
         link.click();
       }

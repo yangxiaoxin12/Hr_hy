@@ -58,7 +58,8 @@ const learnPlatform = () => import("@/components/membercenter/learnPlatform"); /
 
 const trainingRecords = () =>
     import("@/components/membercenter/trainingRecords"); // 导入
-
+const stock = () =>
+    import("@/components/stock/index"); // 导入
 const workSpace = () => import("@/components/workSpace/workSpace"); // 导入
 Vue.use(Router);
 
@@ -312,6 +313,12 @@ export default new Router({
                     path: "/trainingImplementation",
                     name: "trainingImplementation",
                     component: trainingImplementation
+                },
+                
+                {
+                    path: "/stock",
+                    name: "stock",
+                    component: stock
                 },
                 {
                     path: "/trainingRecords",
