@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar" style="min-height: 597px">
     <el-menu
-    :unique-opened="true"
+      :unique-opened="true"
       :default-active="activePath"
       class="el-menu-vertical-demo"
       @open="handleOpen"
@@ -26,15 +26,37 @@
             <i :class="item.icon"></i>
             <span>{{ item.text }}</span>
           </template>
-          <el-menu-item-group>
+          <el-menu-item-group
+            v-for="(item, index) in item.menulist"
+            :key="index"
+          >
             <el-menu-item
-              v-for="(item, index) in item.menulist"
+              v-if="!item.menulist || item.menulist.length == 0"
               v-show="!item.hideInMenu"
               :index="'/' + item.router"
-              :key="index"
               @click="jumpUrl(item.jump)"
               >{{ item.text }}</el-menu-item
             >
+            <el-submenu
+              v-if="item.menulist && item.menulist.length > 0"
+              :index="item.icon"
+              :key="index"
+            >
+              <template slot="title">
+                <i :class="item.icon"></i>
+                <span>{{ item.text }}</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item
+                  v-for="(item, index) in item.menulist"
+                  v-show="!item.hideInMenu"
+                  :index="'/' + item.router"
+                  :key="index"
+                  @click="jumpUrl(item.jump)"
+                  >{{ item.text }}</el-menu-item
+                >
+              </el-menu-item-group>
+            </el-submenu>
           </el-menu-item-group>
         </el-submenu>
       </template>
@@ -137,6 +159,28 @@ export default {
               router: "learnPlatform",
               text: "学习平台",
               jump: "http://www.shhuayi-elearning.cn/login.htm",
+            },
+            {
+              text: "课程平台",
+              menulist: [
+                {
+                  router: "trainingPlan",
+                  text: "两化融合政策文件",
+                },
+                // {
+                //   router: "trainingImplementation",
+                //   text: "培训实施",
+                // },
+                {
+                  router: "trainingRecords",
+                  text: "课程资料",
+                },
+                {
+                  router: "learnPlatform",
+                  text: "培训与考评",
+                  jump: "http://www.shhuayi-elearning.cn/login.htm",
+                },
+              ],
             },
           ],
         },
