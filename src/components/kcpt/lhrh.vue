@@ -1,44 +1,41 @@
+// 两化融合
 <template>
   <div>
     <div class="form-outer">
-      <div class="label">部门：</div>
+      <div class="label">姓名：</div>
       <el-input
         class="item"
-        v-model="searchForm.content"
-        placeholder="请输入部门名称"
+        v-model="searchForm.name0"
+        placeholder="请输入姓名"
       ></el-input>
-      
+
       <el-button class="button" @click="handleSearch">查询</el-button>
       <el-button class="button" @click="handleReset">重置</el-button>
       <el-button class="button" type="primary">新增</el-button>
     </div>
 
     <el-table border :data="tableData" style="width: 100%">
-      <el-table-column fixed prop="planName" label="序号" width="100">
+      <el-table-column type="index" width="50"> </el-table-column>
+      <el-table-column prop="name0" label="姓名" width="100"> </el-table-column>
+      <el-table-column prop="name1" label="培训内容" width="150">
       </el-table-column>
-      <el-table-column prop="content" label="类型" width="200">
+      <el-table-column prop="name2" label="培训时间" width="150">
       </el-table-column>
-      <el-table-column prop="date" label="文件名" width="200">
+      <el-table-column prop="name3" label="考试内容" width="150">
       </el-table-column>
-      <el-table-column prop="dutyName" label="发布时间">
+      <el-table-column prop="name4" label="考试时间" width="150">
       </el-table-column>
-      <el-table-column prop="process" label="阅读量">
+      <el-table-column prop="name5" label="考试成绩" width="150">
       </el-table-column>
-      <el-table-column prop="type" label="下载量">
-      </el-table-column>
-      <el-table-column fixed="right" label="操作" width="200">
+      <el-table-column prop="name6" label="反馈" width="200"> </el-table-column>
+      <!-- <el-table-column prop="name1" label="附件"> </el-table-column> -->
+      <el-table-column fixed="right" label="附件" >
         <template slot-scope="scope">
           <el-button
             type="text"
             size="small"
             @click="handleEdit(scope.row, scope.$index)"
             >下载</el-button
-          >
-          <el-button type="text" style="color: blue" size="small"
-            >上传</el-button
-          >
-          <el-button type="text" style="color: red" size="small"
-            >删除</el-button
           >
         </template>
       </el-table-column>
@@ -57,124 +54,260 @@ export default {
       },
       tableData: [
         {
-          planName: "1",
-          content: "安环部",
-          date: "2020-12-15",
-          dutyName: "2021年部门年度计划（安环部）",
-          startDate1: "2020-1-8",
-          endDate1: "2021-1-7",
-          startDate2: "2020-1-15",
-          endDate2: "2021-1-14",
-          process: "年度阶段",
-          type: "安全考核",
+          name0: "王集超",
+          name1: "“智能工厂集成技术与应用”新技能项目培训",
+          name2: "2021/6/19",
+          name3: "证书考试取证",
+          name4: "/",
+          name5: "/",
         },
         {
-          planName: "2",
-          content: "催化剂装置",
-          date: "2020-12-28",
-          dutyName: "2021年部门年度计划（催化剂装置）",
-          startDate1: "2020-1-8",
-          endDate1: "2020-2-7",
-          startDate2: "2020-1-15",
-          endDate2: "2020-2-14",
-          process: "月度阶段",
-          type: "安全考核",
+          name0: "徐齐田",
+          name1: "“智能工厂集成技术与应用”新技能项目培训",
+          name2: "2021/6/19",
+          name3: "证书考试取证",
+          name4: "/",
+          name5: "/",
         },
         {
-          planName: "3",
-          content: "技术部",
-          date: "2020-12-24",
-          dutyName: "2021年部门年度计划（技术部）",
-          startDate1: "2020-2-8",
-          endDate1: "2020-3-7",
-          startDate2: "2020-2-15",
-          endDate2: "2020-3-14",
-          process: "月度阶段",
-          type: "安全考核",
+          name0: "杨菁池",
+          name1: "“智能工厂集成技术与应用”新技能项目培训",
+          name2: "2021/6/19",
+          name3: "证书考试取证",
+          name4: "/",
+          name5: "/",
         },
         {
-          planName: "4",
-          content: "发展部",
-          date: "2021-01-11",
-          dutyName: "2021年部门年度培训计划（发展部）",
-          startDate1: "2020-3-8",
-          endDate1: "2020-4-7",
-          startDate2: "2020-3-15",
-          endDate2: "2020-4-14",
-          process: "月度阶段",
-          type: "安全考核",
+          name0: "汪勇",
+          name1: "“智能工厂集成技术与应用”新技能项目培训",
+          name2: "2021/6/19",
+          name3: "证书考试取证",
+          name4: "/",
+          name5: "/",
         },
         {
-          planName: "5",
-          content: "丙烯酸装置",
-          date: "2021-05-10",
-          dutyName: "2021年部门培训计划（丙烯酸装置）",
-          startDate1: "2020-4-8",
-          endDate1: "2020-5-7",
-          startDate2: "2020-4-15",
-          endDate2: "2020-5-14",
-          process: "月度阶段",
-          type: "安全考核",
+          name0: "秦春华",
+          name1: "“智能工厂集成技术与应用”新技能项目培训",
+          name2: "2021/6/19",
+          name3: "证书考试取证",
+          name4: "/",
+          name5: "/",
         },
         {
-          planName: "6",
-          content: "质检中心",
-          date: "2021-01-11",
-          dutyName: "2021年部门培训计划（质检中心）",
-          startDate1: "2020-5-8",
-          endDate1: "2020-6-7",
-          startDate2: "2020-5-15",
-          endDate2: "2020-6-14",
-          process: "月度阶段",
-          type: "安全考核",
+          name0: "胡亦超",
+          name1: "“智能工厂集成技术与应用”新技能项目培训",
+          name2: "2021/6/19",
+          name3: "证书考试取证",
+          name4: "/",
+          name5: "/",
         },
         {
-          planName: "7",
-          content: "综合办公室",
-          date: "2021-01-11",
-          dutyName: "2021年部门培训计划（综合办公室）",
-          startDate1: "2020-6-8",
-          endDate1: "2020-7-7",
-          startDate2: "2020-6-15",
-          endDate2: "2020-7-14",
-          process: "月度阶段",
-          type: "安全考核",
+          name0: "许明炜",
+          name1: "“智能工厂集成技术与应用”新技能项目培训",
+          name2: "2021/6/19",
+          name3: "证书考试取证",
+          name4: "/",
+          name5: "/",
         },
         {
-          planName: "8",
-          content: "生产管理部",
-          date: "2021-01-06",
-          dutyName: "2021年度部门年度计划(生产管理部）",
-          startDate1: "2020-7-8",
-          endDate1: "2020-8-7",
-          startDate2: "2020-7-15",
-          endDate2: "2020-8-14",
-          process: "月度阶段",
-          type: "安全考核",
+          name0: "赵兵兵",
+          name1: "华谊集团数据分析、数据工程培训",
+          name2: "2021/7/2",
+          name3: "随堂测验",
+          name4: "2021/7/2",
+          name5: "85",
         },
         {
-          planName: "9",
-          content: "SAP装置",
-          date: "2021-01-12",
-          dutyName: "2021年度部门培训计划（SAP装置）",
-          startDate1: "2020-9-8",
-          endDate1: "2020-10-7",
-          startDate2: "2020-9-15",
-          endDate2: "2020-10-14",
-          process: "月度阶段",
-          type: "安全考核",
+          name0: "胡亦超",
+          name1: "华谊集团数据分析、数据工程培训",
+          name2: "2021/7/2",
+          name3: "随堂测验",
+          name4: "2021/7/2",
+          name5: "88",
         },
         {
-          planName: "10",
-          content: "数字化工作室",
-          date: "2021-01-12",
-          dutyName: "2021年度部门培训计划（数字化工作室）",
-          startDate1: "2020-9-8",
-          endDate1: "2020-10-7",
-          startDate2: "2020-9-15",
-          endDate2: "2020-10-14",
-          process: "月度阶段",
-          type: "安全考核",
+          name0: "路顺利",
+          name1: "华谊集团数据分析、数据工程培训",
+          name2: "2021/7/2",
+          name3: "随堂测验",
+          name4: "2021/7/2",
+          name5: "87",
+        },
+        {
+          name0: "王集超",
+          name1: "华谊集团数据分析、数据工程培训",
+          name2: "2021/7/2",
+          name3: "随堂测验",
+          name4: "2021/7/2",
+          name5: "95",
+        },
+        {
+          name0: "杨菁池",
+          name1: "华谊集团数据分析、数据工程培训",
+          name2: "2021/7/2",
+          name3: "随堂测验",
+          name4: "2021/7/2",
+          name5: "89",
+        },
+        {
+          name0: "汪勇",
+          name1: "华谊集团数据分析、数据工程培训",
+          name2: "2021/7/2",
+          name3: "随堂测验",
+          name4: "2021/7/2",
+          name5: "90",
+        },
+        {
+          name0: "马振轲",
+          name1: "华谊集团数据分析、数据工程培训",
+          name2: "2021/7/2",
+          name3: "随堂测验",
+          name4: "2021/7/2",
+          name5: "85",
+        },
+        {
+          name0: "陈文良",
+          name1: "华谊集团数据分析、数据工程培训",
+          name2: "2021/7/2",
+          name3: "随堂测验",
+          name4: "2021/7/2",
+          name5: "88",
+        },
+        {
+          name0: "张健",
+          name1: "华谊集团数据分析、数据工程培训",
+          name2: "2021/7/2",
+          name3: "随堂测验",
+          name4: "2021/7/2",
+          name5: "90",
+        },
+        {
+          name0: "谈金辉",
+          name1: "华谊集团数据分析、数据工程培训",
+          name2: "2021/7/2",
+          name3: "随堂测验",
+          name4: "2021/7/2",
+          name5: "87",
+        },
+        {
+          name0: "朱铭燕",
+          name1: "华谊集团数据分析、数据工程培训",
+          name2: "2021/7/2",
+          name3: "随堂测验",
+          name4: "2021/7/2",
+          name5: "92",
+        },
+        {
+          name0: "赵倩",
+          name1: "华谊集团数据分析、数据工程培训",
+          name2: "2021/7/2",
+          name3: "随堂测验",
+          name4: "2021/7/2",
+          name5: "94",
+        },
+        {
+          name0: "王集超",
+          name1: "工业控制系统网络安全培训",
+          name2: "2021/10/27",
+          name3: "线上考试",
+          name4: "2021/10/28",
+          name5: "90",
+        },
+        {
+          name0: "徐齐田",
+          name1: "工业控制系统网络安全培训",
+          name2: "2021/10/27",
+          name3: "线上考试",
+          name4: "2021/10/28",
+          name5: "90",
+        },
+        {
+          name0: "杨菁池",
+          name1: "工业控制系统网络安全培训",
+          name2: "2021/10/27",
+          name3: "线上考试",
+          name4: "2021/10/28",
+          name5: "85",
+        },
+        {
+          name0: "汪勇",
+          name1: "工业控制系统网络安全培训",
+          name2: "2021/10/27",
+          name3: "线上考试",
+          name4: "2021/10/28",
+          name5: "95",
+        },
+        {
+          name0: "谈金辉",
+          name1: "工业控制系统网络安全培训",
+          name2: "2021/10/27",
+          name3: "线上考试",
+          name4: "2021/10/28",
+          name5: "80",
+        },
+        {
+          name0: "王集超",
+          name1: "华谊集团信息安全意识培训",
+          name2: "2021/10/28",
+          name3: "线上考试",
+          name4: "2021/10/28",
+          name5: "90",
+        },
+        {
+          name0: "徐齐田",
+          name1: "华谊集团信息安全意识培训",
+          name2: "2021/10/28",
+          name3: "线上考试",
+          name4: "2021/10/28",
+          name5: "95",
+        },
+        {
+          name0: "杨菁池",
+          name1: "华谊集团信息安全意识培训",
+          name2: "2021/10/28",
+          name3: "线上考试",
+          name4: "2021/10/28",
+          name5: "89",
+        },
+        {
+          name0: "汪勇",
+          name1: "华谊集团信息安全意识培训",
+          name2: "2021/10/28",
+          name3: "线上考试",
+          name4: "2021/10/28",
+          name5: "88",
+        },
+        {
+          name0: "曹嘉文",
+          name1: "华谊集团信息安全意识培训",
+          name2: "2021/10/28",
+          name3: "线上考试",
+          name4: "2021/10/28",
+          name5: "90",
+        },
+        {
+          name0: "金涛",
+          name1: "华谊集团信息安全意识培训",
+          name2: "2021/10/28",
+          name3: "线上考试",
+          name4: "2021/10/28",
+          name5: "81",
+        },
+        {
+          name0: "蒋庆智",
+          name1: "华谊集团信息安全意识培训",
+          name2: "2021/10/28",
+          name3: "线上考试",
+          name4: "2021/10/28",
+          name5: "82",
+        },
+        {
+          name0: "瞿红",
+          name1: "华谊集团信息安全意识培训",
+          name2: "2021/10/28",
+          name3: "线上考试",
+          name4: "2021/10/28",
+          name5: "85",
         },
       ],
       saveData: [],
@@ -188,54 +321,30 @@ export default {
     handleEdit(row, i) {
       const link = document.createElement("a");
       link.style.display = "none";
-      if (i == 0) {
-        link.href = "../../../static/files/0.docx";
-        link.setAttribute("download", "2021年部门年度计划（安环部）.docx");
+      if (i >= 0 && i < 10) {
+        link.href = "../../../static/ks/0.docx";
+        link.setAttribute("download", "培训通知.docx");
       }
-      if (i == 1) {
-        link.href = "../../../static/files/1.docx";
-        link.setAttribute("download", "2021年部门年度计划（催化剂装置）.docx");
+      if (i >= 10 && i < 20) {
+        link.href = "../../../static/ks/1.pdf";
+        link.setAttribute("download", "试卷1.pdf");
       }
-      if (i == 2) {
-        link.href = "../../../static/files/2.docx";
-        link.setAttribute("download", "2021年部门年度计划（技术部）.docx");
+      if (i >= 20 && i < 30) {
+        link.href = "../../../static/ks/2.pdf";
+        link.setAttribute("download", "试卷2.pdf");
       }
-      if (i == 3) {
-        link.href = "../../../static/files/3.docx";
-        link.setAttribute("download", "2021年部门年度培训计划（发展部）.docx");
+      if (i >= 30) {
+        link.href = "../../../static/ks/3.png";
+        link.setAttribute("download", "网络安全知识竞赛截图.PNG");
       }
-      if (i == 4) {
-        link.href = "../../../static/files/4.docx";
-        link.setAttribute("download", "2021年部门培训计划（丙烯酸装置）.docx");
-      }
-      if (i == 5) {
-        link.href = "../../../static/files/5.docx";
-        link.setAttribute("download", "2021年部门培训计划（质检中心）.docx");
-      }
-      if (i == 6) {
-        link.href = "../../../static/files/6.docx";
-        link.setAttribute("download", "2021年部门培训计划（综合办公室）.docx");
-      }
-      if (i == 7) {
-        link.href = "../../../static/files/7.docx";
-        link.setAttribute("download", "2021年度部门年度计划(生产管理部）.docx");
-      } if (i == 8) {
-        link.href = "../../../static/files/8.xlsx";
-        link.setAttribute("download", "2021年度部门培训计划（SAP装置）.xlsx");
-      }
-       if (i == 9) {
-        link.href = "../../../static/files/9.pdf";
-        link.setAttribute("download", "数字化岗位培训计划(1).pdf");
-      }
-      
 
-       document.body.appendChild(link);
-        link.click();
+      document.body.appendChild(link);
+      link.click();
     },
     handleSearch() {
       this.tableData = this.saveData.filter((item) => {
-        let nameKey = "planName";
-        let contentKey = "content";
+        let nameKey = "name0";
+        let contentKey = "name0";
         let dateKey = "startDate1";
 
         let nameIn = this.searchForm[nameKey]

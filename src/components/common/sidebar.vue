@@ -46,15 +46,38 @@
                 <i :class="item.icon"></i>
                 <span>{{ item.text }}</span>
               </template>
-              <el-menu-item-group>
+              <el-menu-item-group
+                v-for="(item, index) in item.menulist"
+                :key="index"
+              >
                 <el-menu-item
-                  v-for="(item, index) in item.menulist"
+                  v-if="!item.menulist || item.menulist.length == 0"
                   v-show="!item.hideInMenu"
                   :index="'/' + item.router"
-                  :key="index"
                   @click="jumpUrl(item.jump)"
                   >{{ item.text }}</el-menu-item
                 >
+                <el-submenu
+                  v-if="item.menulist && item.menulist.length > 0"
+                  :index="item.icon"
+                  :key="index"
+                >
+                  <template slot="title">
+                    <i :class="item.icon"></i>
+                    <span>{{ item.text }}</span>
+                  </template>
+                  <el-menu-item-group
+                    v-for="(item, index) in item.menulist"
+                    :key="index"
+                  >
+                    <el-menu-item
+                      v-show="!item.hideInMenu"
+                      :index="'/' + item.router"
+                      @click="jumpUrl(item.jump)"
+                      >{{ item.text }}</el-menu-item
+                    >
+                  </el-menu-item-group>
+                </el-submenu>
               </el-menu-item-group>
             </el-submenu>
           </el-menu-item-group>
@@ -157,23 +180,61 @@ export default {
             },
             {
               router: "learnPlatform",
-              text: "学习平台",
+              text: "集团学习平台",
               jump: "http://www.shhuayi-elearning.cn/login.htm",
             },
             {
-              text: "课程平台",
+              text: "知识库",
               menulist: [
                 {
-                  router: "lhrh",
-                  text: "两化融合政策文件",
+                  router: "31",
+                  text: "体系文件",
+                  menulist: [
+                    {
+                      router: "iso",
+                      text: "ISO",
+                    },
+                    {
+                      router: "lhrh1",
+                      text: "两化融合",
+                    },
+                  ],
                 },
                 {
-                  router: "kczl",
-                  text: "课程资料",
+                  router: "21",
+                  text: "专业课程",
+                  menulist: [
+                    {
+                      router: "gl",
+                      text: "管理",
+                    },
+                    {
+                      router: "gy",
+                      text: "工艺",
+                    },
+                    {
+                      router: "jdy",
+                      text: "机电仪",
+                    },
+                    {
+                      router: "znzz",
+                      text: "智能制造",
+                    },
+                  ],
                 },
                 {
-                  router: "pxykh",
-                  text: "培训与考评",
+                  router: "11",
+                  text: "经验知识库",
+                  menulist: [
+                    {
+                      router: "sc",
+                      text: "生产",
+                    },
+                    {
+                      router: "zhinzz",
+                      text: "智能制造",
+                    },
+                  ],
                 },
               ],
             },

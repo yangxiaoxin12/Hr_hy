@@ -65,6 +65,19 @@ const kczl = () => import("@/components/kcpt/kczl"); // 导入
 const lhrh = () => import("@/components/kcpt/lhrh"); // 导入
 const pxykh = () => import("@/components/kcpt/pxykh"); // 导入
 
+const iso = () => import("@/components/tzwj/iso"); // 导入
+const lhrh1 = () => import("@/components/tzwj/lhrh"); // 导入
+
+const gl = () => import("@/components/zykc/gl"); // 导入
+const gy = () => import("@/components/zykc/gy"); // 导入
+const jdy = () => import("@/components/zykc/jdy"); // 导入
+const znzz = () => import("@/components/zykc/znzz"); // 导入
+
+const sc = () => import("@/components/jyzsk/sc"); // 导入
+const zhinzz = () => import("@/components/jyzsk/znzz"); // 导入
+
+
+
 Vue.use(Router);
 
 /**
@@ -340,6 +353,42 @@ export default new Router({
                     path: "/pxykh",
                     name: "pxykh",
                     component: pxykh
+                }
+                ,{
+                    path: "/iso",
+                    name: "iso",
+                    component: iso
+                }
+                ,{
+                    path: "/lhrh1",
+                    name: "lhrh1",
+                    component: lhrh1
+                }
+                ,{
+                    path: "/gl",
+                    name: "gl",
+                    component: gl
+                },{
+                    path: "/gy",
+                    name: "gy",
+                    component: gy
+                },{
+                    path: "/jdy",
+                    name: "jdy",
+                    component: jdy
+                },{
+                    path: "/znzz",
+                    name: "znzz",
+                    component: znzz
+                }
+                ,{
+                    path: "/sc",
+                    name: "sc",
+                    component: sc
+                },{
+                    path: "/zhinzz",
+                    name: "zhinzz",
+                    component: zhinzz
                 }
             ]
         }
