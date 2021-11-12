@@ -16,11 +16,15 @@
     <el-table border :data="tableData" style="width: 100%">
       <el-table-column fixed prop="planName" label="序号" width="100">
       </el-table-column>
-      <el-table-column prop="content" label="部门" width="200">
+      <el-table-column prop="content" label="类型" width="200">
       </el-table-column>
-      <el-table-column prop="date" label="下发时间" width="200">
+      <el-table-column prop="date" label="文件名" width="200">
       </el-table-column>
-      <el-table-column prop="dutyName" label="培训计划安排文档">
+      <el-table-column prop="dutyName" label="发布时间">
+      </el-table-column>
+      <el-table-column prop="process" label="阅读量">
+      </el-table-column>
+      <el-table-column prop="type" label="下载量">
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
         <template slot-scope="scope">
