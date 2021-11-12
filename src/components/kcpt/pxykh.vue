@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="form-outer">
-      <div class="label">部门：</div>
+      <div class="label">姓名：</div>
       <el-input
         class="item"
-        v-model="searchForm.content"
-        placeholder="请输入部门名称"
+        v-model="searchForm.name0"
+        placeholder="请输入姓名"
       ></el-input>
 
       <el-button class="button" @click="handleSearch">查询</el-button>
@@ -28,7 +28,7 @@
       </el-table-column>
       <el-table-column prop="name6" label="反馈" width="200"> </el-table-column>
       <!-- <el-table-column prop="name1" label="附件"> </el-table-column> -->
-      <el-table-column fixed="right" label="附件" width="100">
+      <el-table-column fixed="right" label="附件" >
         <template slot-scope="scope">
           <el-button
             type="text"
@@ -342,8 +342,8 @@ export default {
     },
     handleSearch() {
       this.tableData = this.saveData.filter((item) => {
-        let nameKey = "planName";
-        let contentKey = "content";
+        let nameKey = "name0";
+        let contentKey = "name0";
         let dateKey = "startDate1";
 
         let nameIn = this.searchForm[nameKey]
