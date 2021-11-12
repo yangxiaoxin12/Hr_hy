@@ -46,15 +46,38 @@
                 <i :class="item.icon"></i>
                 <span>{{ item.text }}</span>
               </template>
-              <el-menu-item-group>
+              <el-menu-item-group
+                v-for="(item, index) in item.menulist"
+                :key="index"
+              >
                 <el-menu-item
-                  v-for="(item, index) in item.menulist"
+                  v-if="!item.menulist || item.menulist.length == 0"
                   v-show="!item.hideInMenu"
                   :index="'/' + item.router"
-                  :key="index"
                   @click="jumpUrl(item.jump)"
                   >{{ item.text }}</el-menu-item
                 >
+                <el-submenu
+                  v-if="item.menulist && item.menulist.length > 0"
+                  :index="item.icon"
+                  :key="index"
+                >
+                  <template slot="title">
+                    <i :class="item.icon"></i>
+                    <span>{{ item.text }}</span>
+                  </template>
+                  <el-menu-item-group
+                    v-for="(item, index) in item.menulist"
+                    :key="index"
+                  >
+                    <el-menu-item
+                      v-show="!item.hideInMenu"
+                      :index="'/' + item.router"
+                      @click="jumpUrl(item.jump)"
+                      >{{ item.text }}</el-menu-item
+                    >
+                  </el-menu-item-group>
+                </el-submenu>
               </el-menu-item-group>
             </el-submenu>
           </el-menu-item-group>
@@ -174,6 +197,12 @@ export default {
                 {
                   router: "pxykh",
                   text: "培训与考评",
+                  menulist: [
+                    {
+                      router: "testplan",
+                      text: "考核计划",
+                    },
+                  ],
                 },
               ],
             },
