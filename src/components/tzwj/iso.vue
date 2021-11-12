@@ -63,8 +63,8 @@ export default {
           type: "iso",
           filename: "ISO QES管理体系过程控制文件",
           times: "2021-01-17",
-          ydl: "256",
-          xzl: "189",
+          ydl: "54",
+          xzl: "63",
         },
         
       ],
