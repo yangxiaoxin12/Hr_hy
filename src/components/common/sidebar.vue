@@ -164,21 +164,16 @@ export default {
               text: "课程平台",
               menulist: [
                 {
-                  router: "trainingPlan",
+                  router: "lhrh",
                   text: "两化融合政策文件",
                 },
-                // {
-                //   router: "trainingImplementation",
-                //   text: "培训实施",
-                // },
                 {
-                  router: "trainingRecords",
+                  router: "kczl",
                   text: "课程资料",
                 },
                 {
-                  router: "learnPlatform",
+                  router: "pxykh",
                   text: "培训与考评",
-                  jump: "http://www.shhuayi-elearning.cn/login.htm",
                 },
               ],
             },
