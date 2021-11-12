@@ -217,21 +217,111 @@ export default {
             },
             {
               id: 62,
-              name: "副总工程师",
+              name: "发展部副经理",
               alias: "2020-12-28",
-              operator: "发展部-副总工程师-岗位说明书",
+              operator: "发展部-发展部副经理-岗位说明书",
             },
             {
               id: 63,
-              name: "投资分析师（规划、项目）",
+              name: "经理助手",
               alias: "2020-11-28",
-              operator: "发展部-投资分析师（规划、项目）-岗位说明书",
+              operator: "发展部-经理助手-岗位说明书",
+            },
+          ],
+        },
+        {
+          id: 7,
+          date: "人力资源部 ",
+          children: [
+            {
+              id: 71,
+              name: "经理",
+              alias: "2020-12-18",
+              operator: "人力资源部-经理-岗位说明书",
+            },
+          ],
+        },
+        {
+          id: 8,
+          date: "财务部 ",
+          children: [
+            {
+              id: 81,
+              name: "经理",
+              alias: "2020-12-18",
+              operator: "财务部-经理-岗位说明书",
+            },
+          ],
+        },
+        {
+          id:9,
+          date: "纪委 ",
+          children: [
+            {
+              id:91,
+              name: "纪检监察干事",
+              alias: "2020-12-18",
+              operator: "纪委-纪检监察干事-岗位说明书",
+            },
+          ],
+        },
+        {
+          id:10,
+          date: "工会 ",
+          children: [
+            {
+              id:101,
+              name: "工会主席",
+              alias: "2020-12-18",
+              operator: "工会-工会主席-岗位说明书",
             },
             {
-              id: 64,
-              name: "项目现场管理",
-              alias: "2020-11-28",
-              operator: "发展部-项目现场管理-岗位说明书",
+              id:102,
+              name: "工会干事",
+              alias: "2020-12-18",
+              operator: "工会-工会干事-岗位说明书",
+            },
+          ],
+        },
+        {
+          id:11,
+          date: "团委 ",
+          children: [
+            {
+              id:111,
+              name: "团委书记",
+              alias: "2020-12-18",
+              operator: "团委-团委书记-岗位说明书",
+            },
+            {
+              id:112,
+              name: "团委委员",
+              alias: "2020-12-18",
+              operator: "团委-团委委员-岗位说明书",
+            },
+          ],
+        },
+        {
+          id:12,
+          date: "党委办公室 ",
+          children: [
+            {
+              id:121,
+              name: "党办主任",
+              alias: "2020-12-18",
+              operator: "党委办公室-党办主任-岗位说明书",
+            },
+          ],
+        },
+        {
+          id:13,
+          date: "组织部 ",
+          children: [
+            {
+              id:131,
+              name: "组织部长",
+              alias: "2020-12-18",
+              operator: "组织部-组织部长-岗位说明书",
             },
           ],
         },
@@ -244,7 +334,6 @@ export default {
   },
   methods: {
     handleClick(row, i) {
-      alert(i);
       const link = document.createElement("a");
       link.style.display = "none";
       if (i == 1) {
@@ -265,6 +354,22 @@ export default {
           "download",
           "安全环保部-安全环保管理-岗位说明书.docx"
         );
+      }
+      if (i == 24) {
+        link.href = "../../../static/file/5.docx";
+        link.setAttribute("download", "发展部-经理-岗位说明书.docx");
+      }
+      if (i == 25) {
+        link.href = "../../../static/file/4.docx";
+        link.setAttribute("download", "发展部-副经理-岗位说明书.docx");
+      }
+      if (i == 26) {
+        link.href = "../../../static/file/6.docx";
+        link.setAttribute("download", "发展部-经理助理-岗位说明书.docx");
+      }
+      if (i == 28) {
+        link.href = "../../../static/file/7.docx";
+        link.setAttribute("download", "人力资源部-经理-岗位说明书.docx");
       }
 
       document.body.appendChild(link);

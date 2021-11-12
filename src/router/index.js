@@ -61,6 +61,10 @@ const trainingRecords = () =>
 const stock = () =>
     import("@/components/stock/index"); // 导入
 const workSpace = () => import("@/components/workSpace/workSpace"); // 导入
+const kczl = () => import("@/components/kcpt/kczl"); // 导入
+const lhrh = () => import("@/components/kcpt/lhrh"); // 导入
+const pxykh = () => import("@/components/kcpt/pxykh"); // 导入
+
 Vue.use(Router);
 
 /**
@@ -314,7 +318,7 @@ export default new Router({
                     name: "trainingImplementation",
                     component: trainingImplementation
                 },
-                
+
                 {
                     path: "/stock",
                     name: "stock",
@@ -324,6 +328,18 @@ export default new Router({
                     path: "/trainingRecords",
                     name: "trainingRecords",
                     component: trainingRecords
+                },{
+                    path: "/kczl",
+                    name: "kczl",
+                    component: kczl
+                },{
+                    path: "/lhrh",
+                    name: "lhrh",
+                    component: lhrh
+                },{
+                    path: "/pxykh",
+                    name: "pxykh",
+                    component: pxykh
                 }
             ]
         }
