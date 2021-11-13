@@ -121,9 +121,7 @@ export default {
   color: #333;
   line-height: 60px;
 }
-.el-menu-item-group__title {
-  padding: 0px !important;
-}
+
 .el-menu-item {
   background-color: #1f2d3d !important;
 }

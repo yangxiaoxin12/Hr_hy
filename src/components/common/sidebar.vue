@@ -62,7 +62,9 @@
                   :index="item.icon"
                   :key="index"
                 >
-                  <template slot="title">
+                  <template
+                    slot="title"
+                  >
                     <i :class="item.icon"></i>
                     <span>{{ item.text }}</span>
                   </template>
@@ -71,6 +73,10 @@
                     :key="index"
                   >
                     <el-menu-item
+                      style="
+                        height: 25px !important;
+                        line-height: 25px !important;
+                      "
                       v-show="!item.hideInMenu"
                       :index="'/' + item.router"
                       @click="jumpUrl(item.jump)"
@@ -303,7 +309,18 @@ export default {
       }
     },
   },
-  created() { },
+  created() {},
 };
 </script>
-
+<style scoped>
+.el-menu-item-group__title {
+  /* padding: 7px 0 7px 20px; */
+  line-height: normal;
+  font-size: 12px;
+  color: #909399;
+}
+.el-submenu /deep/ .el-submenu__title {
+    height: 40px;
+   line-height: 40px ;
+  }
+</style>

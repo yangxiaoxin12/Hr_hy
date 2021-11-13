@@ -23,6 +23,12 @@ export default {
 ::-ms-scrollbar {
   display: none;
 }
+// .el-submenu .el-menu-item {
+//     height: 35px !important;
+//     line-height: 35px !important;
+//     padding: 0 45px;
+//     min-width: 200px;
+// }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
